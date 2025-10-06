@@ -112,6 +112,10 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+body {
+  font-family: var(--font-poppins);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -119,4 +123,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+*{
+   & ::-webkit-scrollbar {
+        display: none;
+    }
 }
