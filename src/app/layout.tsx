@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Asidebar } from "@/components/asidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${popins.variable} antialiased`}>
         <Navbar />
-        {children}
+        <SidebarProvider>
+          <Asidebar />
+          {children}
+        </SidebarProvider>
       </body>
     </html>
   );

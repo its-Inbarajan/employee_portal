@@ -14,9 +14,9 @@ import { Button } from "./ui/button";
 
 export const Navbar = () => {
   return (
-    <nav className="py-2 bg-white border-b border-gray-300 w-full px-2 md:px-6">
+    <nav className="py-2 bg-white border-b relative border-gray-300 w-full px-2 md:px-6">
       <div className="flex justify-between items-center">
-        <div className="rounded-xl">
+        <div className="rounded-xl flex items-center gap-2">
           <Image
             src={"/next.svg"}
             alt="logo"
@@ -49,7 +49,7 @@ export const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger
                 role="button"
-                className="w-full ring-1 px-2 py-1 ring-black rounded-sm flex justify-between items-center gap-2"
+                className="w-full ring px-2 py-1 ring-black rounded-sm flex justify-between items-center gap-2"
               >
                 <ListChecksIcon className="size-5 text-green-500" />
                 <span className="font-medium text-black text-base">

@@ -10,7 +10,6 @@ export default function AnimatedSearch() {
   const inputFocus = React.useRef<boolean>(false);
   const ToggleInput = () => {
     setIsOpen((pre) => !pre);
-    inputFocus.current = false ? true : false;
   };
   // Close search when clicking outside
   React.useEffect(() => {
@@ -20,6 +19,7 @@ export default function AnimatedSearch() {
         !containerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
+        inputFocus.current = true;
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -35,7 +35,7 @@ export default function AnimatedSearch() {
         {/* Search Input */}
         <Input
           type="text"
-          autoFocus={inputFocus.current}
+          autoFocus={true}
           placeholder="Search..."
           className={`bg-transparent outline-none border-none px-3 text-sm transition-all duration-500 ${
             isOpen ? " opacity-100 w-full" : "hidden opacity-0 w-0"
