@@ -50,7 +50,10 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn("w-full bg-black rounded-md text-white", className)}
+      className={cn(
+        "w-full bg-black rounded-md text-white px-2 py-2",
+        className
+      )}
       {...props}
     />
   );

@@ -14,7 +14,7 @@ import { Button } from "./ui/button";
 
 export const Navbar = () => {
   return (
-    <nav className="py-2 bg-white border-b relative border-gray-300 w-full px-2 md:px-6">
+    <nav className="py-2 bg-gray-100 border-b relative border-gray-300 w-full px-2 md:px-6">
       <div className="flex justify-between items-center">
         <div className="rounded-xl flex items-center gap-2">
           <Image
@@ -27,7 +27,7 @@ export const Navbar = () => {
           />
         </div>
         <div className="flex justify-between md:justify-center items-center gap-2.5">
-          <div className=" hidden md:flex items-center">
+          <div className="hidden md:flex items-center">
             <AnimatedSearch />
           </div>
           <div className="relative">
@@ -49,13 +49,13 @@ export const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger
                 role="button"
-                className="w-full ring px-2 py-1 ring-black rounded-sm flex justify-between items-center gap-2"
+                className="w-full border bg-white px-2 py-1 ring-black rounded-sm flex justify-between items-center gap-2"
               >
                 <ListChecksIcon className="size-5 text-green-500" />
                 <span className="font-medium text-black text-base">
                   Ready to interview
                 </span>
-                <ChevronDown className="size-5" />
+                <ChevronDown className="size-5 " />
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="w-[17rem] px-2.5 absolute -left-[6rem] md:-left-[1.5rem] rounded -translate-1/2 top-40">
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 className="rounded-md px-2 flex w-20 justify-between h-12 items-center hover:bg-blue-50 hover:cursor-pointer"
               >
                 <Image
-                  src={"/file.svg"}
+                  src={"/next.svg"}
                   width={10}
                   height={10}
                   alt="profile"

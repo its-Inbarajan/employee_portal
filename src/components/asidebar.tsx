@@ -31,7 +31,7 @@ const items = [
   },
   {
     title: "Jobs",
-    url: "#",
+    url: "/jobs",
     icon: BriefcaseBusiness,
   },
   {
@@ -54,9 +54,12 @@ export const Asidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
+                <SidebarMenuItem key={item.title} className="py-4">
+                  <SidebarMenuButton asChild tooltip={item.title.toString()}>
+                    <Link
+                      href={item.url}
+                      className="flex w-full flex-col h-fit"
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>

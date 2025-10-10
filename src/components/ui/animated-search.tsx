@@ -26,16 +26,16 @@ export default function AnimatedSearch() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   return (
-    <div ref={containerRef} className="flex justify-center items-center">
+    <div ref={containerRef} className="flex justify-center items-center group">
       <div
         className={`flex items-center rounded-full transition-all duration-500 ease-in-out ${
-          isOpen ? "w-64 border border-gray-300 overflow-hidden" : "w-5"
+          isOpen ? "w-64 border border-gray-300 overflow-hidden" : ""
         }`}
       >
         {/* Search Input */}
         <Input
           type="text"
-          autoFocus={true}
+          autoFocus={isOpen}
           placeholder="Search..."
           className={`bg-transparent outline-none border-none px-3 text-sm transition-all duration-500 ${
             isOpen ? " opacity-100 w-full" : "hidden opacity-0 w-0"
@@ -50,10 +50,10 @@ export default function AnimatedSearch() {
           className={
             isOpen
               ? "hidden"
-              : "inline-flex items-center rounded-full cursor-pointer bg-transparent text-gray-500 hover:text-gray-800"
+              : "flex items-center rounded-full justify-center group hover:bg-purple-200 w-10 h-10 cursor-pointer bg-transparent"
           }
         >
-          <Search className="size-5 text-gray-500" />
+          <Search className="size-5 text-gray-500 group-hover:text-purple-500" />
         </Button>
       </div>
     </div>
