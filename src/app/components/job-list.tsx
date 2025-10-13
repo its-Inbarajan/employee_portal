@@ -1,21 +1,10 @@
 "use client";
+import { JobListProps } from "@/@types/jobs";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-type JobListProps = {
-  id: number;
-  image: string;
-  title: string;
-  location: string;
-  salary_range: string;
-  createdAt: string;
-  company_name: string;
-  company_profile_link: string;
-  job_link: string;
-};
 
 export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
   item,
@@ -74,7 +63,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
           </div>
         ) : (
           <Link
-            href={`/jobs/applied/${item.id}`}
+            href={`/jobs/applications?jobId=${String(item.id)}`}
             className="inline-block w-auto px-4 py-2 bg-transparent active:ring-1 active:ring-black  text-black cursor-pointer text-xs text-center transition-all duration-150 ease-in-out"
           >
             <ChevronRight className="size-5" />

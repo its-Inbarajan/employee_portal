@@ -36,7 +36,7 @@ const items = [
   },
   {
     title: "Applied",
-    url: "#",
+    url: "/jobs/applications",
     icon: Dock,
   },
   {
