@@ -4,13 +4,13 @@ import Link from "next/link";
 
 export default function OverviewPage() {
   return (
-    <div className="max-w-screen border rounded-sm relative px-4 py-4">
-      <div className="flex flex-col">
+    <div className="max-w-screen border rounded-sm min-h-screen relative px-4 py-4">
+      <div className="flex flex-col h-full">
         <h1 className="font-semibold mb-2 text-black text-lg leading-6 tracking-wide">
           What recruiters will see?
         </h1>
-        <div className="md:px-4 h-screen md:py-4 p-2 border rounded-sm w-full">
-          <div className="flex items-start md:flex-row flex-col gap-3 md:px-5 md:py-2.5 px-3.5 py-2">
+        <div className="md:px-4 h-auto md:py-4 p-2 border rounded-sm w-full">
+          <div className="flex items-start flex-wrap md:flex-row flex-col gap-3 md:px-5 md:py-2.5 px-3.5 py-2">
             <div className="h-20 w-20 rounded-full border">
               <Image
                 src={"/next.svg"}
@@ -93,6 +93,123 @@ export default function OverviewPage() {
                   Company Name
                 </p>
               </div>
+            </div>
+          </div>
+          <div className="flex md:px-5 md:py-2.5 px-3.5 py-2 items-start gap-2.5 w-full flex-col">
+            <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+              Skills
+            </span>
+
+            <div className="flex gap-2 flex-wrap items-start w-full">
+              {[
+                "CSS",
+                "React",
+                "NextJs",
+                "NodeJs",
+                "ExpressJs",
+                "Mongodb",
+                "socket.io",
+                "Redux",
+                "Tanstack(Query)",
+                "scss/css",
+                "AWS/EC2/ELB/S3/DynamoDB",
+                "Full-Stack Web Development (Node/Redux/React)",
+                "MERN Stack - Javascript (ES5 & ES6), MongoDB, Express.Js, React, Node.Js",
+                "TailwindCSS",
+                "TypeScript",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="w-auto bg-gray-200 rounded inline-block px-1.5 text-center"
+                >
+                  <span className="size-4 text-gray-600 font-medium  text-xs">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex md:px-5 md:py-2.5 px-3.5 py-2 items-start gap-2.5 w-full flex-col">
+            <span className="font-semibold text-lg text-gray-800 leading-6 tracking-wide">
+              Ideal next opportunity
+            </span>
+            <div className="flex flex-col flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Desired Salary
+              </span>
+              <span className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1">
+                $7,882 / ₹700,000
+              </span>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Desired Role
+              </span>
+              <span className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1">
+                Full-Stack Engineer
+              </span>
+              <span className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1">
+                Open to Frontend Engineer or Software Engine
+              </span>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Remote Work
+              </span>
+              <span className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1">
+                Onsite Or Remote
+              </span>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Desired Location{" "}
+              </span>
+              <span className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1">
+                Bangalore Urban (current)
+              </span>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Desired Tech Stack{" "}
+              </span>
+              <div className="flex flex-row flex-wrap flex-1 gap-2">
+                {[
+                  "React",
+                  "TypeScript",
+                  "Node.js",
+                  "Express.js",
+                  "Javascript",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 flex-1">
+              <span className="font-normal text-xs text-gray-500 leading-6 tracking-wide">
+                Wants
+              </span>
+              <ul className="flex list-none flex-row flex-wrap flex-1 gap-2">
+                {[
+                  "To build products",
+                  "Employees 'wear a lot of hats'",
+                  "A flexible remote work policy",
+                  "Individual contributor track",
+                  "Autonomy",
+                  "Quiet office",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="inline-block font-normal text-sm text-gray-500 rounded bg-gray-200 px-1.5 py-1"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

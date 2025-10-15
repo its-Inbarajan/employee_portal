@@ -98,13 +98,15 @@ export const Navbar = () => {
                 role="button"
                 className="rounded-md px-2 flex w-20 justify-between h-12 items-center hover:bg-blue-50 hover:cursor-pointer"
               >
-                <Image
-                  src={"/next.svg"}
-                  width={10}
-                  height={10}
-                  alt="profile"
-                  className="h-8 w-8 rounded-full select-none object-cover"
-                />
+                <div className="w-9 block h-9 rounded-full ring-1 ring-gray-500">
+                  <Image
+                    src={"/next.svg"}
+                    width={10}
+                    height={10}
+                    alt="profile"
+                    className="w-full h-full object-center aspect-auto"
+                  />
+                </div>
                 <ChevronDown className="size-5" />
               </DropdownMenuTrigger>
               <div className="">

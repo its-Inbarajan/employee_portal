@@ -31,12 +31,12 @@ export default function EditLayout({
   };
 
   return (
-    <div className="md:max-w-screen w-full max-w-5xl mx-auto md:px-6 px-3.5 py-3.5 md:py-6">
+    <div className="md:max-w-screen w-full max-w-5xl mx-auto md:px-6 px-1 sm:max-w-sm py-3.5 md:py-6">
       <h1 className="text-2xl font-semibold mb-6">Edit your Profile</h1>
-      <div className="flex justify-between items-center gap-3">
+      <div className="flex justify-between  items-center gap-3">
         <Tabs value={activeTab} onValueChange={handleChange} className="w-full">
-          <div className="flex w-full justify-between items-center border-b border-gray-300 rounded-none bg-transparent ">
-            <TabsList className="flex sm:flex-wrap  lg:flex-nowrap gap-2 p-0">
+          <div className="flex md:flex-row flex-wrap flex-col w-full md:justify-between justify-self-start md:items-center border-b border-gray-300 rounded-none bg-transparent ">
+            <TabsList className="flex md:flex-wrap lg:flex-nowrap gap-2 p-0">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}
