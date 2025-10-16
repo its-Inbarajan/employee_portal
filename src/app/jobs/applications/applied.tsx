@@ -2,7 +2,7 @@
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React, { Suspense } from "react";
+import React from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
 
