@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Sidebar,
@@ -16,6 +17,7 @@ import {
   User2,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -47,6 +49,7 @@ const items = [
 ];
 
 export const Asidebar = () => {
+  const pathName = usePathname();
   return (
     <Sidebar className="sticky isolate">
       <SidebarContent>
@@ -55,7 +58,11 @@ export const Asidebar = () => {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title} className="py-4">
-                  <SidebarMenuButton asChild tooltip={item.title.toString()}>
+                  <SidebarMenuButton
+                    isActive={pathName.toString() === item.url.toString()}
+                    asChild
+                    tooltip={item.title.toString()}
+                  >
                     <Link
                       href={item.url}
                       className="flex w-full flex-col h-fit"

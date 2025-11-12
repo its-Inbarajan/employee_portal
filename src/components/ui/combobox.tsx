@@ -24,15 +24,17 @@ type ComboBoxProps = {
   PopoverClassName?: string;
   CommandClassName?: string;
   options: Options[];
+  placeholder: string;
 };
 
 export function CompoBox({
   PopoverClassName,
   options,
   CommandClassName,
+  placeholder,
 }: ComboBoxProps) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [value, setValue] = React.useState<string>("");
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -44,7 +46,8 @@ export function CompoBox({
         >
           {value
             ? options[0]?.data.find((item) => item === value)
-            : "Select framework..."}
+            : placeholder}
+
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
