@@ -53,7 +53,7 @@ export function CompoBox({
       </PopoverTrigger>
       <PopoverContent className={cn("w-full p-0", CommandClassName)}>
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder={placeholder} />
           <CommandList>
             <CommandEmpty>No Options.</CommandEmpty>
             {options &&
