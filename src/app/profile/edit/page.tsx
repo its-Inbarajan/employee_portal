@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import Chip from "@/components/ui/chip";
 import { CompoBox } from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,7 +24,6 @@ import {
   Plus,
   SearchIcon,
   Twitter,
-  X,
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -246,17 +246,7 @@ export default function ProfilePage() {
                 Open to the following roles
               </label>
               <div className="flex flex-row col-span-12 flex-wrap gap-2 items-center">
-                <div className="w-auto rounded bg-gray-300 px-2 py-2 flex flex-row gap-2 items-center">
-                  <span className="font-normal leading-relaxed text-sm text-black">
-                    Frontend Developer
-                  </span>
-                  <Button
-                    variant={"default"}
-                    className="bg-transparent h-5 p-0 hover:bg-transparent  cursor-pointer inline-block"
-                  >
-                    <X className="size-5 text-black" />
-                  </Button>
-                </div>
+                <Chip value="Frontend Developer" />
               </div>
               <CompoBox
                 PopoverClassName="w-full col-span-12 lg:col-span-12 rounded-md border-px border-gray-500"
@@ -669,20 +659,7 @@ export default function ProfilePage() {
                 "SCSS",
                 "AWS",
               ].map((item) => (
-                <div
-                  key={`title_${item}`}
-                  className="w-auto rounded bg-gray-300 px-2 py-2 flex flex-row gap-2 items-center"
-                >
-                  <span className="font-normal leading-relaxed text-sm text-black">
-                    {item}
-                  </span>
-                  <Button
-                    variant={"link"}
-                    className="bg-transparent h-5 p-0 hover:bg-transparent  cursor-pointer inline-block"
-                  >
-                    <X className="size-5 text-black" />
-                  </Button>
-                </div>
+                <Chip key={`title_${item}`} value={item} />
               ))}
             </div>
 

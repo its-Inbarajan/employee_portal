@@ -441,12 +441,13 @@ export default function Preference() {
           <div className="flex gap-3 space-y-2 flex-col w-full flex-1">
             <div className="grid gap-6 items-center">
               {inputs.map((item) => (
-                // flex flex-row flex-1 gap-4
                 <div
                   className="grid grid-cols-6 items-center"
                   key={item.context}
                 >
-                  <span className="col-span-3">{item.context}</span>
+                  <span className="col-span-3 text-nowrap font-medium text-sm">
+                    {item.context}
+                  </span>
                   {item.input.map((inp) => (
                     <RadioGroup key={`${item.context}_${inp}`}>
                       <div

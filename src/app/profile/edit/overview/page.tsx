@@ -1,3 +1,4 @@
+import Chip from "@/components/ui/chip";
 import { Earth, Github, Linkedin, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -118,14 +119,13 @@ export default function OverviewPage() {
                 "TailwindCSS",
                 "TypeScript",
               ].map((item) => (
-                <div
+                <Chip
                   key={item}
-                  className="w-auto bg-gray-200 rounded inline-block px-1.5 text-center"
-                >
-                  <span className="size-4 text-gray-600 font-medium  text-xs">
-                    {item}
-                  </span>
-                </div>
+                  spanClass="size-4 text-gray-600 font-medium  text-xs"
+                  className="w-auto bg-gray-200 rounded inline-block px-1.5 py-1.5 text-center"
+                  value={item}
+                  isButtonRequire={false}
+                />
               ))}
             </div>
           </div>

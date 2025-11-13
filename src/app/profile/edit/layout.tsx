@@ -11,6 +11,7 @@ const tabs = [
   { value: "resume", label: "Resume / CV" },
   { value: "preferences", label: "Preferences" },
   { value: "culture", label: "Culture" },
+  // { value: "view", label: "Profile view" },
 ];
 
 export default function EditLayout({
@@ -60,10 +61,11 @@ export default function EditLayout({
                 </TabsTrigger>
               ))}
             </TabsList>
+
             <TabsList>
               <TabsTrigger
                 className="text-blue-500 text-xs font-medium leading-6 tracking-wide"
-                value="profile-view"
+                value="/view"
               >
                 Profile view
               </TabsTrigger>
