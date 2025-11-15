@@ -1,15 +1,31 @@
 "use client";
 import { JobListProps } from "@/@types/jobs";
 import { Button } from "@/components/ui/button";
+import withApplyDrawer from "@/hocs/withApplyDrawer";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { ApplyForm } from "./job-apply-form";
 
 export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
   item,
   isApplied = false,
 }) => {
+  const RawApplyButton: React.FC<{ openApplyDrawer: () => void }> = ({
+    openApplyDrawer,
+  }) => (
+    <Button
+      type="button"
+      variant={"default"}
+      className="w-full px-4 py-2 bg-transparent cursor-pointer ring-1 text-black ring-black hover:bg-black hover:text-white text-sm text-center transition-all duration-500 ease-in-out"
+      onClick={openApplyDrawer}
+    >
+      Apply
+    </Button>
+  );
+
+  const ApplyButton = withApplyDrawer(RawApplyButton);
   return (
     <div className="flex w-full py-3 border-b gap-4 items-start">
       <div className="w-16 h-fit border rounded-sm">
@@ -53,13 +69,10 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
         </div>
         {!isApplied ? (
           <div className="inline-block">
-            <Button
-              type="button"
-              variant={"default"}
-              className="w-full px-4 py-2 bg-transparent cursor-pointer ring-1 text-black ring-black hover:bg-black hover:text-white text-sm text-center transition-all duration-500 ease-in-out"
-            >
-              Apply
-            </Button>
+            <ApplyButton
+              job={item}
+              renderDrawerContent={(job) => <ApplyForm job={job} />}
+            />
           </div>
         ) : (
           <Link

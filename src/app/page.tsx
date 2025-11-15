@@ -9,6 +9,7 @@ import {
 import { ChevronDown, List, ListChecksIcon } from "lucide-react";
 import Image from "next/image";
 import { JobList } from "./components/job-list";
+import Link from "next/link";
 
 export default function Home() {
   const RecommendedJobs = [
@@ -19,6 +20,8 @@ export default function Home() {
       title: "Full Stack developer",
       location: "Bangalore",
       salary_range: "16L – ₹18L",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
       createdAt: "3 days ago",
       company_profile_link: "/",
       job_link: "/",
@@ -33,6 +36,8 @@ export default function Home() {
       createdAt: "3 days ago",
       company_profile_link: "/",
       job_link: "/",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
     },
     {
       id: 2,
@@ -43,6 +48,8 @@ export default function Home() {
       salary_range: "16L – ₹18L",
       company_profile_link: "/",
       job_link: "/",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
       createdAt: "3 days ago",
     },
     {
@@ -54,6 +61,8 @@ export default function Home() {
       salary_range: "16L – ₹18L",
       company_profile_link: "/",
       job_link: "/",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
       createdAt: "3 days ago",
     },
     {
@@ -65,6 +74,8 @@ export default function Home() {
       salary_range: "16L – ₹18L",
       company_profile_link: "/",
       job_link: "/",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
       createdAt: "3 days ago",
     },
   ];
@@ -80,6 +91,8 @@ export default function Home() {
       company_profile_link: "/",
       job_link: "/",
       createdAt: "3 days ago",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
     },
   ];
   return (
@@ -173,13 +186,12 @@ export default function Home() {
                     >
                       View your public profile
                     </Button>
-                    <Button
-                      variant={"link"}
-                      type="button"
+                    <Link
+                      href={"/profile/edit"}
                       className="bg-transparent hover:underline cursor-pointer text-blue-500 text-sm"
                     >
                       Edit
-                    </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -199,12 +211,12 @@ export default function Home() {
                 </p>
               </div>
               <div className="inline-block float-end">
-                <Button
-                  variant={"default"}
+                <Link
+                  href={"/profile/edit/preferences"}
                   className="bg-transparent hover:underline text-blue-500 cursor-pointer font-normal text-xs tracking-wide"
                 >
                   Change job preference
-                </Button>
+                </Link>
               </div>
             </div>
             {RecommendedJobs &&
@@ -218,7 +230,7 @@ export default function Home() {
             <div className="flex items-center w-full justify-center">
               <Button
                 variant={"default"}
-                className="bg-transparent text-blue-500 cursor-pointer w-auto inline-block font-medium text-base"
+                className="bg-transparent hover:bg-none text-blue-500 cursor-pointer w-auto inline-block font-medium text-base"
               >
                 See more
               </Button>
