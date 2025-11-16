@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ApplyForm } from "./job-apply-form";
+import { ApplyForms } from "./job-apply-form";
 
 export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
   item,
@@ -71,7 +71,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
           <div className="inline-block">
             <ApplyButton
               job={item}
-              renderDrawerContent={(job) => <ApplyForm job={job} />}
+              renderDrawerContent={(job) => <ApplyForms job={job} />}
             />
           </div>
         ) : (

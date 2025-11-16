@@ -9,9 +9,12 @@ export type JobListProps = {
   company_profile_link: string;
   job_link: string;
   description: string;
+  skills: string[];
+  job_type: string;
+  exp: string;
 };
 
-export interface JobApplication {
+export interface JobApplicationInputs {
   first_name: string;
   last_name: string;
   resume: string;

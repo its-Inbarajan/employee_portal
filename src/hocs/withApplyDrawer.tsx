@@ -7,8 +7,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-  DrawerFooter,
-  DrawerClose,
 } from "@/components/ui/drawer";
 import { JobListProps } from "@/@types/jobs";
 import { Input } from "@/components/ui/input";
@@ -37,12 +35,12 @@ export function withApplyDrawer<P extends object>(
         <WrappedComponent {...props} openApplyDrawer={openApplyDrawer} />
 
         <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
-          <DrawerContent>
+          <DrawerContent className="min-h-screen">
             <DrawerHeader>
               <DrawerTitle>Apply: {props.job?.title ?? "Job"}</DrawerTitle>
             </DrawerHeader>
 
-            <div className="p-4 ">
+            <div className="p-4">
               {props.renderDrawerContent ? (
                 props.renderDrawerContent(props.job)
               ) : (
@@ -75,19 +73,23 @@ export function withApplyDrawer<P extends object>(
                 </div>
               )}
             </div>
-
-            <DrawerFooter className="border-t">
+            {/* <DrawerFooter className="border-t">
               <div className="flex w-full justify-end ">
                 <DrawerClose asChild>
                   <Button
+                    type="reset"
                     variant="default"
                     className="bg-transparent hover:bg-transparent text-black"
                   >
                     close
                   </Button>
                 </DrawerClose>
+
+                <Button type="reset" variant="default">
+                  Next
+                </Button>
               </div>
-            </DrawerFooter>
+            </DrawerFooter> */}
           </DrawerContent>
         </Drawer>
       </>
