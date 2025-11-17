@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { applyJobSchema } from "@/features/job-apply-form-schema/schema";
+import { useApplyJob } from "@/features/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -26,7 +27,15 @@ const applyJobFormStepTwo = applyJobSchema.pick({
 
 type ApplyJobFormStepTwo = z.infer<typeof applyJobFormStepTwo>;
 
-export default function StepTwo() {
+type StepTwoProps = {
+  handleStepBack: () => void;
+  handleNextStep: () => void;
+};
+export default function StepTwo({
+  handleStepBack,
+  handleNextStep,
+}: StepTwoProps) {
+  const setData = useApplyJob((state) => state.setData);
   const {
     formState: { errors },
     handleSubmit,
@@ -58,91 +67,218 @@ export default function StepTwo() {
 
   const onSubmit = (data: ApplyJobFormStepTwo) => {
     console.log(data);
+    setData(data);
+    handleNextStep();
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <FieldGroup>
-        <FieldSet>
-          <FieldGroup>
-            <div className="flex md:flex-row flex-col items-center gap-2">
-              <Field>
-                <FieldLabel htmlFor="exp.year">First name</FieldLabel>
-                <Controller
-                  name="exp.year"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      id="exp.year"
-                      type="text"
-                      placeholder="Joe"
-                      required
-                      autoFocus={true}
-                    />
-                  )}
-                />
-                <FieldError>{errors.exp?.year?.message}</FieldError>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="exp.month">Last name</FieldLabel>
+    <div className="overflow-auto h-screen max-h-full">
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <FieldGroup>
+          <FieldSet>
+            <FieldGroup>
+              <FieldLabel className="text-lg font-medium text-gray-500">
+                How Many years of Experience do you have?
+              </FieldLabel>
+              <div className="flex md:flex-row flex-col items-center gap-2">
+                <Field>
+                  <FieldLabel htmlFor="exp.year">Year</FieldLabel>
+                  <Controller
+                    name="exp.year"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="exp.year"
+                        type="text"
+                        placeholder="Year"
+                        required
+                        autoFocus={true}
+                      />
+                    )}
+                  />
+                  <FieldError>{errors.exp?.year?.message}</FieldError>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="exp.month">Month</FieldLabel>
 
-                <Controller
-                  name="exp.month"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      id="exp.month"
-                      type="text"
-                      placeholder="Doe"
-                      required
-                    />
-                  )}
-                />
-                <FieldError>{errors.exp?.month?.message}</FieldError>
-              </Field>
-            </div>
-            {/* <Field>
-              <FieldLabel htmlFor="mobile_no">Mobile no</FieldLabel>
-              <Controller
-                name="mobile_no"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    id="mobile_no"
-                    type="number"
-                    placeholder="123456789"
-                    required
+                  <Controller
+                    name="exp.month"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="exp.month"
+                        type="text"
+                        placeholder="Month"
+                        required
+                      />
+                    )}
                   />
-                )}
-              />
-              <FieldError>{errors.mobile_no?.message}</FieldError>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    id="email"
-                    type="email"
-                    placeholder="Joe"
-                    required
+                  <FieldError>{errors.exp?.month?.message}</FieldError>
+                </Field>
+              </div>
+
+              <FieldLabel className="text-lg font-medium text-gray-500">
+                what is your current/last CTC and ECTC?
+              </FieldLabel>
+              <div className="flex md:flex-row flex-col items-center gap-2">
+                <Field>
+                  <FieldLabel htmlFor="ctc">Current/Last CTC</FieldLabel>
+                  <Controller
+                    name="ctc"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="ctc"
+                        type="text"
+                        placeholder="ctc"
+                        required
+                      />
+                    )}
                   />
-                )}
-              />
-              <FieldError>{errors.email?.message}</FieldError>
-            </Field> */}
-          </FieldGroup>
-        </FieldSet>
-      </FieldGroup>
-      <div className="mt-2 flex justify-end w-full">
-        <Button type="submit">Submit</Button>
-      </div>
-    </form>
+                  <FieldError>{errors?.address?.state?.message}</FieldError>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="ectc">Expected CTC</FieldLabel>
+
+                  <Controller
+                    name="ectc"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="ectc"
+                        type="text"
+                        placeholder="ectc"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>{errors.exp?.month?.message}</FieldError>
+                </Field>
+              </div>
+
+              <FieldLabel className="text-lg font-medium text-gray-500">
+                Address
+              </FieldLabel>
+              <div className="flex md:flex-row flex-col items-center gap-2">
+                <Field>
+                  <FieldLabel htmlFor="address.state">State</FieldLabel>
+                  <Controller
+                    name="address.state"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="address.state"
+                        type="text"
+                        placeholder="state"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>{errors?.address?.state?.message}</FieldError>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="address.city">city</FieldLabel>
+
+                  <Controller
+                    name="address.city"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="address.city"
+                        type="text"
+                        placeholder="city"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>{errors.exp?.month?.message}</FieldError>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="address.zip">zip</FieldLabel>
+
+                  <Controller
+                    name="address.zip"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="address.zip"
+                        type="text"
+                        placeholder="zip"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>{errors.exp?.month?.message}</FieldError>
+                </Field>
+              </div>
+
+              <FieldLabel className="text-lg font-medium text-gray-500">
+                what is your Current location?
+              </FieldLabel>
+              <div className="flex md:flex-row flex-col items-center gap-2">
+                <Field>
+                  <FieldLabel htmlFor="location.current_loc">
+                    Current location
+                  </FieldLabel>
+                  <Controller
+                    name="location.current_loc"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="location.current_loc"
+                        type="text"
+                        placeholder="current location"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>
+                    {errors?.location?.current_loc?.message}
+                  </FieldError>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="location.preferred_loc">
+                    Preferred Location
+                  </FieldLabel>
+
+                  <Controller
+                    name="location.preferred_loc"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        id="location.preferred_loc"
+                        type="text"
+                        placeholder="preferred location"
+                        required
+                      />
+                    )}
+                  />
+                  <FieldError>
+                    {errors.location?.preferred_loc?.message}
+                  </FieldError>
+                </Field>
+              </div>
+            </FieldGroup>
+          </FieldSet>
+          <div className="mt-2 flex gap-2 justify-end w-full">
+            <Button type="button" onClick={handleStepBack}>
+              Back
+            </Button>
+            <Button type="button" onClick={handleNextStep}>
+              Next
+            </Button>
+          </div>
+        </FieldGroup>
+      </form>
+    </div>
   );
 }

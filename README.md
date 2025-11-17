@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dev — Employee Portal
 
-## Getting Started
+This folder contains the employee portal web app used to list jobs and allow employees to apply from the frontend.
 
-First, run the development server:
+The app is a Next.js (App Router) + TypeScript application with a small component library and a client-side drawer used to show the apply form.
+
+## Tech stack
+
+- Next.js (App Router)
+- React 19 + TypeScript
+- Tailwind CSS
+- vaul (drawer primitives)
+- Radix UI primitives (used by UI components)
+- lucide-react (icons)
+- react-hook-form + `@hookform/resolvers` (form handling)
+- zod (schema validation)
+- zustand (lightweight state when needed)
+
+You can see the precise versions in `package.json`.
+
+## Local setup
+
+1. Install dependencies
+
+```bash
+cd dev_employee_portal
+npm install
+```
+
+2. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Navigate to the jobs list (home page) and click the `Apply` button on any job.
+- The HOC `withApplyDrawer` opens the `Drawer` and renders `ApplyForm` (or any custom `renderDrawerContent` you pass).
 
-## Learn More
+## Common notes & tips
 
-To learn more about Next.js, take a look at the following resources:
+- If you pass `renderDrawerContent` to the HOC, it will receive the `job` as the first argument. Make the child component accept `job?: JobListProps` (optional) or ensure the HOC only calls the renderer when a job is present.
+- For complex forms prefer `react-hook-form` + `zod` for typed validation and better UX.
+- File inputs should be handled as `File` objects (upload via FormData) rather than controlled string values.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build & deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build for production:
 
-## Deploy on Vercel
+```bash
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy as any Next.js site (Vercel is recommended for minimal configuration).

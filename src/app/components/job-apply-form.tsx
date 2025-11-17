@@ -2,6 +2,8 @@
 
 import { JobApplicationInputs, JobListProps } from "@/@types/jobs";
 import StepOne from "@/features/components/job-apply-multi-step-form/step-one";
+import StepThree from "@/features/components/job-apply-multi-step-form/step-three";
+import StepTwo from "@/features/components/job-apply-multi-step-form/step-two";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -13,17 +15,28 @@ type ApplyFormProps = {
 };
 
 export function ApplyForms({ job }: ApplyFormProps) {
-  // const [step, setStep] = React.useState<number>(1);
+  const [step, setStep] = React.useState<number>(1);
 
-  // const handleNextStep = () => {
-  //   setStep((pre) => pre + 1);
-  // };
+  const handleNextStep = () => {
+    setStep((pre) => pre + 1);
+  };
 
-  // const handleStepBack = () => {
-  //   setStep((pre) => pre - 1);
-  // };
+  const handleStepBack = () => {
+    setStep((pre) => pre - 1);
+  };
+
+  const steps = {
+    1: <StepOne handleNextStep={handleNextStep} />,
+    2: (
+      <StepTwo
+        handleStepBack={handleStepBack}
+        handleNextStep={handleNextStep}
+      />
+    ),
+    3: <StepThree handleStepBack={handleStepBack} />,
+  } as const;
   return (
-    <div className="md:px-4 md:py-4 px-2 py-2">
+    <div className="md:px-4 md:py-4 px-2 py-2 min-h-full overflow-auto">
       <div className="grid grid-cols-12 gap-5 items-start w-full">
         <div className="col-span-12 flex-row rounded bg-gray-100 h-full md:px-6 px-3 md:py-6 py-3 w-full gap-3 flex sm:col-span-6">
           <div className="w-20 h-fit border border-gray-400 rounded-sm">
@@ -105,7 +118,7 @@ export function ApplyForms({ job }: ApplyFormProps) {
           </div>
         </div>
         <div className="col-span-12 sm:col-span-6">
-          <StepOne />
+          {steps[step as keyof typeof steps] || null}
         </div>
       </div>
     </div>

@@ -26,7 +26,11 @@ const applyFormStepOneSchema = applyJobSchema.pick({
 
 type ApplyFormStepOneSchema = z.infer<typeof applyFormStepOneSchema>;
 
-export default function StepOne() {
+type StepOneProps = {
+  handleNextStep: () => void;
+};
+
+export default function StepOne({ handleNextStep }: StepOneProps) {
   const setData = useApplyJob((state) => state.setData);
   const {
     handleSubmit,
@@ -47,6 +51,7 @@ export default function StepOne() {
   const onSubmit = (data: ApplyFormStepOneSchema) => {
     console.log(data);
     setData(data);
+    handleNextStep();
   };
 
   return (
