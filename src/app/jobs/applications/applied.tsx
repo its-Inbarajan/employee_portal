@@ -64,7 +64,7 @@ const ClientApplied = () => {
             Applications
           </h1>
 
-          <div className="flex flex-col gap-6 max-w-full w-full">
+          <div className="flex flex-col gap-6 max-w-full mt-5 w-full">
             <Tabs defaultValue="ongoing">
               <TabsList>
                 <TabsTrigger value="ongoing">Ongoing</TabsTrigger>

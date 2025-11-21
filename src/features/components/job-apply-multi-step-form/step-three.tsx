@@ -1,4 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { DrawerClose } from "@/components/ui/drawer";
 import {
   Field,
   FieldError,
@@ -22,6 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FolderOpen } from "lucide-react";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const applyFormStepOneSchema = applyJobSchema.pick({
@@ -47,14 +51,18 @@ export default function StepThree({ handleStepBack }: StepOneProps) {
     defaultValues: {
       notice_period: "",
       resume: "",
-      terms: false,
+      terms: true,
     },
     mode: "onChange",
   });
 
   const onSubmit = (data: ApplyFormStepThreeSchema) => {
-    console.log(data);
-    setData(data);
+    try {
+      toast.success("Thanks for applying!");
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const options = [
     "Immediate joiner",
@@ -136,7 +144,9 @@ export default function StepThree({ handleStepBack }: StepOneProps) {
                 <Controller
                   name="terms" // The name of your checkbox field
                   control={control} // Pass the control object from useForm
-                  render={({ field: { onChange, value, ...restField } }) => (
+                  render={({
+                    field: { onChange, value = true, ...restField },
+                  }) => (
                     <input
                       type="checkbox"
                       onChange={(e) => onChange(e.target.checked)} // Update value with e.target.checked
@@ -155,7 +165,9 @@ export default function StepThree({ handleStepBack }: StepOneProps) {
             <Button type="button" onClick={handleStepBack}>
               Back
             </Button>
-            <Button type="submit">Submit</Button>
+            <DrawerClose asChild>
+              <Button type="submit">Submit</Button>
+            </DrawerClose>
           </div>
         </FieldSet>
       </FieldGroup>

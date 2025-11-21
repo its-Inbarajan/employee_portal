@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Asidebar } from "@/components/asidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +30,7 @@ export default function RootLayout({
         <SidebarProvider>
           <Asidebar />
           {children}
+          <Toaster position="bottom-right" theme="system" />
         </SidebarProvider>
       </body>
     </html>
