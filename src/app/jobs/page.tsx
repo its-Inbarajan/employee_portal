@@ -1,11 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { CompoBox } from "@/components/ui/combobox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useDialog from "@/hocs/useDialog";
 import { ChevronDown, ListFilter, Pen, Plus } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
+import JobFilter from "../components/job-filter";
 
 type TabsValue = {
   id: string;
@@ -13,7 +16,24 @@ type TabsValue = {
   value: string;
 };
 
+const OpenFilterDialog: React.FC<{ openDialog: () => void }> = ({
+  openDialog,
+}) => {
+  return (
+    <Button
+      type="button"
+      className="w-full hover:bg-gray-400 bg-white transition-all duration-500 ease-in-out border-b-gray-100 rounded-none rounded-bl rounded-br border border-b-2"
+      variant={"secondary"}
+      onClick={openDialog}
+    >
+      <ListFilter className="size-5" /> Filter{" "}
+      <ChevronDown className="size-5" />
+    </Button>
+  );
+};
+
 export default function Jobs() {
+  const OpenDialog = useDialog(OpenFilterDialog);
   const [tabs, setTabs] = React.useState<TabsValue[]>(() =>
     Array.from({ length: 1 }).map((_, i) => ({
       id: String(i + 1),
@@ -21,6 +41,7 @@ export default function Jobs() {
       value: `default`,
     }))
   );
+
   const [activeTab, setActiveTab] = React.useState<string>(
     tabs[0]?.value ?? "default"
   );
@@ -54,6 +75,44 @@ export default function Jobs() {
   //     setActiveTab(remaining[remaining.length - 1]?.value ?? "");
   //   }
   // };
+
+  const roles = [
+    {
+      heading: "Engineering",
+      data: [
+        "software engineering",
+        "mobile developer",
+        "IOS developer",
+        "andriod developer",
+        "frontend engineering",
+        "backend engineering",
+        "Full-Stack engineering",
+        "software architect",
+        "security engineering",
+        "machine learning engineering",
+        "embedded engineering",
+        "data engineering",
+        "devops",
+        "engineering manager",
+        "qa engineering",
+        "data scientict",
+      ],
+    },
+    {
+      heading: "Designer",
+      data: [
+        "Junior Designer",
+        "Graphic Designer",
+        "Visual Designer",
+        "User Interface (UI) Designer",
+        "User Experience (UX) Designer",
+        "Product Designer",
+        "Interaction Designer",
+        "Motion Graphics Designer",
+        "Web Designer",
+      ],
+    },
+  ];
   return (
     <div className="w-full">
       <Tabs
@@ -102,21 +161,33 @@ export default function Jobs() {
             className="w-full"
           >
             <Card className="rounded-none w-full shadow-2xs bg-white mt-0">
-              <CardHeader>
-                <CardTitle className="">{item.name}</CardTitle>
-              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-2.5 items-center">
+                  <CompoBox
+                    PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                    options={roles}
+                    placeholder="Choose Role"
+                    CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
+                  />
+                  <CompoBox
+                    PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                    options={[]}
+                    placeholder="Choose location"
+                    CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
+                  />
+                </div>
+              </CardContent>
             </Card>
           </TabsContent>
         ))}
       </Tabs>
       <div className="flex w-full">
-        <Button
-          className="w-full hover:bg-gray-400 bg-white transition-all duration-500 ease-in-out border-b-gray-400 rounded-none rounded-bl rounded-br border border-b-2"
-          variant={"secondary"}
-        >
-          <ListFilter className="size-5" /> Filter{" "}
-          <ChevronDown className="size-5" />
-        </Button>
+        <OpenDialog
+          data={{
+            title: "Job Filters",
+          }}
+          renderDialogContent={() => <JobFilter />}
+        />
       </div>
     </div>
   );

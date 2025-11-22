@@ -20,13 +20,13 @@ type RenderContent = (job?: JobListProps) => React.ReactNode;
  * simple apply content. You can pass a `renderDrawerContent` prop to the
  * wrapped component to customize the drawer body.
  */
-export function withApplyDrawer<P extends object>(
+function withApplyDrawer<P extends object>(
   WrappedComponent: React.ComponentType<P & { openApplyDrawer: () => void }>
 ) {
   return function WithApplyDrawer(
     props: P & { job?: JobListProps; renderDrawerContent?: RenderContent }
   ) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState<boolean>(false);
 
     const openApplyDrawer = React.useCallback(() => setOpen(true), []);
 
@@ -73,23 +73,6 @@ export function withApplyDrawer<P extends object>(
                 </div>
               )}
             </div>
-            {/* <DrawerFooter className="border-t">
-              <div className="flex w-full justify-end ">
-                <DrawerClose asChild>
-                  <Button
-                    type="reset"
-                    variant="default"
-                    className="bg-transparent hover:bg-transparent text-black"
-                  >
-                    close
-                  </Button>
-                </DrawerClose>
-
-                <Button type="reset" variant="default">
-                  Next
-                </Button>
-              </div>
-            </DrawerFooter> */}
           </DrawerContent>
         </Drawer>
       </>
