@@ -11,6 +11,7 @@ import {
 import { JobListProps } from "@/@types/jobs";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 type RenderContent = (job?: JobListProps) => React.ReactNode;
 
@@ -24,7 +25,11 @@ function withApplyDrawer<P extends object>(
   WrappedComponent: React.ComponentType<P & { openApplyDrawer: () => void }>
 ) {
   return function WithApplyDrawer(
-    props: P & { job?: JobListProps; renderDrawerContent?: RenderContent }
+    props: P & {
+      job?: JobListProps;
+      renderDrawerContent?: RenderContent;
+      className: string;
+    }
   ) {
     const [open, setOpen] = React.useState<boolean>(false);
 
@@ -35,7 +40,7 @@ function withApplyDrawer<P extends object>(
         <WrappedComponent {...props} openApplyDrawer={openApplyDrawer} />
 
         <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
-          <DrawerContent className="min-h-screen">
+          <DrawerContent className={cn("", props.className)}>
             <DrawerHeader>
               <DrawerTitle>Apply: {props.job?.title ?? "Job"}</DrawerTitle>
             </DrawerHeader>

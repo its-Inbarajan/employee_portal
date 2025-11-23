@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Chip from "@/components/ui/chip";
 import { CompoBox } from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -15,8 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { ToggleSwitch } from "@/components/ui/toggle-switch";
 import {
   EarthIcon,
   Github,
@@ -756,8 +757,11 @@ export default function ProfilePage() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid items-center w-full relative">
-              <ToggleSwitch label="Display pronouns on my profile" />
+            <div className="flex items-center space-x-2">
+              <Switch id="display-pronouns-on-proflie" />
+              <Label htmlFor="display-pronouns-on-proflie">
+                Display pronouns on my profile
+              </Label>
             </div>
             <div className="grid items-center w-full">
               <label

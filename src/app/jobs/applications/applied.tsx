@@ -1,10 +1,18 @@
 "use client";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, XIcon } from "lucide-react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const RecentlyApplied = [
   {
@@ -17,6 +25,7 @@ const RecentlyApplied = [
     company_profile_link: "/",
     job_link: "/",
     createdAt: "3 days ago",
+    company_des: "Conversational workplace application",
   },
 ];
 
@@ -25,6 +34,9 @@ const ClientApplied = () => {
   const router = useRouter();
   const pathName = usePathname();
   const [open, setOpen] = React.useState<boolean>(false);
+  const [activeTab, setActiveTab] = React.useState<
+    "application" | "job-description" | "company-info" | string
+  >("application");
   const [selectedJobId, setSelectedJobId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -43,7 +55,7 @@ const ClientApplied = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     params.set("jobId", value);
-    console.log(params);
+
     router.push(`${pathName}?${params.toString()}`);
   };
 
@@ -56,6 +68,13 @@ const ClientApplied = () => {
       router.push(`${pathName}${qs ? `?${qs}` : ""}`);
     }
   };
+
+  const handleTabValue = (
+    value: "application" | "job-description" | "company-info" | string
+  ) => {
+    setActiveTab(value);
+  };
+
   return (
     <div className="md:px-6 md:py-4 px-3 py-3  overflow-scroll scroll-smooth  min-h-screen">
       <div className="md:max-w-screen max-w-sm mx-auto w-full">
@@ -124,8 +143,77 @@ const ClientApplied = () => {
                 open={open}
                 onOpenChange={handleOpenChange}
               >
-                <DrawerContent>
-                  <DrawerTitle>View Applied Job{selectedJobId}</DrawerTitle>
+                <DrawerContent className="data-[vaul-drawer-direction=right]:sm:max-w-xl ">
+                  <div className="flex gap-2 justify-between items-start border-b px-4 py-4">
+                    <Link
+                      href={RecentlyApplied[0].company_profile_link}
+                      className="flex flex-row w-full gap-4 items-center"
+                    >
+                      <div className="w-16 h-fit border rounded-sm">
+                        <Image
+                          width={100}
+                          height={100}
+                          alt="company_profile"
+                          className="h-full w-full aspect-square object-center"
+                          src={RecentlyApplied[0].image}
+                        />
+                      </div>
+                      <div className="grid capitalize items-center space-y-px">
+                        <DrawerTitle>
+                          {RecentlyApplied[0].company_name} {selectedJobId}
+                        </DrawerTitle>
+                        <DrawerDescription>
+                          {RecentlyApplied[0].company_des}
+                        </DrawerDescription>
+                        <span className="font-medium text-muted-foreground leading-relaxed tracking-wide text-sm">
+                          {RecentlyApplied[0].createdAt}
+                        </span>
+                      </div>
+                    </Link>
+
+                    <Button
+                      onClick={() => handleOpenChange(false)}
+                      type="button"
+                      size={"icon-sm"}
+                      variant={"secondary"}
+                    >
+                      <XIcon />
+                    </Button>
+                  </div>
+                  <Tabs
+                    className="w-full"
+                    value={activeTab}
+                    onValueChange={handleTabValue}
+                  >
+                    <div className="w-full bg-white shadow">
+                      <TabsList className="bg-transparent space-x-4 pb-0 rounded-none">
+                        {["application", "job-description", "company-info"].map(
+                          (item) => (
+                            <TabsTrigger
+                              className={
+                                "capitalize relative px-4 py-2 text-sm font-normal text-black transition-all"
+                              }
+                              key={`tab-value-${item}`}
+                              value={item}
+                            >
+                              {item.split("-").join(" ")}
+                              <span
+                                className={cn(
+                                  "absolute left-0 bottom-0 w-full h-[2px] bg-black transition-transform duration-300",
+                                  activeTab === item
+                                    ? "scale-x-100"
+                                    : "scale-x-0 origin-center"
+                                )}
+                              />
+                            </TabsTrigger>
+                          )
+                        )}
+                      </TabsList>
+                    </div>
+                    <TabsContent className="" value="application">
+                      Application
+                    </TabsContent>
+                  </Tabs>
                 </DrawerContent>
               </Drawer>
             </Tabs>

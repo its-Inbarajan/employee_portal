@@ -70,6 +70,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
         {!isApplied ? (
           <div className="inline-block">
             <ApplyButton
+              className="min-h-screen"
               job={item}
               renderDrawerContent={(job) => <ApplyForms job={job} />}
             />

@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CompoBox } from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,15 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
-import { Target } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import {
+  BuildingIcon,
+  ComputerIcon,
+  EarthIcon,
+  PlusIcon,
+  SearchIcon,
+  Target,
+} from "lucide-react";
 import React from "react";
 const roles = [
   {
@@ -122,7 +131,7 @@ const currency = [
 export default function JobFilter() {
   return (
     <div className="flex flex-col h-full">
-      <div className="overflow-auto flex-1 pb-20">
+      <div className="overflow-auto flex-1">
         <div className="h-fit bg-white flex flex-col shadow px-3 py-3 rounded ">
           <div className="grid  relative w-full grid-cols-2 gap-2.5 items-center">
             <CompoBox
@@ -203,7 +212,7 @@ export default function JobFilter() {
                 </p>
                 <div className="grid w-full gap-2 items-center">
                   <Label htmlFor="equity-value">0% - 2%+</Label>
-                  <Slider defaultValue={[33]} max={100} step={2} />
+                  <Slider defaultValue={[0.1, 0.1]} max={10} step={2} />
                 </div>
               </div>
             </div>
@@ -216,56 +225,309 @@ export default function JobFilter() {
           </h1>
           <div className="grid grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
-              <div className="px-2 py-2 space-y-5">
+              <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
-                  Salary
+                  Skills
                 </p>
-                <div className="font-normal text-gray-300 text-sm">
-                  Any Salary
-                </div>
-                <div className="flex md:flex-row flex-col gap-2.5 w-full items-center">
+
+                <div className="flex flex-col gap-2.5 w-full items-center">
                   <Input
-                    placeholder="Minimum salary"
+                    placeholder="Type to search"
                     className="rounded w-full placeholder:text-gray-400"
-                    type="number"
-                  />{" "}
-                  <span className="text-xl text-gray-400">-</span>
-                  <Input
-                    placeholder="Maximum salary"
-                    className="rounded w-full placeholder:text-gray-400"
-                    type="number"
+                    type="search"
                   />
-                </div>
-                <div className="w-full">
-                  <Select>
-                    <SelectTrigger className="w-full border-px border-gray-500 rounded-md shadow-none ">
-                      <SelectValue placeholder="Select currency" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {currency.map((item) => (
-                        <SelectItem
-                          className="flex flex-1 gap-2 items-center"
-                          key={`filters-${item.currency_name}`}
-                          value={item.code}
+                  <div className="flex flex-col justify-self-start  w-full">
+                    <div className="uppercase font-normal text-gray-400 text-xs">
+                      Popular
+                    </div>
+                    {["react", "python", "nextjs", "java", "ruby on rails"].map(
+                      (item) => (
+                        <div
+                          className="flex justify-between items-center gap-2 w-full"
+                          key={`popular-lan-${item}`}
                         >
-                          <span>{item.country}</span>
-                          <span>{item.symbol}</span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          <div className="font-medium leading-relaxed text-sm capitalize tracking-wide">
+                            {item}
+                          </div>
+                          <Button
+                            size={"icon-sm"}
+                            variant={"secondary"}
+                            className="hover:bg-transparent bg-transparent"
+                          >
+                            <PlusIcon className="size-5 text-blue-500" />
+                          </Button>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
-              <div className="px-2 py-2 space-y-5">
+              <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
-                  Equity
+                  Market
+                </p>
+
+                <div className="flex flex-col gap-2.5 w-full items-center">
+                  <Input
+                    placeholder="Type to search"
+                    className="rounded w-full placeholder:text-gray-400"
+                    type="search"
+                  />
+                  <div className="flex flex-col justify-self-start  w-full">
+                    <div className="uppercase font-normal text-gray-400 text-xs">
+                      Popular
+                    </div>
+                    {[
+                      "Healthcare",
+                      "E-Commerce",
+                      "Education",
+                      "Enterprise Software",
+                      "Marketplaces",
+                    ].map((item) => (
+                      <div
+                        className="flex justify-between items-center gap-2 w-full"
+                        key={`popular-lan-${item}`}
+                      >
+                        <div className="font-medium leading-relaxed text-sm capitalize tracking-wide">
+                          {item}
+                        </div>
+                        <Button
+                          size={"icon-sm"}
+                          variant={"secondary"}
+                          className="hover:bg-transparent bg-transparent"
+                        >
+                          <PlusIcon className="size-5 text-blue-500" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Separator />
+        <div className="px-3 py-3 md:py-6 md:px-6">
+          <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+            <ComputerIcon className="size-5" /> Job Details
+          </h1>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Job Types
+                </p>
+
+                <div className="flex flex-col gap-2.5 w-full justify-start">
+                  {["Full Time", "Contract", "Internship", "Cofounder"].map(
+                    (item) => (
+                      <div
+                        key={`job-types-${item}`}
+                        className="flex items-center justify-start gap-2"
+                      >
+                        <Checkbox
+                          id={item.toLocaleLowerCase()}
+                          name={item.toLocaleLowerCase()}
+                        />
+                        <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Required experience
                 </p>
                 <div className="grid w-full gap-2 items-center">
-                  <Label htmlFor="equity-value">0% - 2%+</Label>
-                  <Slider defaultValue={[33]} max={100} step={2} />
+                  <Label
+                    htmlFor="exp"
+                    className="text-xs tracking-wide leading-relaxed text-gray-400"
+                  >
+                    {" "}
+                    Filter jobs by minimum years of experience
+                  </Label>
+                  <Slider
+                    defaultValue={[0, 10]} // Or use `value` prop for controlled component
+                    max={10}
+                    step={1}
+                    // value={range}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Separator />
+        <div className="px-3 py-3 md:py-6 md:px-6">
+          <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+            <SearchIcon className="size-5" /> Keywords
+          </h1>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Included keywords
+                </p>
+
+                <div className="flex flex-col gap-2.5 w-full justify-start">
+                  <div className="relative w-full">
+                    <Input type="search" name="keywords" id="keywords" />
+                    <div className="absolute inset-0 top-0 left-[24.5rem] z-0 inline-block float-end">
+                      <Button variant={"default"} type="button">
+                        Add
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Excluded keywords
+                </p>
+                <div className="flex flex-col gap-2.5 w-full justify-start">
+                  <div className="relative w-full">
+                    <Input type="search" name="keywords" id="keywords" />
+                    <div className="absolute inset-0 top-0 left-[24.5rem] z-0 inline-block float-end">
+                      <Button variant={"default"} type="button">
+                        Add
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Separator />
+        <div className="px-3 py-3 md:py-6 md:px-6">
+          <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+            <BuildingIcon className="size-5" /> Company Details
+          </h1>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Company size
+                </p>
+
+                <div className="flex flex-col gap-2.5 w-full justify-start">
+                  {[
+                    "1-10 employees",
+                    "11-50 employees",
+                    "51-200 employees",
+                    "201-500 employees",
+                    "501-1000 employees",
+                    "1001-5000 employees",
+                    "5000+ employees",
+                  ].map((item) => (
+                    <div
+                      key={`company-size-${item}`}
+                      className="flex items-center justify-start gap-2"
+                    >
+                      <Checkbox
+                        id={item.toLocaleLowerCase()}
+                        name={item.toLocaleLowerCase()}
+                      />
+                      <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Investment stage
+                </p>
+                <div className="flex flex-col gap-2.5 w-full justify-start">
+                  {[
+                    "Seed Stage",
+                    "Series A",
+                    "Series B",
+                    "Growth",
+                    "IPO",
+                    "Acquired",
+                  ].map((item) => (
+                    <div
+                      key={`investment-stage-${item}`}
+                      className="flex items-center justify-start gap-2"
+                    >
+                      <Checkbox
+                        id={item.toLocaleLowerCase()}
+                        name={item.toLocaleLowerCase()}
+                      />
+                      <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Remote culture
+                </p>
+                <div className="flex items-center justify-start gap-2">
+                  <div className="flex items-center space-x-2">
+                    <Switch id="remote-culture" />
+                    <Label htmlFor="remote-culture">
+                      {" "}
+                      Only show jobs at companies that are mostly or fully
+                      remote
+                    </Label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Responsiveness
+                </p>
+                <div className="flex items-center justify-start gap-2">
+                  <div className="flex items-center space-x-2">
+                    <Switch id="responsiveness" />
+                    <Label htmlFor="responsiveness">
+                      {" "}
+                      Only show companies highly responsive to incoming
+                      applications
+                    </Label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Separator />
+        <div className="px-3 py-3 md:py-6 md:px-6">
+          <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+            <EarthIcon className="size-5" /> Immigration
+          </h1>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded ring py-3 px-2 ring-secondary w-full">
+              <div className="px-2 py-2 grid w-full gap-4">
+                <p className="font-medium leading-tight text-black text-lg">
+                  Immigration
+                </p>
+                <div className="flex items-center justify-start gap-2">
+                  <div className="flex items-center space-x-2">
+                    <Switch id="immigration" />
+                    <Label htmlFor="immigration">
+                      {" "}
+                      Only show companies that can sponsor a visa
+                    </Label>
+                  </div>
                 </div>
               </div>
             </div>
