@@ -11,27 +11,29 @@ export default function OverviewPage() {
           What recruiters will see?
         </h1>
         <div className="md:px-4 h-auto md:py-4 p-2 border rounded-sm w-full">
-          <div className="flex items-start flex-wrap md:flex-row flex-col gap-3 md:px-5 md:py-2.5 px-3.5 py-2">
-            <div className="h-20 w-20 rounded-full border">
-              <Image
-                src={"/next.svg"}
-                alt="profile-image"
-                width={50}
-                height={50}
-                className="w-full h-full object-fill aspect-auto"
-              />
-            </div>
-            <div className="flex flex-col items-start justify-start">
-              <p className="font-semibold text-xl text-black mb-1.5 leading-6 tracking-wide text-nowrap">
-                Inba Rajan <span className="text-gray-500">(He/Him)</span>
-              </p>
-              <span className="font-normal text-gray-7 leading-5 mb-2 text-wrap w-xl tracking-wider">
-                3 years of exp • Bangalore Urban, India • 0.5 hours behind •
-                Open to remote
-              </span>
-              <span className="rounded-full bg-gray-200 inline-block font-normal text-xs h-fit p-2 leading-5 tracking-wide text-gray-700">
-                Active today
-              </span>
+          <div className="flex items-start sm:flex-wrap md:flex-row flex-col gap-3 md:px-2 md:py-2.5 px-3.5 py-2">
+            <div className="flex items-start gap-4 md:flex-row flex-col flex-1">
+              <div className="h-20 w-20 rounded-full border">
+                <Image
+                  src={"/next.svg"}
+                  alt="profile-image"
+                  width={50}
+                  height={50}
+                  className="w-full h-full object-fill aspect-auto"
+                />
+              </div>
+              <div className="flex flex-col flex-1 items-start justify-start">
+                <p className="font-semibold text-xl text-black mb-1.5 leading-6 tracking-wide text-nowrap">
+                  Inba Rajan <span className="text-gray-500">(He/Him)</span>
+                </p>
+                <p className="font-normal text-gray-700 md:leading-relaxed mb-2  tracking-wider">
+                  3 years of exp • Bangalore Urban, India • 0.5 hours behind •
+                  Open to remote
+                </p>
+                <span className="rounded-full bg-gray-200 inline-block font-normal text-xs h-fit p-2 leading-5 tracking-wide text-gray-700">
+                  Active today
+                </span>
+              </div>
             </div>
             <div className="flex flex-wrap gap-4 items-start">
               <Link href={"/"} className="w-auto bg-gray-200 rounded p-1.5">

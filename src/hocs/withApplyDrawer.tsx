@@ -38,9 +38,10 @@ function withApplyDrawer<P extends object>(
     return (
       <>
         <WrappedComponent {...props} openApplyDrawer={openApplyDrawer} />
-
         <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
-          <DrawerContent className={cn("", props.className)}>
+          <DrawerContent
+            className={cn("overflow-y-auto h-auto", props.className)}
+          >
             <DrawerHeader>
               <DrawerTitle>Apply: {props.job?.title ?? "Job"}</DrawerTitle>
             </DrawerHeader>

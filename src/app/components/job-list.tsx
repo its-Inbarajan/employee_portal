@@ -27,7 +27,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
 
   const ApplyButton = withApplyDrawer(RawApplyButton);
   return (
-    <div className="flex w-full py-3 border-b gap-4 items-start">
+    <div className="flex md:flex-row flex-col w-full py-3 border-b gap-4 items-start">
       <div className="w-16 h-fit border rounded-sm">
         <Image
           src={item.image ?? "/next.svg"}
@@ -37,12 +37,12 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
           className="h-full w-full aspect-square object-center"
         />
       </div>
-      <div className="flex flex-col gap-4 md:flex-row w-full items-start">
-        <div className="flex flex-col gap-1 space-y-2.5 w-full">
+      <div className="flex flex-col gap-2 lg:gap-4 md:flex-row w-full items-start">
+        <div className="flex flex-col gap-1 lg:space-y-2.5 w-full">
           <div className="flex flex-1 flex-col w-full">
             <Link
               href={"/"}
-              className="font-semibold hover:underline block w-full text-lg leading-5 tracking-wide"
+              className="font-semibold hover:underline text-nowrap block w-full text-lg leading-5 tracking-wide"
             >
               {item.title}
             </Link>
@@ -68,9 +68,9 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
           </div>
         </div>
         {!isApplied ? (
-          <div className="inline-block">
+          <div className="md:inline-block md:w-fit block w-full">
             <ApplyButton
-              className="min-h-screen"
+              className=""
               job={item}
               renderDrawerContent={(job) => <ApplyForms job={job} />}
             />

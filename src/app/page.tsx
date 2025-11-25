@@ -168,7 +168,7 @@ export default function Home() {
     },
   ];
   return (
-    <div className="md:px-6 md:py-4 px-3 py-3  overflow-scroll scroll-smooth  min-h-screen">
+    <div className="md:px-6 md:py-4 px-3 py-3 min-h-screen">
       <div className="md:max-w-full md:w-full sm:w-sm max-w-sm mx-auto gap-5 flex flex-col justify-self-start">
         <div className="w-full">
           <Card className="shadow-neutral-50 ">
@@ -250,7 +250,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col md:flex-row justify-self-start lg:justify-end gap-4 lg:items-center">
+                  <div className="flex flex-row gap-3 flex-1 items-center">
                     <Button
                       variant={"link"}
                       type="button"
@@ -272,17 +272,17 @@ export default function Home() {
         </div>
         <div className="w-full ">
           <Card className="shadow-neutral-50 md:px-6 md:py-4 px-3 py-3">
-            <div className="flex flex-row justify-between items-start gap-2">
+            <div className="flex flex-col md:flex-row justify-between items-start lg:gap-3">
               <div className="inline-block float-start space-y-1.5">
                 <h1 className="text-xl font-semibold leading-5 tracking-wide">
                   Recommended Jobs
                 </h1>
-                <p className="font-normal mb-2 text-gray-400 text-sm tracking-wide leading-5">
+                <p className="font-normal mb-2 text-gray-400 text-sm text-wrap tracking-wide leading-5">
                   Jobs where you are a top applicant based on your profile job
                   search.
                 </p>
               </div>
-              <div className="inline-block float-end">
+              <div className="block text-nowrap float-end">
                 <Link
                   href={"/profile/edit/preferences"}
                   className="bg-transparent hover:underline text-blue-500 cursor-pointer font-normal text-xs tracking-wide"
@@ -301,8 +301,8 @@ export default function Home() {
               ))}
             <div className="flex items-center w-full justify-center">
               <Button
-                variant={"default"}
-                className="bg-transparent hover:bg-none text-blue-500 cursor-pointer w-auto inline-block font-medium text-base"
+                variant={"secondary"}
+                className="bg-transparent hover:bg-transparent text-blue-500 cursor-pointer w-auto inline-block font-medium text-base"
               >
                 See more
               </Button>
