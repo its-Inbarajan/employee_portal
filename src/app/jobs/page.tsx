@@ -122,7 +122,7 @@ export default function Jobs() {
         defaultValue={`default`}
       >
         <div className="flex flex-row">
-          <TabsList className="font-normal  p-0 relative text-sm text-black flex w-fit items-center mb-0 rounded-none">
+          <TabsList className="font-normal p-0 relative text-sm text-black flex w-fit items-center mb-0 rounded-none">
             {tabs.map((item, index) => (
               <TabsTrigger
                 key={`key-${item.name}-${index}`}

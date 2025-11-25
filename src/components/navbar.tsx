@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import {
@@ -11,32 +12,55 @@ import { Bell, ChevronDown, List, ListChecksIcon } from "lucide-react";
 import AnimatedSearch from "./ui/animated-search";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { SidebarTrigger } from "./ui/sidebar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import useKeyboardShortcut from "@/hooks/use-keyboard-shortcut-key";
 
 export const Navbar = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const handleOpenNotifiation = React.useCallback(
+    () => setOpen((pre) => !pre),
+    []
+  );
+
+  useKeyboardShortcut("i", handleOpenNotifiation);
   return (
-    <nav className="py-2 bg-gray-100 border-b relative border-gray-300 w-full px-2 md:px-6">
+    <nav className="py-2 bg-gray-100 border-b border-gray-300 w-full px-2 md:px-6">
       <div className="flex justify-between items-center">
-        <div className="rounded-xl flex items-center gap-2">
-          <Image
-            src={"/next.svg"}
-            alt="logo"
-            loading="lazy"
-            width={0}
-            height={0}
-            className="w-10 h-10 object-center"
-          />
+        <div className="flex items-center justify-start gap-3">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <SidebarTrigger variant={"secondary"} size={"icon-sm"} />
+            </TooltipTrigger>
+            <TooltipContent>Press CTRL + B</TooltipContent>
+          </Tooltip>
+          <div className="rounded-xl flex items-center gap-2">
+            <Image
+              src={"/next.svg"}
+              alt="logo"
+              loading="lazy"
+              width={0}
+              height={0}
+              className="w-10 h-10 object-center"
+            />
+          </div>
         </div>
         <div className="flex justify-between md:justify-center items-center gap-2.5">
           <div className="hidden md:flex items-center">
             <AnimatedSearch />
           </div>
           <div className="relative">
-            <DropdownMenu>
+            <DropdownMenu onOpenChange={handleOpenNotifiation} open={open}>
               <DropdownMenuTrigger
                 role="button"
                 className="group p-2 rounded-full cursor-pointer hover:bg-purple-200 transition ease-in-out"
               >
-                <Bell className="size-5 text-gray-500 group-hover:text-purple-500" />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Bell className="size-5 text-gray-500 group-hover:text-purple-500" />
+                  </TooltipTrigger>
+                  <TooltipContent>Press CRTL + I</TooltipContent>
+                </Tooltip>
               </DropdownMenuTrigger>
               <div className="">
                 <DropdownMenuContent className="w-xs absolute -translate-1/2 top-6">

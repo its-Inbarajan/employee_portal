@@ -43,7 +43,7 @@ const items = [
   },
   {
     title: "Message",
-    url: "#",
+    url: "/jobs/message",
     icon: MessageCircle,
   },
 ];
@@ -51,7 +51,7 @@ const items = [
 export const Asidebar = () => {
   const pathName = usePathname();
   return (
-    <Sidebar className="sticky isolate">
+    <Sidebar>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>

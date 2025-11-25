@@ -14,7 +14,7 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const hideFor = ["/jobs/applications"];
+  const hideFor = ["/jobs/applications", "/jobs/message"];
   if (pathname && hideFor.some((p) => pathname.startsWith(p))) {
     return <>{children}</>;
   }
@@ -26,8 +26,8 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
     router.push(value === "jobs" ? "/jobs" : `/jobs/${value}`);
   };
   return (
-    <div className="md:max-w-screen w-full max-w-5xl mx-auto md:px-6 px-1 sm:max-w-sm py-3.5 md:py-6">
-      <h1 className="font-semibold leading-relaxed tracking-tight text-4xl">
+    <div className="md:max-w-screen w-full max-w-5xl mx-auto sm:max-w-sm">
+      <h1 className="font-semibold leading-normal tracking-tight text-4xl">
         Search for jobs
       </h1>
       <div className="flex justify-between  items-center gap-3">

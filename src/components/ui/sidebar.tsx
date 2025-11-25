@@ -139,8 +139,8 @@ function SidebarProvider({
             } as React.CSSProperties
           }
           className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar grid md:grid-cols-[96px_1fr] xl:grid-cols-[96px_2fr_96px] min-h-svh w-full gap-6",
-            // "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+            // "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar grid md:grid-cols-[96px_1fr] xl:grid-cols-[96px_2fr_96px] min-h-svh w-full gap-6",
+            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
             className
           )}
           {...props}

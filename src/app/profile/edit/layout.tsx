@@ -32,7 +32,7 @@ export default function EditLayout({
   };
 
   return (
-    <div className="md:max-w-screen w-full overflow-hidden max-w-5xl mx-auto md:px-6 px-1 sm:max-w-sm py-3.5 md:py-6">
+    <div className="md:max-w-screen w-full overflow-hidden max-w-5xl mx-auto sm:max-w-sm">
       <h1 className="text-2xl font-semibold mb-6">Edit your Profile</h1>
       <div className="flex justify-between  items-center gap-3">
         <Tabs value={activeTab} onValueChange={handleChange} className="w-full">
