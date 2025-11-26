@@ -1,12 +1,12 @@
 "use client";
 import { JobListProps } from "@/@types/jobs";
 import { Button } from "@/components/ui/button";
-import withApplyDrawer from "@/hocs/withApplyDrawer";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ApplyForms } from "./job-apply-form";
+import applyWithDialog from "@/hocs/applyWithDialog";
 
 export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
   item,
@@ -25,7 +25,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
     </Button>
   );
 
-  const ApplyButton = withApplyDrawer(RawApplyButton);
+  const ApplyButton = applyWithDialog(RawApplyButton);
   return (
     <div className="flex md:flex-row flex-col w-full py-3 border-b gap-4 items-start">
       <div className="w-16 h-fit border rounded-sm">

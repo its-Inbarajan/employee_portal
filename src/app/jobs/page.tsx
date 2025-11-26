@@ -162,7 +162,7 @@ export default function Jobs() {
           >
             <Card className="rounded-none w-full shadow-2xs bg-white mt-0">
               <CardContent>
-                <div className="grid grid-cols-2 gap-2.5 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
                   <CompoBox
                     PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
                     options={roles}

@@ -78,7 +78,7 @@ export default function StepThree({ handleStepBack }: StepOneProps) {
       <FieldGroup>
         <FieldSet>
           <FieldGroup>
-            <FieldLabel className="text-lg font-medium text-gray-500">
+            <FieldLabel className="text-sm md:text-lg font-medium text-gray-500">
               What is your current notice period?
             </FieldLabel>
             <div className="flex md:flex-row flex-col items-center gap-2">

@@ -38,7 +38,7 @@ export function ApplyForms({ job }: ApplyFormProps) {
   return (
     <div className="md:px-4 md:py-4 px-2 py-2">
       <div className="grid grid-cols-12 h-full gap-5 items-start w-full">
-        <div className="col-span-12 sm:col-span-6">
+        <div className="col-span-12 sm:col-span-6 md:block hidden">
           <div className="flex-row rounded bg-gray-100 md:px-6 px-3 md:py-6 py-3 w-full h-fit gap-3 flex">
             <div className="w-20 h-fit border border-gray-400 rounded-sm">
               <Image
@@ -51,7 +51,7 @@ export function ApplyForms({ job }: ApplyFormProps) {
             </div>
             <div className="flex flex-col space-y-1 w-full justify-self-start">
               <div className="flex flex-col mb-4">
-                <h1 className="font-semibold text-xl leading-relaxed text-black">
+                <h1 className="font-semibold text-xl flex-nowrap leading-relaxed text-black">
                   {job?.title}
                 </h1>
                 <Link
@@ -104,7 +104,7 @@ export function ApplyForms({ job }: ApplyFormProps) {
                   <h1 className="font-medium text-sm tracking-wide text-gray-700">
                     Skills
                   </h1>
-                  <div className="flex gap-2 flex-wrap items-start w-md">
+                  <div className="flex gap-2 flex-wrap items-start">
                     {job?.skills.map((item) => (
                       <span
                         key={`skills_${item}`}

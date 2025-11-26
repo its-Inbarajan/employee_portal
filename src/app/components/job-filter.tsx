@@ -133,7 +133,7 @@ export default function JobFilter() {
     <div className="flex flex-col h-full">
       <div className="overflow-auto flex-1">
         <div className="h-fit bg-white flex flex-col shadow px-3 py-3 rounded ">
-          <div className="grid  relative w-full grid-cols-2 gap-2.5 items-center">
+          <div className="grid relative w-full grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
             <CompoBox
               PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
               options={roles}
@@ -161,7 +161,7 @@ export default function JobFilter() {
             Compenstation
           </h1>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 space-y-5">
                 <p className="font-medium leading-tight text-black text-lg">
@@ -223,7 +223,7 @@ export default function JobFilter() {
           <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
             <Target className="size-5" /> Areas of Interest
           </h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
@@ -314,7 +314,7 @@ export default function JobFilter() {
           <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
             <ComputerIcon className="size-5" /> Job Details
           </h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
@@ -369,7 +369,7 @@ export default function JobFilter() {
           <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
             <SearchIcon className="size-5" /> Keywords
           </h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
@@ -379,7 +379,7 @@ export default function JobFilter() {
                 <div className="flex flex-col gap-2.5 w-full justify-start">
                   <div className="relative w-full">
                     <Input type="search" name="keywords" id="keywords" />
-                    <div className="absolute inset-0 top-0 left-[24.5rem] z-0 inline-block float-end">
+                    <div className="absolute inset-0 top-0 left-0 md:left-[24.5rem] z-0">
                       <Button variant={"default"} type="button">
                         Add
                       </Button>
@@ -397,7 +397,7 @@ export default function JobFilter() {
                 <div className="flex flex-col gap-2.5 w-full justify-start">
                   <div className="relative w-full">
                     <Input type="search" name="keywords" id="keywords" />
-                    <div className="absolute inset-0 top-0 left-[24.5rem] z-0 inline-block float-end">
+                    <div className="absolute inset-0 top-0 left-0 md:left-[24.5rem] z-0">
                       <Button variant={"default"} type="button">
                         Add
                       </Button>
@@ -413,7 +413,7 @@ export default function JobFilter() {
           <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
             <BuildingIcon className="size-5" /> Company Details
           </h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
@@ -514,7 +514,7 @@ export default function JobFilter() {
           <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
             <EarthIcon className="size-5" /> Immigration
           </h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="rounded ring py-3 px-2 ring-secondary w-full">
               <div className="px-2 py-2 grid w-full gap-4">
                 <p className="font-medium leading-tight text-black text-lg">
