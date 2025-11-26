@@ -30,7 +30,7 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
       <h1 className="font-semibold leading-normal tracking-tight text-4xl">
         Search for jobs
       </h1>
-      <div className="flex justify-between  items-center gap-3">
+      <div className="flex relative justify-between  items-center gap-3">
         <Tabs
           value={activeTab}
           onValueChange={handleChange}

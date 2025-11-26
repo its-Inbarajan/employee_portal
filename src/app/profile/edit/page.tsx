@@ -166,6 +166,7 @@ export default function ProfilePage() {
                 className="rounded-md border-px border-gray-500"
                 type="text"
                 id="full_name"
+                autoFocus={true}
                 name="full_name"
                 autoComplete="username"
               />
@@ -180,8 +181,33 @@ export default function ProfilePage() {
                   alt="edit-profile"
                 />
               </div>
-              <div className="ring-1 w-2xs max-w-fit cursor-pointer text-black text-center inline-block px-2.5 font-normal hover:bg-black hover:text-white transition-all duration-500 ease-in-out py-2 rounded ring-black">
-                Upload a new photo
+              <div className="flex items-center space-x-4">
+                <Label
+                  htmlFor="file_input"
+                  className="ring-1 w-2xs max-w-fit cursor-pointer text-black text-center inline-block px-2.5 font-normal hover:bg-black hover:text-white transition-all duration-500 ease-in-out py-2 rounded ring-black"
+                >
+                  {/* <svg
+                    className="w-5 h-5 inline-block mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                    ></path>
+                  </svg> */}
+                  Upload a new photo
+                </Label>
+                <Input
+                  type="file"
+                  id="file_input"
+                  className="hidden"
+                  accept=".png"
+                />
               </div>
             </div>
 

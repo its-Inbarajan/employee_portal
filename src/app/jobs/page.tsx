@@ -1,14 +1,48 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { CompoBox } from "@/components/ui/combobox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useDialog from "@/hocs/useDialog";
-import { ChevronDown, ListFilter, Pen, Plus } from "lucide-react";
+import {
+  BookmarkIcon,
+  BriefcaseBusinessIcon,
+  ChevronDown,
+  DollarSignIcon,
+  EyeOffIcon,
+  ListFilter,
+  MapPinIcon,
+  NewspaperIcon,
+  PenIcon,
+  PlusIcon,
+  XIcon,
+} from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 import JobFilter from "../components/job-filter";
+import Image from "next/image";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type TabsValue = {
   id: string;
@@ -34,6 +68,7 @@ const OpenFilterDialog: React.FC<{ openDialog: () => void }> = ({
 
 export default function Jobs() {
   const OpenDialog = useDialog(OpenFilterDialog);
+  const [open, setOpen] = React.useState<boolean>(false);
   const [tabs, setTabs] = React.useState<TabsValue[]>(() =>
     Array.from({ length: 1 }).map((_, i) => ({
       id: String(i + 1),
@@ -67,14 +102,14 @@ export default function Jobs() {
     setTabs((s) => [...s, newTab]);
   };
 
-  // const removeTab = (value: string) => {
-  //   setTabs((s) => s.filter((t) => t.value !== value));
-  //   if (activeTab === value) {
-  //     // switch to previous tab or first
-  //     const remaining = tabs.filter((t) => t.value !== value);
-  //     setActiveTab(remaining[remaining.length - 1]?.value ?? "");
-  //   }
-  // };
+  const removeTab = (value: string) => {
+    setTabs((s) => s.filter((t) => t.value !== value));
+    if (activeTab === value) {
+      // switch to previous tab or first
+      const remaining = tabs.filter((t) => t.value !== value);
+      setActiveTab(remaining[remaining.length - 1]?.value ?? "");
+    }
+  };
 
   const roles = [
     {
@@ -113,6 +148,9 @@ export default function Jobs() {
       ],
     },
   ];
+  const handleOpenDrawer = () => {
+    setOpen((pre) => !pre);
+  };
   return (
     <div className="w-full">
       <Tabs
@@ -129,17 +167,18 @@ export default function Jobs() {
                 className="border w-fit relative rounded-none rounded-t-sm"
                 value={`${item.value}`}
               >
-                {item.name} <Pen className="size-3" />
-                {/* {tabs.length >= 2 && item.value !== "default" && (
+                {item.name} <PenIcon className="size-3" />
+                {tabs.length >= 2 && item.value !== "default" && (
                   <Button
                     onClick={() => removeTab(item.value)}
                     className="h-fit absolute inset-0 -top-2 bg-white size-[20px] flex items-center z-10 rounded-full left-28"
                     variant={"secondary"}
+                    size={"sm"}
                     type="button"
                   >
-                    <X className="size-4" />
+                    <XIcon className="size-4" />
                   </Button>
-                )} */}
+                )}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -150,10 +189,9 @@ export default function Jobs() {
             variant={"secondary"}
             onClick={handleAddTabs}
           >
-            <Plus />
+            <PlusIcon />
           </Button>
         </div>
-
         {tabs.map((item) => (
           <TabsContent
             value={`${item.value}`}
@@ -189,6 +227,331 @@ export default function Jobs() {
           renderDialogContent={() => <JobFilter />}
         />
       </div>
+      <div className="grid grid-cols-12 gap-3.5 w-full items-start">
+        <div className="col-span-12 md:col-span-7">
+          {[1, 2, 3, 4, 5].map((it) => (
+            <Link
+              key={it}
+              href={"#"}
+              className="flex items-center my-4 max-w-3xl gap-4 flex-col"
+            >
+              <Card className="rounded-2xl shadow hover:shadow-2xs transition-all ease-in-out duration-200">
+                <CardContent className="space-y-3">
+                  <div className="flex flex-row items-center justify-between">
+                    <div className="inline-flex flex-col justify-start">
+                      <CardTitle className="leading-snug tracking-wide">
+                        Frontend developer
+                      </CardTitle>
+                      <span className="font-medium text-xs leading-5 tracking-wide text-gray-700">
+                        Company name
+                      </span>
+                    </div>
+                    <div className="w-12 h-fit border rounded-sm">
+                      <Image
+                        src={"/next.svg"}
+                        width={50}
+                        height={50}
+                        className="h-full w-full aspect-square object-center ring-1"
+                        alt="company_profile"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid w-full items-start line-clamp-1 text-nowrap gap-1">
+                    <div className="flex flex-row flex-1 items-center">
+                      <div className="flex flex-row h-3 gap-4 items-center">
+                        <div className="flex items-center gap-2">
+                          <BriefcaseBusinessIcon className="size-4 text-gray-600" />
+                          <span className="font-normal text-gray-700 text-sm">
+                            1-3 Yrs
+                          </span>
+                        </div>
+                        <Separator orientation="vertical" className="mr-2" />
+                      </div>
+                      <div className="flex flex-row h-3 gap-4 items-center">
+                        <div className="flex items-center gap-2">
+                          <DollarSignIcon className="size-4 text-gray-600" />
+                          <span className="font-normal text-gray-700 text-sm">
+                            Not disclosed
+                          </span>
+                        </div>
+                        <Separator orientation="vertical" className="mr-2" />
+                      </div>
+                      <div className="flex flex-row gap-4 items-center">
+                        <div className="flex items-center gap-2">
+                          <MapPinIcon className="size-4 text-gray-600" />
+                          <span className="font-normal text-gray-700 text-sm">
+                            Remote
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-row gap-2 flex-1 items-center">
+                      <NewspaperIcon className="size-4 text-gray-600" />
+                      <span className="font-normal text-gray-700 text-sm">
+                        Experiene : 1-3 yrs
+                      </span>
+                      <span className="font-normal text-gray-700 inline-block text-sm">
+                        Eduation : Bachelors / Master in software development
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-row text-nowrap line-clamp-1 gap-2 flex-1 items-center">
+                    {[
+                      "Frontend development",
+                      "Redux",
+                      "JavaScript",
+                      "TypeScript",
+                      "Nextjs",
+                      "CSS/SCSS",
+                      "HTML",
+                    ].map((item) => (
+                      <span
+                        key={`jobs-skills-${item}`}
+                        className="font-normal text-gray-600 text-sm"
+                      >
+                        {item},
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <div className="font-normal tracking-wide text-xs text-gray-400">
+                      2 days ago
+                    </div>
+                    <div className="inline-flex items-center gap-2">
+                      <Button
+                        variant={"ghost"}
+                        size={"sm"}
+                        className="hover:text-blue-500 p-0 text-black inline-flex items-center text-xs font-normal"
+                      >
+                        <EyeOffIcon /> Hide
+                      </Button>
+                      <Button
+                        variant={"ghost"}
+                        size={"sm"}
+                        className="hover:text-blue-500 p-0 text-black inline-flex items-center text-xs font-normal"
+                      >
+                        <BookmarkIcon /> Save
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+        <div className="hidden md:flex my-4 col-span-5 w-full">
+          <Card className="shadow-none">
+            <CardContent>
+              <CardTitle className="font-semibold text-nowrap text-lg">
+                Add preferences to get match
+              </CardTitle>
+              <div className="space-y-2">
+                <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
+                  Preferred job role{" "}
+                  <Button
+                    onClick={handleOpenDrawer}
+                    size={"sm"}
+                    variant={"default"}
+                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
+                  >
+                    <PenIcon className="size-3" />
+                  </Button>
+                </span>
+                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
+                  {[
+                    "frontend developer",
+                    "mern stack developer",
+                    "full stack developer",
+                  ].map((ite) => (
+                    <div
+                      key={`prefferred-job-${ite}`}
+                      className="rounded-full capitalize px-2.5 py-2.5 w-fit bg-gray-100 font-medium text-sm tracking-wide text-gray-800"
+                    >
+                      {ite}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
+                  Preferred work location{" "}
+                  <Button
+                    size={"sm"}
+                    variant={"default"}
+                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
+                  >
+                    <PenIcon className="size-3" />
+                  </Button>
+                </span>
+                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
+                  {[
+                    "pune",
+                    "Noida",
+                    "Mumbai (All Areas)",
+                    "Mumbai",
+                    "Kolkata",
+                    "Hyderabad/Secunderabad",
+                    "Delhi / NCR",
+                    "Chennai",
+                    "Bangalore/Bengaluru",
+                    "Ahmedabad",
+                  ].map((ite) => (
+                    <div
+                      key={`prefferred-job-${ite}`}
+                      className="rounded-full capitalize px-2.5 py-2.5 w-fit bg-gray-100 font-medium text-sm tracking-wide text-gray-800"
+                    >
+                      {ite}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
+                  Preferred Salary{" "}
+                  <Button
+                    size={"sm"}
+                    variant={"default"}
+                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
+                  >
+                    <PenIcon className="size-3" />
+                  </Button>
+                </span>
+                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
+                  {["₹ 6,60,000"].map((ite) => (
+                    <div
+                      key={`prefferred-job-${ite}`}
+                      className="rounded-full capitalize px-2.5 py-2.5 w-fit bg-gray-100 font-medium text-sm tracking-wide text-gray-800"
+                    >
+                      {ite}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <Drawer direction="right" open={open} onOpenChange={handleOpenDrawer}>
+        <DrawerContent className="data-[vaul-drawer-direction=right]:sm:max-w-lg py-2 overflow-hidden px-10">
+          <DrawerClose
+            onClick={handleOpenDrawer}
+            className="flex justify-end w-full"
+          >
+            <XIcon />
+          </DrawerClose>
+          <DrawerHeader className="px-0">
+            <DrawerTitle className="inline-block">
+              Manage your job preferences
+            </DrawerTitle>
+          </DrawerHeader>
+          <form>
+            <div className="flex flex-col relative gap-4">
+              <div className="grid w-full gap-2 items-center">
+                <Label htmlFor="preferred-job">
+                  Preferred Job Role (Max 3)
+                </Label>
+                <Input
+                  type="text"
+                  id="preferred-job"
+                  placeholder="Enter your preferred Job Role"
+                  className="rounded-xl h-12 w-full"
+                />
+                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
+                  {[
+                    "frontend developer",
+                    "mern stack developer",
+                    "full stack developer",
+                  ].map((ite) => (
+                    <div
+                      key={`prefferred-job-${ite}`}
+                      className=" inline-flex items-center gap-2 rounded-full capitalize py-1.5 px-2.5 w-fit bg-gray-200 ring font-medium text-sm tracking-wide text-black"
+                    >
+                      {ite}{" "}
+                      <Button
+                        size={"sm"}
+                        className="h-fit has-[>svg]:px-0 px-0"
+                      >
+                        <XIcon />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="grid w-full gap-2 items-center">
+                <Label>Preferred Salary</Label>
+                <div className="grid grid-cols-12">
+                  <div className="col-span-2">
+                    <Select>
+                      <SelectTrigger className="rounded-xl">
+                        <SelectValue placeholder="₹" />
+                      </SelectTrigger>
+                      <SelectContent className="">
+                        <SelectGroup>
+                          {["$", "₹"].map((ite) => (
+                            <SelectItem key={ite} value={ite}>
+                              {ite}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="col-span-10">
+                    <Input
+                      className="w-full rounded-xl h-12"
+                      placeholder="eg : 4,50,000"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="grid w-full gap-2 items-center">
+                <Label htmlFor="preferred-job">
+                  Preferred Work Locations (Max 10)
+                </Label>
+                <Input
+                  type="text"
+                  id="preferred-job"
+                  placeholder="Enter your preferred Job Role"
+                  className="rounded-xl h-12 w-full"
+                />
+                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
+                  {[
+                    "pune",
+                    "Noida",
+                    "Mumbai (All Areas)",
+                    "Mumbai",
+                    "Kolkata",
+                    "Hyderabad/Secunderabad",
+                    "Delhi / NCR",
+                    "Chennai",
+                    "Bangalore/Bengaluru",
+                    "Ahmedabad",
+                  ].map((ite) => (
+                    <div
+                      key={`prefferred-job-${ite}`}
+                      className=" inline-flex items-center gap-2 rounded-full capitalize py-1.5 px-2.5 w-fit bg-gray-200 ring font-medium text-sm tracking-wide text-black"
+                    >
+                      {ite}{" "}
+                      <Button
+                        size={"sm"}
+                        className="h-fit has-[>svg]:px-0 px-0"
+                      >
+                        <XIcon />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <DrawerFooter className="mt-auto absolute top-0 right-0 left-0 bottom-0 shadow-2xl px-10 shadow-gray-500  z-10 h-fit rounded-bl-xl bg-white w-full">
+              <div className="flex w-full justify-start items-center gap-2">
+                <Button>Submit</Button>
+                <Button>Close</Button>
+              </div>
+            </DrawerFooter>
+          </form>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
