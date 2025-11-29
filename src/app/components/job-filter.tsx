@@ -130,7 +130,7 @@ const currency = [
 ];
 export default function JobFilter() {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
       <div className="overflow-auto flex-1">
         <div className="h-fit bg-white flex flex-col shadow px-3 py-3 rounded ">
           <div className="grid relative w-full grid-cols-1 md:grid-cols-2 gap-2.5 items-center">

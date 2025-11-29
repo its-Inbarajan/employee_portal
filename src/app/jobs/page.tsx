@@ -24,25 +24,8 @@ import JobFilter from "../components/job-filter";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import useDrawer from "@/hocs/useDrawer";
+import JobPreferenceForm from "../components/job-preference-form";
 
 type TabsValue = {
   id: string;
@@ -66,9 +49,24 @@ const OpenFilterDialog: React.FC<{ openDialog: () => void }> = ({
   );
 };
 
+const OpenPrefernceEdit: React.FC<{ openDrawer: () => void }> = ({
+  openDrawer,
+}) => {
+  return (
+    <Button
+      onClick={openDrawer}
+      size={"sm"}
+      variant={"default"}
+      className="bg-transparent h-4 hover:bg-transparent text-blue-500"
+    >
+      <PenIcon className="size-3" />
+    </Button>
+  );
+};
+
 export default function Jobs() {
+  const OpenDrawer = useDrawer(OpenPrefernceEdit);
   const OpenDialog = useDialog(OpenFilterDialog);
-  const [open, setOpen] = React.useState<boolean>(false);
   const [tabs, setTabs] = React.useState<TabsValue[]>(() =>
     Array.from({ length: 1 }).map((_, i) => ({
       id: String(i + 1),
@@ -148,11 +146,9 @@ export default function Jobs() {
       ],
     },
   ];
-  const handleOpenDrawer = () => {
-    setOpen((pre) => !pre);
-  };
+
   return (
-    <div className="w-full">
+    <div className="w-full group-data-[collapsible=icon]:bg-red-500">
       <Tabs
         className="gap-0"
         value={activeTab}
@@ -348,14 +344,10 @@ export default function Jobs() {
               <div className="space-y-2">
                 <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
                   Preferred job role{" "}
-                  <Button
-                    onClick={handleOpenDrawer}
-                    size={"sm"}
-                    variant={"default"}
-                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
-                  >
-                    <PenIcon className="size-3" />
-                  </Button>
+                  <OpenDrawer
+                    direction="right"
+                    renderComponent={() => <JobPreferenceForm />}
+                  />
                 </span>
                 <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
                   {[
@@ -375,13 +367,10 @@ export default function Jobs() {
               <div className="space-y-2">
                 <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
                   Preferred work location{" "}
-                  <Button
-                    size={"sm"}
-                    variant={"default"}
-                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
-                  >
-                    <PenIcon className="size-3" />
-                  </Button>
+                  <OpenDrawer
+                    direction="right"
+                    renderComponent={() => <JobPreferenceForm />}
+                  />
                 </span>
                 <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
                   {[
@@ -408,13 +397,10 @@ export default function Jobs() {
               <div className="space-y-2">
                 <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
                   Preferred Salary{" "}
-                  <Button
-                    size={"sm"}
-                    variant={"default"}
-                    className="bg-transparent h-4 hover:bg-transparent text-blue-500"
-                  >
-                    <PenIcon className="size-3" />
-                  </Button>
+                  <OpenDrawer
+                    direction="right"
+                    renderComponent={() => <JobPreferenceForm />}
+                  />
                 </span>
                 <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
                   {["₹ 6,60,000"].map((ite) => (
@@ -431,127 +417,6 @@ export default function Jobs() {
           </Card>
         </div>
       </div>
-      <Drawer direction="right" open={open} onOpenChange={handleOpenDrawer}>
-        <DrawerContent className="data-[vaul-drawer-direction=right]:sm:max-w-lg py-2 overflow-hidden px-10">
-          <DrawerClose
-            onClick={handleOpenDrawer}
-            className="flex justify-end w-full"
-          >
-            <XIcon />
-          </DrawerClose>
-          <DrawerHeader className="px-0">
-            <DrawerTitle className="inline-block">
-              Manage your job preferences
-            </DrawerTitle>
-          </DrawerHeader>
-          <form>
-            <div className="flex flex-col relative gap-4">
-              <div className="grid w-full gap-2 items-center">
-                <Label htmlFor="preferred-job">
-                  Preferred Job Role (Max 3)
-                </Label>
-                <Input
-                  type="text"
-                  id="preferred-job"
-                  placeholder="Enter your preferred Job Role"
-                  className="rounded-xl h-12 w-full"
-                />
-                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
-                  {[
-                    "frontend developer",
-                    "mern stack developer",
-                    "full stack developer",
-                  ].map((ite) => (
-                    <div
-                      key={`prefferred-job-${ite}`}
-                      className=" inline-flex items-center gap-2 rounded-full capitalize py-1.5 px-2.5 w-fit bg-gray-200 ring font-medium text-sm tracking-wide text-black"
-                    >
-                      {ite}{" "}
-                      <Button
-                        size={"sm"}
-                        className="h-fit has-[>svg]:px-0 px-0"
-                      >
-                        <XIcon />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="grid w-full gap-2 items-center">
-                <Label>Preferred Salary</Label>
-                <div className="grid grid-cols-12">
-                  <div className="col-span-2">
-                    <Select>
-                      <SelectTrigger className="rounded-xl">
-                        <SelectValue placeholder="₹" />
-                      </SelectTrigger>
-                      <SelectContent className="">
-                        <SelectGroup>
-                          {["$", "₹"].map((ite) => (
-                            <SelectItem key={ite} value={ite}>
-                              {ite}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="col-span-10">
-                    <Input
-                      className="w-full rounded-xl h-12"
-                      placeholder="eg : 4,50,000"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="grid w-full gap-2 items-center">
-                <Label htmlFor="preferred-job">
-                  Preferred Work Locations (Max 10)
-                </Label>
-                <Input
-                  type="text"
-                  id="preferred-job"
-                  placeholder="Enter your preferred Job Role"
-                  className="rounded-xl h-12 w-full"
-                />
-                <div className="gap-2 w-full flex-wrap flex items-center flex-1 justify-start">
-                  {[
-                    "pune",
-                    "Noida",
-                    "Mumbai (All Areas)",
-                    "Mumbai",
-                    "Kolkata",
-                    "Hyderabad/Secunderabad",
-                    "Delhi / NCR",
-                    "Chennai",
-                    "Bangalore/Bengaluru",
-                    "Ahmedabad",
-                  ].map((ite) => (
-                    <div
-                      key={`prefferred-job-${ite}`}
-                      className=" inline-flex items-center gap-2 rounded-full capitalize py-1.5 px-2.5 w-fit bg-gray-200 ring font-medium text-sm tracking-wide text-black"
-                    >
-                      {ite}{" "}
-                      <Button
-                        size={"sm"}
-                        className="h-fit has-[>svg]:px-0 px-0"
-                      >
-                        <XIcon />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <DrawerFooter className="mt-auto absolute top-0 right-0 left-0 bottom-0 shadow-2xl px-10 shadow-gray-500  z-10 h-fit rounded-bl-xl bg-white w-full">
-              <div className="flex w-full justify-start items-center gap-2">
-                <Button>Submit</Button>
-                <Button>Close</Button>
-              </div>
-            </DrawerFooter>
-          </form>
-        </DrawerContent>
-      </Drawer>
     </div>
   );
 }
