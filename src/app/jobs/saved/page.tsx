@@ -1,6 +1,22 @@
 "use client";
+import NaukriStyleJobCard from "@/app/components/naukri-style-job-card";
+import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
 
 export default function Saved() {
-  return <div>Saved</div>;
+  return (
+    <div className="flex flex-col max-w-3xl w-full justify-start space-y-3">
+      <h1 className="font-semibold text-xl leading-6 tracking-tight text-black">Jobs saved by you</h1>
+      <Card>
+        <CardContent className="flex flex-row items-baseline gap-2 flex-1">
+          <span className="font-semibold text-5xl text-black">01</span>
+          <span className="font-medium text-xs text-gray-500">Saved Job(s)</span>
+        </CardContent>
+      </Card>
+
+      <div>
+        <NaukriStyleJobCard />
+      </div>
+    </div>
+  )
 }
