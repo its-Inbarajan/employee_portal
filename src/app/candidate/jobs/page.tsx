@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { CompoBox } from "@/components/ui/combobox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useDialog from "@/hocs/useDialog";
@@ -15,10 +15,10 @@ import {
 import React from "react";
 import { toast } from "sonner";
 import JobFilter from "../components/job-filter";
-import useDrawer from "@/hocs/useDrawer";
 import JobPreferenceForm from "../components/job-preference-form";
 import NaukriStyleJobCard from "../components/naukri-style-job-card";
 import JobPreference from "../components/job-preference";
+import useDrawer from "@/hocs/useDrawer";
 
 type TabsValue = {
   id: string;
@@ -47,13 +47,11 @@ const OpenPrefernceEdit: React.FC<{ openDrawer: () => void }> = ({
 }) => {
   return (
     <Button
-      onClick={openDrawer}
       size={"sm"}
-      variant={"default"}
-      asChild
-      className="bg-transparent h-4 hover:bg-transparent text-blue-500"
+      variant={'ghost'}
+      onClick={openDrawer}
     >
-      <PenIcon className="size-3" />
+      <PenIcon className="" />
     </Button>
   );
 };
@@ -224,13 +222,14 @@ export default function Jobs() {
             <NaukriStyleJobCard key={it} />
           ))}
         </div>
-        <div className="hidden md:flex my-4 col-span-5 w-full">
-          <JobPreference OpenDrawer={
-            <OpenDrawer
-              direction="right"
-              renderComponent={() => <JobPreferenceForm />}
-            />
-          }
+        <div className="col-span-5 mt-4 w-full">
+          <JobPreference
+            OpenDrawer={
+              <OpenDrawer
+                direction="right"
+                renderComponent={() => <JobPreferenceForm />}
+              />
+            }
           />
         </div>
       </div>

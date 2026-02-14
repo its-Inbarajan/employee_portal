@@ -23,27 +23,27 @@ import { usePathname } from "next/navigation";
 const items = [
   {
     title: "Home",
-    url: "/",
+    url: "/candidate",
     icon: Home,
   },
   {
     title: "Profile",
-    url: "/profile/edit/overview",
+    url: "/candidate/profile/edit/overview",
     icon: User2,
   },
   {
     title: "Jobs",
-    url: "/jobs",
+    url: "/candidate/jobs",
     icon: BriefcaseBusiness,
   },
   {
     title: "Applied",
-    url: "/jobs/applications",
+    url: "/candidate/jobs/applications",
     icon: Dock,
   },
   {
     title: "Message",
-    url: "/jobs/message",
+    url: "/candidate/jobs/message",
     icon: MessageCircle,
   },
 ];

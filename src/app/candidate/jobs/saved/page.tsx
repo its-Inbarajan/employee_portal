@@ -1,7 +1,7 @@
 "use client";
-import NaukriStyleJobCard from "@/app/components/naukri-style-job-card";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
+import NaukriStyleJobCard from "../../components/naukri-style-job-card";
 
 export default function Saved() {
   return (

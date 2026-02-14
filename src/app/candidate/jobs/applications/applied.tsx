@@ -23,8 +23,9 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import ApplicationStatus from "@/app/components/application-status";
+
 import Chip from "@/components/ui/chip";
+import ApplicationStatus from "../../components/application-status";
 
 const RecentlyApplied = [
   {
@@ -327,13 +328,12 @@ const ClientApplied = () => {
                         </span>
                         <div className="flex items-center justify-self-start w-full gap-2">
                           <div
-                            className={`w-2 h-2 rounded-full ${
-                              item.status === "pending"
-                                ? "bg-yellow-500"
-                                : item.status === "rejected"
+                            className={`w-2 h-2 rounded-full ${item.status === "pending"
+                              ? "bg-yellow-500"
+                              : item.status === "rejected"
                                 ? "bg-red-500"
                                 : "bg-green-500"
-                            }  inline-block`}
+                              }  inline-block`}
                           />
                           <span className="capitalize font-medium text-black tracking-wide leading-5 text-xs">
                             {item.status}
@@ -674,7 +674,7 @@ const ClientApplied = () => {
                           <button
                             type="button"
                             className="absolute top-0 start-0 z-50 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                            // data-carousel-prev
+                          // data-carousel-prev
                           >
                             <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 group-focus:ring-4 group-focus:outline-none ">
                               <svg
@@ -700,7 +700,7 @@ const ClientApplied = () => {
                           <button
                             type="button"
                             className="absolute top-0 end-0 z-50 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                            // data-carousel-next
+                          // data-carousel-next
                           >
                             <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 group-focus:ring-4 group-focus:outline-none ">
                               <svg

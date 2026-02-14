@@ -5,13 +5,13 @@ import React from 'react';
 const JobPreference: React.FC<{ OpenDrawer: React.JSX.Element }> = ({ OpenDrawer }) => {
     return (
         <div>
-            <Card className="shadow-none">
+            <Card>
                 <CardContent>
                     <CardTitle className="font-semibold text-nowrap text-lg">
                         Add preferences to get match
                     </CardTitle>
                     <div className="space-y-2">
-                        <span className="inline-flex mt-2 text-sm font-normal tracking-tight text-gray-600 items-center gap-1">
+                        <span className="flex gap-2 flex-row mt-2 text-sm font-normal tracking-tight text-gray-600 items-center">
                             Preferred job role{" "}
                             {OpenDrawer}
                         </span>
