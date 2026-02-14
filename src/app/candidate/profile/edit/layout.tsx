@@ -27,7 +27,7 @@ export default function EditLayout({
 
   const handleChange = (value: string) => {
     router.push(
-      value === "profile" ? "/profile/edit" : `/profile/edit/${value}`
+      value === "profile" ? "/candidate/profile/edit" : `/candidate/profile/edit/${value}`
     );
   };
 

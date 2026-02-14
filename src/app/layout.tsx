@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { Asidebar } from "@/components/asidebar";
-import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,49 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${popins.variable} antialiased bg-gray-100`}>
-        <SidebarProvider>
-          {/* <div className="min-h-screen md:hidden w-full grid grid-rows-[auto_2fr]">
-            <header>
-              <Navbar />
-            </header>
-            <div className="grid grid-cols-[auto_auto] md:grid-cols-[auto_1fr] relative min-h-0 overflow-auto">
-              <aside className="sticky inset-0 top-0">
-                <Asidebar />
-              </aside>
-              <main className="min-h-0">{children}</main>
-            </div>
-          </div> */}
-
-          {/* <div className="grid grid-rows-[auto_1fr] w-full h-screen">
-            <header>
-              <Navbar />
-            </header>
-
-            <div className="flex flex-row relative overflow-hidden">
-              <aside className="shrink-0">
-                <Asidebar />
-              </aside>
-
-              <main className="flex-1 overflow-y-auto p-4">{children}</main>
-            </div>
-          </div> */}
-
-          <div className="min-h-screen md:h-screen w-full grid grid-cols-[auto_1fr]">
-            <aside className="sticky top-0 h-screen overflow-y-auto">
-              <Asidebar />
-            </aside>
-            <div className="grid grid-rows-[auto_1fr] min-h-screen">
-              <header>
-                <Navbar />
-              </header>
-
-              <main className="min-h-0 overflow-y-auto p-2 md:p-4">
-                {children}
-              </main>
-            </div>
-          </div>
-        </SidebarProvider>
-        <Toaster position="bottom-right" theme="system" />
+        {children}
       </body>
     </html>
   );

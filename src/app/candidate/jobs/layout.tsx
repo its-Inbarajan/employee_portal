@@ -14,7 +14,7 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const hideFor = ["/jobs/applications", "/jobs/message"];
+  const hideFor = ["/candidate/jobs/applications", "/candidate/jobs/message"];
   if (pathname && hideFor.some((p) => pathname.startsWith(p))) {
     return <>{children}</>;
   }
@@ -23,7 +23,7 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
     tabs.find((tab) => pathname.endsWith(tab.value))?.value || "jobs";
 
   const handleChange = (value: string) => {
-    router.push(value === "jobs" ? "/jobs" : `/jobs/${value}`);
+    router.push(value === "jobs" ? "/candidate/jobs" : `/candidate/jobs/${value}`);
   };
   return (
     <div className="md:max-w-screen w-full max-w-5xl mx-auto sm:max-w-sm">
