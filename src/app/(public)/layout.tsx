@@ -1,11 +1,15 @@
+import Header from "@/components/public-header";
+
 export default function PublicLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <div>
-            <header>Navbar</header>
+        <div className="overflow-hidden">
+            <header>
+                <Header />
+            </header>
             <main>
                 {children}
             </main>
