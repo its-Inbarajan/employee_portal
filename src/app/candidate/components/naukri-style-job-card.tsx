@@ -14,14 +14,14 @@ const NaukriStyleJobCard = () => {
             href={"#"}
             className="flex items-center max-w-3xl w-full gap-4 flex-col"
         >
-            <Card className="rounded-2xl shadow hover:shadow-2xs transition-all ease-in-out duration-200">
+            <Card className="rounded-2xl shadow bg-background hover:shadow-2xs transition-all ease-in-out duration-200">
                 <CardContent className="space-y-3">
                     <div className="flex flex-row items-center justify-between">
                         <div className="inline-flex flex-col justify-start">
                             <CardTitle className="leading-snug tracking-wide">
                                 Frontend developer
                             </CardTitle>
-                            <span className="font-medium text-xs leading-5 tracking-wide text-gray-700">
+                            <span className="font-medium text-xs leading-5 tracking-wide dark:text-accent-foreground/75">
                                 Company name
                             </span>
                         </div>
@@ -30,7 +30,7 @@ const NaukriStyleJobCard = () => {
                                 src={"/next.svg"}
                                 width={50}
                                 height={50}
-                                className="h-full w-full aspect-square object-center ring-1"
+                                className="h-full w-full dark:brightness-75 dark:contrast-125 dark:invert aspect-square object-center ring-1"
                                 alt="company_profile"
                             />
                         </div>
@@ -40,7 +40,7 @@ const NaukriStyleJobCard = () => {
                             <div className="flex flex-row h-3 gap-4 items-center">
                                 <div className="flex items-center gap-2">
                                     <BriefcaseBusinessIcon className="size-4 text-gray-600" />
-                                    <span className="font-normal text-gray-700 text-sm">
+                                    <span className="font-normal dark:text-accent-foreground/75 text-sm">
                                         1-3 Yrs
                                     </span>
                                 </div>
@@ -49,7 +49,7 @@ const NaukriStyleJobCard = () => {
                             <div className="flex flex-row h-3 gap-4 items-center">
                                 <div className="flex items-center gap-2">
                                     <DollarSignIcon className="size-4 text-gray-600" />
-                                    <span className="font-normal text-gray-700 text-sm">
+                                    <span className="font-normal dark:text-accent-foreground/75 text-sm">
                                         Not disclosed
                                     </span>
                                 </div>
@@ -58,7 +58,7 @@ const NaukriStyleJobCard = () => {
                             <div className="flex flex-row gap-4 items-center">
                                 <div className="flex items-center gap-2">
                                     <MapPinIcon className="size-4 text-gray-600" />
-                                    <span className="font-normal text-gray-700 text-sm">
+                                    <span className="font-normal dark:text-accent-foreground/75 text-sm">
                                         Remote
                                     </span>
                                 </div>
@@ -66,10 +66,10 @@ const NaukriStyleJobCard = () => {
                         </div>
                         <div className="flex flex-row gap-2 flex-1 items-center">
                             <NewspaperIcon className="size-4 text-gray-600" />
-                            <span className="font-normal text-gray-700 text-sm">
+                            <span className="font-normal dark:text-accent-foreground/75 text-sm">
                                 Experiene : 1-3 yrs
                             </span>
-                            <span className="font-normal text-gray-700 inline-block text-sm">
+                            <span className="font-normal dark:text-accent-foreground/75 inline-block text-sm">
                                 Eduation : Bachelors / Master in software development
                             </span>
                         </div>
@@ -86,7 +86,7 @@ const NaukriStyleJobCard = () => {
                         ].map((item) => (
                             <span
                                 key={`jobs-skills-${item}`}
-                                className="font-normal text-gray-600 text-sm"
+                                className="font-normal dark:text-accent-foreground/75 text-sm"
                             >
                                 {item},
                             </span>

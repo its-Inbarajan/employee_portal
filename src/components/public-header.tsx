@@ -19,9 +19,9 @@ const Navigations = [
 
 ]
 export default function Header() {
-
+    // bg-linear-to-r from-[#B9FF66] to-gray-100 bg-size-[200%_200%]
     return (
-        <div className="fixed z-50 rounded-full top-0 sm:top-5 left-0 sm:left-1/2 md:-translate-x-1/2 sm:p-0.5 w-full md:w-2xl lg:w-3xl flex items-center bg-linear-to-r from-[#B9FF66] to-gray-100 bg-size-[200%_200%]">
+        <div className="fixed z-50 rounded-full top-0 sm:top-5 left-0 sm:left-1/2 md:-translate-x-1/2 bg-white/5 sm:p-0.5 w-full md:w-2xl lg:w-3xl flex items-center ">
             <div className="w-full text-black px-8 rounded-none sm:rounded-full backdrop-blur-md">
                 <div className="flex w-full justify-between items-center gap-10">
                     <figure>

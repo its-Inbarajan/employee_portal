@@ -8,29 +8,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Bell, ChevronDown, List, ListChecksIcon } from "lucide-react";
+import { ChevronDown, List, ListChecksIcon } from "lucide-react";
 import AnimatedSearch from "./ui/animated-search";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { SidebarTrigger } from "./ui/sidebar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import useKeyboardShortcut from "@/hooks/use-keyboard-shortcut-key";
+import { ModeToggle } from "./ui/theme-toggle";
+import { Notification } from "./notification";
 
 export const Navbar = () => {
-  const [open, setOpen] = React.useState<boolean>(false);
-  const handleOpenNotifiation = React.useCallback(
-    () => setOpen((pre) => !pre),
-    []
-  );
 
-  useKeyboardShortcut("i", handleOpenNotifiation);
   return (
-    <nav className="py-2 bg-gray-100 border-b border-gray-300 w-full px-2 md:px-6">
+    <nav className="py-2 bg-sidebar text-sidebar-foreground w-full px-2 md:px-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center justify-start gap-3">
           <Tooltip>
             <TooltipTrigger asChild>
-              <SidebarTrigger variant={"secondary"} size={"icon-sm"} />
+              <SidebarTrigger variant={'outline'} size={"icon"} className="dark:text-white" />
             </TooltipTrigger>
             <TooltipContent>Press CTRL + B</TooltipContent>
           </Tooltip>
@@ -41,7 +36,7 @@ export const Navbar = () => {
               loading="lazy"
               width={0}
               height={0}
-              className="w-10 h-10 object-center"
+              className="w-10 h-10 dark:brightness-75 dark:contrast-125 dark:invert object-center"
             />
           </div>
         </div>
@@ -50,24 +45,10 @@ export const Navbar = () => {
             <AnimatedSearch />
           </div>
           <div className="relative">
-            <DropdownMenu onOpenChange={handleOpenNotifiation} open={open}>
-              <DropdownMenuTrigger
-                role="button"
-                className="group p-2 rounded-full cursor-pointer hover:bg-purple-200 transition ease-in-out"
-              >
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Bell className="size-5 text-gray-500 group-hover:text-purple-500" />
-                  </TooltipTrigger>
-                  <TooltipContent>Press CRTL + I</TooltipContent>
-                </Tooltip>
-              </DropdownMenuTrigger>
-              <div className="">
-                <DropdownMenuContent className="w-xs absolute -translate-1/2 top-6">
-                  <DropdownMenuLabel>No notification.</DropdownMenuLabel>
-                </DropdownMenuContent>
-              </div>
-            </DropdownMenu>
+            <Notification />
+          </div>
+          <div className="relative">
+            <ModeToggle />
           </div>
           <div className="md:block hidden">
             <DropdownMenu>
@@ -83,32 +64,32 @@ export const Navbar = () => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="w-[17rem] px-2.5 absolute -left-[6rem] md:-left-[1.5rem] rounded -translate-1/2 top-40">
-                <DropdownMenuLabel className="flex gap-1 flex-col hover:bg-gray-200 hover:cursor-pointer rounded-sm">
+                <DropdownMenuLabel className="flex gap-1 flex-col dark:hover:bg-background hover:bg-gray-200 hover:cursor-pointer rounded-sm">
                   <div className="flex  items-center gap-2">
                     <List className="size-5 text-green-500" />
                     <span>Ready for interview</span>
                   </div>
-                  <p className="font-normal leading-5 tracking-wider text-balance">
+                  <p className="font-normal leading-5 tracking-wider text-xs text-balance">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Quibusdam, accusamus.
                   </p>
                 </DropdownMenuLabel>
-                <DropdownMenuLabel className="flex gap-1 flex-col hover:bg-gray-200 hover:cursor-pointer rounded-sm">
+                <DropdownMenuLabel className="flex gap-1 flex-col dark:hover:bg-background hover:bg-gray-200 hover:cursor-pointer rounded-sm">
                   <div className="flex  items-center gap-2">
                     <List className="size-5 text-green-500" />
                     <span>Open for offer</span>
                   </div>
-                  <p className="font-normal leading-5 tracking-wider text-balance">
+                  <p className="font-normal leading-5 tracking-wider text-xs text-balance">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Quibusdam, accusamus.
                   </p>
                 </DropdownMenuLabel>
-                <DropdownMenuLabel className="flex gap-1 flex-col hover:bg-gray-200 hover:cursor-pointer rounded-sm">
+                <DropdownMenuLabel className="flex gap-1 flex-col dark:hover:bg-background hover:bg-gray-200 hover:cursor-pointer rounded-sm">
                   <div className="flex  items-center gap-2">
                     <List className="size-5 text-green-500" />
                     <span>Close to offer</span>
                   </div>
-                  <p className="font-normal leading-5 tracking-wider text-balance">
+                  <p className="font-normal leading-5 tracking-wider text-xs text-balance">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Quibusdam, accusamus.
                   </p>
@@ -120,7 +101,7 @@ export const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger
                 role="button"
-                className="rounded-md px-2 flex w-20 justify-between h-12 items-center hover:bg-blue-50 hover:cursor-pointer"
+                className="rounded-md px-2 flex w-20 justify-between h-12 items-center dark:hover:bg-background hover:bg-blue-50 hover:cursor-pointer"
               >
                 <div className="w-9 block h-9 rounded-full ring-1 ring-gray-500">
                   <Image
@@ -128,7 +109,7 @@ export const Navbar = () => {
                     width={10}
                     height={10}
                     alt="profile"
-                    className="w-full h-full object-center aspect-auto"
+                    className="w-full h-full dark:brightness-75 dark:contrast-125 dark:invert object-center aspect-auto"
                   />
                 </div>
                 <ChevronDown className="size-5" />

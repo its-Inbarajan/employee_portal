@@ -44,9 +44,11 @@ export function CompoBox({
           aria-expanded={open}
           className={cn("w-[200px] justify-between", PopoverClassName)}
         >
-          {value
-            ? options[0]?.data.find((item) => item === value)
-            : placeholder}
+          <span className="text-accent-foreground">
+            {value
+              ? options[0]?.data.find((item) => item === value)
+              : placeholder}
+          </span>
 
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

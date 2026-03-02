@@ -119,7 +119,7 @@ export default function JobPreferenceForm() {
             </div>
           </div>
         </div>
-        <DrawerFooter className="flex-shrink-0 fixed bottom-0 right-0 rounded-bl-xl left-0 border-t pt-7 bg-white px-10">
+        <DrawerFooter className="flex-shrink-0 fixed bottom-0 right-0 rounded-bl-xl left-0 border-t pt-6 px-10">
           <div className="flex w-full justify-start items-center gap-2">
             <Button>Submit</Button>
             <Button type="reset">Close</Button>

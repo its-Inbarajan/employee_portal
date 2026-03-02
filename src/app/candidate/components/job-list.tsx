@@ -18,7 +18,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
     <Button
       type="button"
       variant={"default"}
-      className="w-full px-4 py-2 bg-transparent cursor-pointer ring-1 text-black ring-black hover:bg-black hover:text-white text-sm text-center transition-all duration-500 ease-in-out"
+      className="w-full px-4 py-2 bg-transparent cursor-pointer ring-1 dark:text-white dark:ring-white dark:hover:bg-white dark:hover:text-black text-black ring-black hover:bg-black hover:text-white text-sm text-center transition-all duration-500 ease-in-out"
       onClick={openApplyDrawer}
     >
       Apply
@@ -57,12 +57,12 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
             </span>
           </div>
           <div className="inline-block float-start">
-            <span className="font-medium text-black tracking-wide leading-5 text-sm">
+            <span className="font-medium text-accent dark:text-accent-foreground/50 tracking-wide leading-5 text-sm">
               ₹16L – ₹18L • 0.0% – 1.0%
             </span>
           </div>
           <div className="inline-block float-start">
-            <span className="font-medium text-black tracking-wide leading-5 text-xs">
+            <span className="font-medium text-accent dark:text-accent-foreground/50 tracking-wide leading-5 text-xs">
               Posted: 3 days ago
             </span>
           </div>
@@ -77,7 +77,7 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
           </div>
         ) : (
           <Link
-            href={`/jobs/applications?jobId=${String(item.id)}`}
+            href={`/candidate/jobs/applications?jobId=${String(item.id)}`}
             className="inline-block w-auto px-4 py-2 bg-transparent active:ring-1 active:ring-black  text-black cursor-pointer text-xs text-center transition-all duration-150 ease-in-out"
           >
             <ChevronRight className="size-5" />

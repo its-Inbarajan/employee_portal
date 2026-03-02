@@ -22,10 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${popins.variable} antialiased bg-gray-100`}>
+      <body className={`${popins.variable} antialiased bg-background`}>
         <ThemeProvider
           attribute={'class'}
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

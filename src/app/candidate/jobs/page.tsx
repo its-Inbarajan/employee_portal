@@ -32,7 +32,7 @@ const OpenFilterDialog: React.FC<{ openDialog: () => void }> = ({
   return (
     <Button
       type="button"
-      className="w-full hover:bg-gray-400 bg-white transition-all duration-500 ease-in-out border-b-gray-100 rounded-none rounded-bl rounded-br border border-b-2"
+      className="w-full hover:bg-gray-400 dark:bg-sidebar bg-white transition-all duration-500 ease-in-out border-b-gray-100 rounded-none rounded-bl rounded-br"
       variant={"secondary"}
       onClick={openDialog}
     >
@@ -187,17 +187,17 @@ export default function Jobs() {
             key={`content-${item.value}-${item.id}`}
             className="w-full"
           >
-            <Card className="rounded-none w-full shadow-2xs bg-white mt-0">
+            <Card className="rounded-none w-full shadow-2xs  mt-0">
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
                   <CompoBox
-                    PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                    PopoverClassName="w-full 4 dark:ring dark:ring-black place-holder:text-black h-12 bg-gray-200 px-1 border-px border-gray-500"
                     options={roles}
                     placeholder="Choose Role"
                     CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
                   />
                   <CompoBox
-                    PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                    PopoverClassName="w-full rounded dark:ring dark:ring-black place-holder:text-black h-12 bg-gray-200 px-1 border-px border-gray-500"
                     options={[]}
                     placeholder="Choose location"
                     CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"

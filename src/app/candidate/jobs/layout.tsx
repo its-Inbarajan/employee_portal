@@ -34,10 +34,10 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
         <Tabs
           value={activeTab}
           onValueChange={handleChange}
-          className="w-fit border-b-0"
+          className="w-fit border-b-0 "
         >
-          <div className="flex md:flex-row border-none flex-wrap flex-col w-full md:justify-between justify-self-start md:items-center border-b border-gray-300 rounded-none bg-transparent ">
-            <TabsList className="flex md:flex-wrap lg:flex-nowrap gap-2 p-0">
+          <div className="flex md:flex-row border-none flex-wrap flex-col w-full md:justify-between justify-self-start md:items-center rounded-none">
+            <TabsList className="flex md:flex-wrap bg-muted lg:flex-nowrap gap-2 p-0">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -50,14 +50,14 @@ export default function JobLayout({ children }: { children: React.ReactNode }) {
                   )}
                 >
                   {tab.label}
-                  <span
+                  {/* <span
                     className={clsx(
                       "absolute left-0 bottom-0 h-[2px] w-full bg-black transition-transform duration-300",
                       activeTab === tab?.value
                         ? "scale-x-100"
                         : "scale-x-0 origin-center"
                     )}
-                  />
+                  /> */}
                 </TabsTrigger>
               ))}
             </TabsList>
