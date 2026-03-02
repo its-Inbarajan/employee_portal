@@ -121,7 +121,7 @@ export const Navbar = () => {
                       src={"/next.svg"}
                       width={10}
                       height={10}
-                      className="rounded-full h-10 w-10 border-1 border-black select-none object-fit "
+                      className="rounded-full h-10 w-10 dark:brightness-75 dark:contrast-125 dark:invert border-1 border-black select-none object-fit "
                       alt="profile- piture"
                     />
                     <div className="w-full space-y-1.5">

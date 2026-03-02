@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CompoBox } from "@/components/ui/combobox";
-import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -132,35 +132,32 @@ const currency = [
 export default function JobFilter() {
   return (
     <>
-      <DialogHeader>
-        {/* Filter */}
-        <div className="flex flex-col shadow px-3 py-3 rounded ">
-          <div className="grid relative w-full grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
-            <CompoBox
-              PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
-              options={roles}
-              placeholder="Choose Role"
-              CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-            />
-            <CompoBox
-              PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
-              options={[]}
-              placeholder="Choose location"
-              CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-            />
-          </div>
-          <div className="col-span-full  w-full py-2">
-            <div className="border-dotted border-2 px-1 py-1 rounded w-fit inline-block text-gray-400 border-gray-300">
-              No filter Selected
-            </div>
-          </div>
-        </div>
-        {/* <DialogTitle>
-        </DialogTitle> */}
-      </DialogHeader>
-      <form className="flex flex-col flex-1 min-h-0 overflow-y-auto px-2">
+      <form>
         <div className="flex flex-col h-full relative">
           <div className="overflow-auto flex-1">
+            <div className="h-fit flex flex-col shadow px-3 py-3 rounded ">
+              <div className="grid relative w-full grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
+                <CompoBox
+                  PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                  options={roles}
+                  placeholder="Choose Role"
+                  CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
+                />
+                <CompoBox
+                  PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
+                  options={[]}
+                  placeholder="Choose location"
+                  CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
+                />
+              </div>
+              <div className="sticky top-0 z-20">
+                <div className="col-span-full  w-full py-2">
+                  <div className="border-dotted border-2 px-1 py-1 rounded w-fit inline-block text-gray-400 border-gray-300">
+                    No filter Selected
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="px-3 py-3 md:py-6 md:px-6">
               <h1 className="font-semibold text-lg mb-3 text-accent-foreground leading-relaxed">
@@ -170,7 +167,7 @@ export default function JobFilter() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 space-y-5">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Salary
                     </p>
                     <div className="font-normal text-gray-300 text-sm">
@@ -213,7 +210,7 @@ export default function JobFilter() {
 
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 space-y-5">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Equity
                     </p>
                     <div className="grid w-full gap-2 items-center">
@@ -226,13 +223,13 @@ export default function JobFilter() {
             </div>
             <Separator />
             <div className="px-3 py-3 md:py-6 md:px-6">
-              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-accent-foreground leading-relaxed py-2">
                 <Target className="size-5" /> Areas of Interest
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Skills
                     </p>
 
@@ -272,7 +269,7 @@ export default function JobFilter() {
 
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Market
                     </p>
 
@@ -317,13 +314,13 @@ export default function JobFilter() {
             </div>
             <Separator />
             <div className="px-3 py-3 md:py-6 md:px-6">
-              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-accent-foreground leading-relaxed py-2">
                 <ComputerIcon className="size-5" /> Job Details
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Job Types
                     </p>
 
@@ -348,7 +345,7 @@ export default function JobFilter() {
 
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Required experience
                     </p>
                     <div className="grid w-full gap-2 items-center">
@@ -372,13 +369,13 @@ export default function JobFilter() {
             </div>
             <Separator />
             <div className="px-3 py-3 md:py-6 md:px-6">
-              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-accent-foreground leading-relaxed py-2">
                 <SearchIcon className="size-5" /> Keywords
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Included keywords
                     </p>
 
@@ -397,7 +394,7 @@ export default function JobFilter() {
 
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Excluded keywords
                     </p>
                     <div className="flex flex-col gap-2.5 w-full justify-start">
@@ -416,13 +413,13 @@ export default function JobFilter() {
             </div>
             <Separator />
             <div className="px-3 py-3 md:py-6 md:px-6">
-              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-accent-foreground leading-relaxed py-2">
                 <BuildingIcon className="size-5" /> Company Details
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Company size
                     </p>
 
@@ -453,7 +450,7 @@ export default function JobFilter() {
 
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Investment stage
                     </p>
                     <div className="flex flex-col gap-2.5 w-full justify-start">
@@ -481,7 +478,7 @@ export default function JobFilter() {
                 </div>
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Remote culture
                     </p>
                     <div className="flex items-center justify-start gap-2">
@@ -498,7 +495,7 @@ export default function JobFilter() {
                 </div>
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Responsiveness
                     </p>
                     <div className="flex items-center justify-start gap-2">
@@ -517,13 +514,13 @@ export default function JobFilter() {
             </div>
             <Separator />
             <div className="px-3 py-3 md:py-6 md:px-6">
-              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-black leading-relaxed bg-white py-2">
+              <h1 className="font-semibold inline-flex gap-2 items-center text-lg mb-3 text-accent-foreground leading-relaxed py-2">
                 <EarthIcon className="size-5" /> Immigration
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="rounded ring py-3 px-2 ring-secondary w-full">
                   <div className="px-2 py-2 grid w-full gap-4">
-                    <p className="font-medium leading-tight text-black text-lg">
+                    <p className="font-medium leading-tight text-accent-foreground text-lg">
                       Immigration
                     </p>
                     <div className="flex items-center justify-start gap-2">
@@ -543,10 +540,10 @@ export default function JobFilter() {
           </div>
         </div>
         {/* footer */}
-        <DialogFooter className="flex-shrink-0 fixed bottom-0 right-0 rounded-bl-xl left-0 border-t pt-6 px-10">
-          <Button variant={"default"} type="button">
-            View Result
-          </Button>
+        <DialogFooter className="flex-shrink-0 bg-background rounded-bl-xl left-0 border-t py-5 px-10">
+          <div className="flex w-full justify-start items-center gap-2">
+            <Button>Submit</Button>
+          </div>
         </DialogFooter>
       </form>
     </>

@@ -146,7 +146,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               About
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -158,7 +158,7 @@ export default function ProfilePage() {
             <div className="grid w-full  items-center">
               <label
                 htmlFor="full_name"
-                className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
               >
                 Full Name
               </label>
@@ -177,14 +177,14 @@ export default function ProfilePage() {
                   src={"/next.svg"}
                   width={50}
                   height={50}
-                  className="w-full h-full object-center aspect-auto"
+                  className="w-full h-full dark:brightness-75 dark:contrast-125 dark:invert object-center aspect-auto"
                   alt="edit-profile"
                 />
               </div>
               <div className="flex items-center space-x-4">
                 <Label
                   htmlFor="file_input"
-                  className="ring-1 w-2xs max-w-fit cursor-pointer text-black text-center inline-block px-2.5 font-normal hover:bg-black hover:text-white transition-all duration-500 ease-in-out py-2 rounded ring-black"
+                  className="ring-1 w-2xs max-w-fit cursor-pointer text-accent-foreground text-center inline-block px-2.5 font-normal hover:bg-black hover:text-white transition-all duration-500 ease-in-out py-2 rounded ring-black"
                 >
                   {/* <svg
                     className="w-5 h-5 inline-block mr-2"
@@ -214,7 +214,7 @@ export default function ProfilePage() {
             <div className="grid w-full items-center ">
               <label
                 htmlFor="location"
-                className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
               >
                 Where are you based?
               </label>
@@ -238,7 +238,7 @@ export default function ProfilePage() {
                 <div className="col-span-12 lg:col-span-8 ">
                   <label
                     htmlFor="primary role"
-                    className="font-normal col-span-1 text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                    className="font-normal col-span-1 text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                   >
                     Select your primary role
                   </label>
@@ -252,7 +252,7 @@ export default function ProfilePage() {
                 <div className="col-span-12 lg:col-span-4">
                   <label
                     htmlFor="experience"
-                    className="font-normal col-span-1 text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                    className="font-normal col-span-1 text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                   >
                     Years of experience
                   </label>
@@ -268,7 +268,7 @@ export default function ProfilePage() {
             <div className="grid gap-2.5 w-full items-center ">
               <label
                 htmlFor="location"
-                className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
               >
                 Open to the following roles
               </label>
@@ -285,7 +285,7 @@ export default function ProfilePage() {
 
             <div className="grid w-full items-center">
               <div className="flex flex-row w-full justify-between items-center">
-                <label className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block">
+                <label className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block">
                   Your bio
                 </label>
                 <span className="inline-block text-sm font-medium leading-relaxed">
@@ -301,7 +301,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Social Profiles
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -313,7 +313,7 @@ export default function ProfilePage() {
             <div className="grid w-full  items-center">
               <label
                 htmlFor="website"
-                className="font-normal text-black leading-relaxed text-lg flex items-center w-full gap-2"
+                className="font-normal text-accent-foreground leading-relaxed text-lg flex items-center w-full gap-2"
               >
                 <EarthIcon className="size-4" /> <span>Website</span>
               </label>
@@ -328,7 +328,7 @@ export default function ProfilePage() {
             <div className="grid w-full items-center">
               <label
                 htmlFor="linkedin"
-                className="font-normal text-black leading-relaxed text-lg flex items-center w-full gap-2"
+                className="font-normal text-accent-foreground leading-relaxed text-lg flex items-center w-full gap-2"
               >
                 <Linkedin className="size-4" /> <span>Linkedin</span>
               </label>
@@ -343,7 +343,7 @@ export default function ProfilePage() {
             <div className="grid w-full items-center">
               <label
                 htmlFor="github"
-                className="font-normal text-black leading-relaxed text-lg flex items-center w-full gap-2"
+                className="font-normal text-accent-foreground leading-relaxed text-lg flex items-center w-full gap-2"
               >
                 <Github className="size-4" /> <span>Github</span>
               </label>
@@ -358,7 +358,7 @@ export default function ProfilePage() {
             <div className="grid w-full items-center">
               <label
                 htmlFor="twitter"
-                className="font-normal text-black leading-relaxed text-lg flex items-center w-full gap-2"
+                className="font-normal text-accent-foreground leading-relaxed text-lg flex items-center w-full gap-2"
               >
                 <Twitter className="size-4" /> <span>Twitter</span>
               </label>
@@ -378,7 +378,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Your work experience
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -407,7 +407,7 @@ export default function ProfilePage() {
                     <div className="grid w-full  items-center">
                       <label
                         htmlFor="company"
-                        className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                        className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                       >
                         Company
                       </label>
@@ -423,7 +423,7 @@ export default function ProfilePage() {
                     <div className="grid w-full items-center">
                       <label
                         htmlFor="title"
-                        className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                        className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                       >
                         Title
                       </label>
@@ -439,7 +439,7 @@ export default function ProfilePage() {
                     <div className="grid w-full items-center">
                       <label
                         htmlFor="start_date"
-                        className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                        className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                       >
                         State Date
                       </label>
@@ -453,7 +453,7 @@ export default function ProfilePage() {
                     <div className="grid w-full items-center">
                       <label
                         htmlFor="end_date"
-                        className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                        className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                       >
                         State Date
                       </label>
@@ -468,13 +468,13 @@ export default function ProfilePage() {
                       <Checkbox id="isCurrentCompany" />
                       <label
                         htmlFor="isCurrentCompany"
-                        className="font-normal text-black leading-relaxed"
+                        className="font-normal text-accent-foreground leading-relaxed"
                       >
                         I currently work here
                       </label>
                     </div>
                     <div className="grid w-full items-center">
-                      <label className="font-normal text-black leading-relaxed text-lg ">
+                      <label className="font-normal text-accent-foreground leading-relaxed text-lg ">
                         Description
                       </label>
                       <Textarea
@@ -500,7 +500,7 @@ export default function ProfilePage() {
                     type="reset"
                     variant={"default"}
                     onClick={() => handleToggle("exp")}
-                    className="bg-transparent text-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
+                    className="bg-transparent text-accent-foreground hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
                   >
                     Close
                   </Button>
@@ -518,7 +518,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Education
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -547,7 +547,7 @@ export default function ProfilePage() {
                     <div className="grid w-full  items-center">
                       <label
                         htmlFor="education"
-                        className="font-normal text-black leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
+                        className="font-normal text-accent-foreground leading-relaxed text-lg after:content-['*'] after:text-red-500 after:ml-1 after:inline-block"
                       >
                         Education
                       </label>
@@ -563,7 +563,7 @@ export default function ProfilePage() {
                     <div className="grid w-full items-center">
                       <label
                         htmlFor="graduation"
-                        className="font-normal text-black leading-relaxed text-lg "
+                        className="font-normal text-accent-foreground leading-relaxed text-lg "
                       >
                         Graduation
                       </label>
@@ -579,7 +579,7 @@ export default function ProfilePage() {
                     <div className="grid w-full items-center">
                       <label
                         htmlFor="degree_major"
-                        className="font-normal text-black leading-relaxed text-lg "
+                        className="font-normal text-accent-foreground leading-relaxed text-lg "
                       >
                         Degree & Major
                       </label>
@@ -611,7 +611,7 @@ export default function ProfilePage() {
                     <div className="grid  w-full items-center">
                       <label
                         htmlFor="GPA"
-                        className="font-normal text-black leading-relaxed text-lg "
+                        className="font-normal text-accent-foreground leading-relaxed text-lg "
                       >
                         GPA
                       </label>
@@ -642,7 +642,7 @@ export default function ProfilePage() {
                     type="reset"
                     variant={"default"}
                     onClick={() => handleToggle("edu")}
-                    className="bg-transparent text-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
+                    className="bg-transparent text-accent-foreground hover:bg-black hover:text-white transition-all duration-500 ease-in-out"
                   >
                     Close
                   </Button>
@@ -661,7 +661,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Your Skills
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -715,7 +715,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Your Skills
             </p>
             <span className="font-normal text-sm text-gray-500 leading-relaxed">
@@ -743,7 +743,7 @@ export default function ProfilePage() {
       <div className="flex justify-between items-center flex-col md:flex-row w-full">
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="flex max-w-xs w-full flex-col flex-1 gap-1 font-medium">
-            <p className="text-xl font-normal leading-relaxed text-black">
+            <p className="text-xl font-normal leading-relaxed text-accent-foreground">
               Identity
             </p>
             <span className="font-normal text-sm text-gray-700 leading-relaxed">
@@ -763,7 +763,7 @@ export default function ProfilePage() {
             <div className="grid items-center w-full">
               <label
                 htmlFor="pronouns"
-                className="font-normal text-black leading-relaxed text-lg "
+                className="font-normal text-accent-foreground leading-relaxed text-lg "
               >
                 Pronouns
               </label>
@@ -792,7 +792,7 @@ export default function ProfilePage() {
             <div className="grid items-center w-full">
               <label
                 htmlFor="gender"
-                className="font-normal text-black leading-relaxed text-lg "
+                className="font-normal text-accent-foreground leading-relaxed text-lg "
               >
                 Gender Identity
               </label>
@@ -815,7 +815,7 @@ export default function ProfilePage() {
             <div className="grid items-center w-full">
               <label
                 htmlFor="race"
-                className="font-normal text-black leading-relaxed text-lg "
+                className="font-normal text-accent-foreground leading-relaxed text-lg "
               >
                 Race/Ethnicity
               </label>
@@ -827,7 +827,7 @@ export default function ProfilePage() {
                   <Checkbox id={item} className="border-px border-gray-400" />
                   <label
                     htmlFor={item}
-                    className="font-normal text-black leading-relaxed"
+                    className="font-normal text-accent-foreground leading-relaxed"
                   >
                     {item}
                   </label>

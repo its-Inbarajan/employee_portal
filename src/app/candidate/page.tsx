@@ -174,8 +174,8 @@ export default function CandidatePage() {
                                 src={"/next.svg"}
                                 width={10}
                                 height={10}
-                                className="rounded-full h-16 w-16 border-1 border-black select-none object-fit "
-                                alt="profile- piture"
+                                className="rounded-full h-16 w-16 border-1 dark:brightness-75 dark:contrast-125 dark:invert border-black select-none object-fit "
+                                alt="profile-piture"
                             />
                             <div className="flex justify-between flex-col lg:flex-row items-start w-full gap-5">
                                 <div className="flex flex-col gap-4 h-full">

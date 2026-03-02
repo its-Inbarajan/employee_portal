@@ -23,7 +23,6 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
 import Chip from "@/components/ui/chip";
 import ApplicationStatus from "../../components/application-status";
 
@@ -291,7 +290,7 @@ const ClientApplied = () => {
   return (
     <div className="md:max-w-screen max-w-sm mx-auto w-full">
       <div className="flex flex-col items-start gap-2">
-        <h1 className="font-semibold leading-6 tracking-wide md:text-3xl text-lg text-black">
+        <h1 className="font-semibold leading-6 tracking-wide md:text-3xl text-lg text-accent-foreground">
           Applications
         </h1>
 
@@ -309,14 +308,15 @@ const ClientApplied = () => {
                     className="w-full"
                     key={item.company_profile_link}
                   >
-                    <div className="flex cursor-pointer w-full py-4 bg-white px-4 rounded-md border gap-4 items-start">
+
+                    <div className="flex cursor-pointer w-full py-4 bg-background px-4 rounded-md border gap-4 items-start">
                       <div className="w-16 h-fit border rounded-sm">
                         <Image
                           src={item.image ?? "/next.svg"}
                           width={100}
                           height={100}
                           alt="company_profile"
-                          className="h-full w-full aspect-square object-center"
+                          className="h-full w-full dark:brightness-75 dark:contrast-125 dark:invert aspect-square object-center"
                         />
                       </div>
                       <div className="flex w-full flex-row md:flex-col items-start">
@@ -335,7 +335,7 @@ const ClientApplied = () => {
                                 : "bg-green-500"
                               }  inline-block`}
                           />
-                          <span className="capitalize font-medium text-black tracking-wide leading-5 text-xs">
+                          <span className="capitalize font-medium text-accent-foreground tracking-wide leading-5 text-xs">
                             {item.status}
                           </span>
                           <span className="capitalize font-medium text-gray-400 tracking-wide leading-5 text-xs">
@@ -352,7 +352,7 @@ const ClientApplied = () => {
             </TabsContent>
             <TabsContent value="archived">
               <div className="flex justify-center items-center h-60">
-                <h1 className="font-bold leading-6 tracking-wide text-xl text-black">
+                <h1 className="font-bold leading-6 tracking-wide text-xl text-accent-foreground">
                   There is no items here!
                 </h1>
               </div>
@@ -371,7 +371,7 @@ const ClientApplied = () => {
                   defaultValue="job-description"
                 >
                   <div className="relative inset-0 z-50 pb-36 w-full">
-                    <div className="w-full fixed z-10 top-0 bg-white  rounded-tl-2xl shadow">
+                    <div className="w-full fixed z-10 top-0 bg-background  rounded-tl-2xl shadow">
                       <div className="flex gap-2 justify-between items-start border-b px-4 py-4">
                         <Link
                           href={RecentlyApplied[0].company_profile_link}
@@ -382,7 +382,7 @@ const ClientApplied = () => {
                               width={100}
                               height={100}
                               alt="company_profile"
-                              className="h-full w-full aspect-square object-center"
+                              className="h-full w-full dark:brightness-75 dark:contrast-125 dark:invert aspect-square object-center"
                               src={RecentlyApplied[0].image}
                             />
                           </div>
@@ -413,7 +413,7 @@ const ClientApplied = () => {
                           (item) => (
                             <TabsTrigger
                               className={
-                                "capitalize relative px-4 py-2 text-sm font-normal text-black transition-all"
+                                "capitalize relative px-4 py-2 text-sm font-normal text-accent-foreground transition-all"
                               }
                               key={`tab-value-${item}`}
                               value={item}
@@ -443,7 +443,7 @@ const ClientApplied = () => {
                         <Image
                           src={"/next.svg"}
                           alt="profile"
-                          className="object-fill object-center w-full h-full"
+                          className="object-fill dark:brightness-75 dark:contrast-125 dark:invert object-center w-full h-full"
                           width={50}
                           height={50}
                         />
@@ -454,7 +454,7 @@ const ClientApplied = () => {
                             key={`questions-${item.title}`}
                             className="flex flex-col flex-1 gap-2 text-wrap"
                           >
-                            <p className="font-medium inline-block leading-normal tracking-wide text-sm text-black">
+                            <p className="font-medium inline-block leading-normal tracking-wide text-sm text-accent-foreground">
                               {item.title}
                             </p>
                             <span className="before:content-['*'] inline-block before:inline-block before:mr-1 before:font-bold before:text-red-500 text-xs font-normal text-gray-400 tracking-wide">
@@ -481,11 +481,11 @@ const ClientApplied = () => {
                   >
                     <div className="flex flex-col gap-4 px-2  justify-start">
                       <div className="space-y-3">
-                        <h1 className="font-medium text-lg tracking-wide text-black">
+                        <h1 className="font-medium text-lg tracking-wide text-accent-foreground">
                           {RecentlyApplied[0]?.job_descript.job_title}
                         </h1>
                         <div className="inline-flex gap-2 items-center justify-start">
-                          <p className="font-normal tracking-wide text-sm text-black">
+                          <p className="font-normal tracking-wide text-sm text-accent-foreground">
                             {RecentlyApplied[0]?.job_descript.salary}
                           </p>
                           /
@@ -496,7 +496,7 @@ const ClientApplied = () => {
                         </div>
                         <div className="grid grid-cols-2 items-center gap-3">
                           <div className="inline-block">
-                            <p className="font-medium text-sm tracking-wide text-black">
+                            <p className="font-medium text-sm tracking-wide text-accent-foreground">
                               Experience
                             </p>
                             <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -504,7 +504,7 @@ const ClientApplied = () => {
                             </span>
                           </div>
                           <div className="inline-block">
-                            <p className="font-medium text-sm tracking-wide text-black">
+                            <p className="font-medium text-sm tracking-wide text-accent-foreground">
                               Remote work policy
                             </p>
                             <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -512,7 +512,7 @@ const ClientApplied = () => {
                             </span>
                           </div>
                           <div className="inline-block">
-                            <p className="font-medium text-sm tracking-wide text-black">
+                            <p className="font-medium text-sm tracking-wide text-accent-foreground">
                               Relocation
                             </p>
                             <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -521,7 +521,7 @@ const ClientApplied = () => {
                           </div>
 
                           <div className="inline-block">
-                            <p className="font-medium text-sm tracking-wide text-black">
+                            <p className="font-medium text-sm tracking-wide text-accent-foreground">
                               Job type
                             </p>
                             <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -529,7 +529,7 @@ const ClientApplied = () => {
                             </span>
                           </div>
                           <div className="inline-block">
-                            <p className="font-medium text-sm tracking-wide text-black">
+                            <p className="font-medium text-sm tracking-wide text-accent-foreground">
                               Visa sponsorship
                             </p>
                             <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -540,7 +540,7 @@ const ClientApplied = () => {
                       </div>
                       <div className="flex flex-row gap-4">
                         <div className="flex flex-col flex-1 space-y-2">
-                          <h1 className="font-medium text-lg text-black tracking-wide">
+                          <h1 className="font-medium text-lg text-accent-foreground tracking-wide">
                             About the job
                           </h1>
                           {RecentlyApplied[0]?.job_descript.about_the_job.map(
@@ -553,7 +553,7 @@ const ClientApplied = () => {
                               </p>
                             )
                           )}
-                          <h1 className="font-medium text-lg  text-black tracking-wide">
+                          <h1 className="font-medium text-lg  text-accent-foreground tracking-wide">
                             Responsibilities :
                           </h1>
                           <ul className="list-disc ml-5">
@@ -568,7 +568,7 @@ const ClientApplied = () => {
                               )
                             )}
                           </ul>
-                          <h1 className="font-medium text-lg  text-black tracking-wide">
+                          <h1 className="font-medium text-lg  text-accent-foreground tracking-wide">
                             Our Ideal Candidate would: :
                           </h1>
                           <ul className="list-disc ml-5">
@@ -583,7 +583,7 @@ const ClientApplied = () => {
                               )
                             )}
                           </ul>
-                          <h1 className="font-medium text-lg  text-black tracking-wide">
+                          <h1 className="font-medium text-lg  text-accent-foreground tracking-wide">
                             Skills:
                           </h1>
                           <div className="flex flex-wrap gap-2 items-center">
@@ -596,7 +596,7 @@ const ClientApplied = () => {
                               />
                             ))}
                           </div>
-                          <h1 className="font-medium text-lg  text-black tracking-wide">
+                          <h1 className="font-medium text-lg  text-accent-foreground tracking-wide">
                             Bonus:
                           </h1>
                           <ul className="list-disc ml-5">
@@ -667,7 +667,7 @@ const ClientApplied = () => {
                               className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                               alt="..."
                             /> */}
-                              <FoldersIcon className="size-20 text-black" />
+                              <FoldersIcon className="size-20 text-accent-foreground" />
                             </div>
                           </div>
                           {/* <!-- Slider controls --> */}
@@ -725,13 +725,13 @@ const ClientApplied = () => {
                           </button>
                         </div>
                       </div>
-                      <p className="font-normal leading-relaxed tracking-wide text-sm text-black">
+                      <p className="font-normal leading-relaxed tracking-wide text-sm text-accent-foreground">
                         {RecentlyApplied[0].company_info.about}
                       </p>
 
                       <div className="grid items-center gap-3">
                         <div className="inline-block">
-                          <p className="font-medium text-sm tracking-wide text-black">
+                          <p className="font-medium text-sm tracking-wide text-accent-foreground">
                             Location
                           </p>
                           <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -739,7 +739,7 @@ const ClientApplied = () => {
                           </span>
                         </div>
                         <div className="inline-block">
-                          <p className="font-medium text-sm tracking-wide text-black">
+                          <p className="font-medium text-sm tracking-wide text-accent-foreground">
                             Total raised
                           </p>
                           <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -747,7 +747,7 @@ const ClientApplied = () => {
                           </span>
                         </div>
                         <div className="inline-block">
-                          <p className="font-medium text-sm tracking-wide text-black">
+                          <p className="font-medium text-sm tracking-wide text-accent-foreground">
                             Company size
                           </p>
                           <span className="font-normal text-xs tracking-tight text-gray-500">
@@ -755,7 +755,7 @@ const ClientApplied = () => {
                           </span>
                         </div>
                         <div className="block">
-                          <h1 className="font-medium text-lg  text-black tracking-wide">
+                          <h1 className="font-medium text-lg  text-accent-foreground tracking-wide">
                             Markets:
                           </h1>
                           <div className="flex flex-wrap gap-2 items-center">

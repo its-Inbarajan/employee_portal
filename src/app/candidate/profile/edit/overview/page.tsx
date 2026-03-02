@@ -7,7 +7,7 @@ export default function OverviewPage() {
   return (
     <div className="max-w-screen border rounded-sm min-h-screen relative px-4 py-4">
       <div className="flex flex-col h-full">
-        <h1 className="font-semibold mb-2 text-black text-lg leading-6 tracking-wide">
+        <h1 className="font-semibold mb-2 text-accent-foreground text-lg leading-6 tracking-wide">
           What recruiters will see?
         </h1>
         <div className="md:px-4 h-auto md:py-4 p-2 border rounded-sm w-full">
@@ -19,11 +19,11 @@ export default function OverviewPage() {
                   alt="profile-image"
                   width={50}
                   height={50}
-                  className="w-full h-full object-fill aspect-auto"
+                  className="w-full h-full dark:brightness-75 dark:contrast-125 dark:invert object-fill aspect-auto"
                 />
               </div>
               <div className="flex flex-col flex-1 items-start justify-start">
-                <p className="font-semibold text-xl text-black mb-1.5 leading-6 tracking-wide text-nowrap">
+                <p className="font-semibold text-xl text-accent-foreground mb-1.5 leading-6 tracking-wide text-nowrap">
                   Inba Rajan <span className="text-gray-500">(He/Him)</span>
                 </p>
                 <p className="font-normal text-gray-700 md:leading-relaxed mb-2  tracking-wider">
@@ -64,7 +64,7 @@ export default function OverviewPage() {
               </div>
 
               {/* Text content */}
-              <p className="font-normal text-sm text-balance leading-5 tracking-wider text-black">
+              <p className="font-normal text-sm text-balance leading-5 tracking-wider text-accent-foreground">
                 I am looking for a role where I can take ownership of end-to-end
                 development, work closely with a passionate team, and contribute
                 to building impactful products. I want to work in an environment
@@ -89,7 +89,7 @@ export default function OverviewPage() {
                 />
               </div>
               <div className="flex flex-col  gap-">
-                <h1 className="font-medium text-black text-xl ">
+                <h1 className="font-medium text-accent-foreground text-xl ">
                   Full stack Developer
                 </h1>
                 <p className="font-medium text-gray-500 text-sm ">
@@ -132,7 +132,7 @@ export default function OverviewPage() {
             </div>
           </div>
           <div className="flex md:px-5 md:py-2.5 px-3.5 py-2 items-start gap-2.5 w-full flex-col">
-            <span className="font-semibold text-lg text-gray-800 leading-6 tracking-wide">
+            <span className="font-semibold text-lg text-gray-500 leading-6 tracking-wide">
               Ideal next opportunity
             </span>
             <div className="flex flex-col flex-1">

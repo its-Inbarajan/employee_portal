@@ -25,7 +25,7 @@ export default function JobPreferenceForm() {
           Manage your job preferences
         </DrawerTitle>
       </DrawerHeader>
-      <form className="flex flex-col flex-1 min-h-0 overflow-y-auto px-2">
+      <form className="flex flex-col flex-1 min-h-0 overflow-y-hidden px-2">
         <div className="flex flex-col gap-4 flex-1 pr-2">
           <div className="grid w-full gap-2 items-center">
             <Label htmlFor="preferred-job">Preferred Job Role (Max 3)</Label>
