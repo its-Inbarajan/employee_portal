@@ -3,6 +3,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Asidebar } from "@/components/asidebar";
 import { Toaster } from "@/components/ui/sonner";
 import Advertice from "@/components/advertice";
+import { SessionProvider } from "next-auth/react";
 
 export default function CandidateLayout({
     children,
@@ -23,7 +24,9 @@ export default function CandidateLayout({
                         </header>
 
                         <main className="min-h-0 overflow-y-auto p-2 md:p-4">
-                            {children}
+                            <SessionProvider>
+                                {children}
+                            </SessionProvider>
                         </main>
                     </div>
                 </div>
