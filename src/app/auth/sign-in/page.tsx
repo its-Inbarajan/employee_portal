@@ -20,7 +20,7 @@ const SignIn = () => {
         if (result?.error) {
             setError("Invalid email or password");
         } else {
-            router.push("/dashboard"); // redirect on success
+            router.push("/candidate"); // redirect on success
         }
     }
 

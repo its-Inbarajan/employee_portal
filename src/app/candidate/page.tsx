@@ -3,10 +3,11 @@ import '../globals.css'
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, List, ListChecksIcon } from "lucide-react";
+import { ChevronDown, List, ListChecksIcon, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { JobList } from "./components/job-list";
+import { useSession } from 'next-auth/react';
 
 export default function CandidatePage() {
     const RecommendedJobs = [
@@ -164,6 +165,12 @@ export default function CandidatePage() {
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum incidunt quas a, eligendi ullam dolor atque consequuntur qui commodi ex officiis perspiciatis, esse ut temporibus nesciunt laborum quia mollitia vero!",
         },
     ];
+
+    const { status } = useSession();
+
+    if (status === "loading") return <p><span className='animate-spin'><Loader2 /></span> Loading...</p>;
+    if (status === "unauthenticated") return <p>Access Denied</p>;
+
     return (
         <div className="md:max-w-full md:w-full sm:w-sm max-w-sm mx-auto gap-5 flex flex-col justify-self-start">
             <div className="w-full">

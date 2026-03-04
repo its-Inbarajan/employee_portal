@@ -1,16 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-
   async rewrites() {
     return [
       {
-        source: "/api/:path*",
-        destination: "http://localhost:4050/api/v1/:path*"
-      }
-    ]
-  }
+        source: "/api/:path((?!auth).*)",  // skip /api/auth/* routes
+        destination: "http://localhost:4050/api/v1/:path*",
+      },
+    ];
+  },
 };
-
 export default nextConfig;

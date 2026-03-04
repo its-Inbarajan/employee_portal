@@ -3,13 +3,20 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Asidebar } from "@/components/asidebar";
 import { Toaster } from "@/components/ui/sonner";
 import Advertice from "@/components/advertice";
-import { SessionProvider } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function CandidateLayout({
+export default async function CandidateLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await getServerSession();
+    console.log(session)
+    // Protect — redirect if not logged in
+    if (!session) {
+        redirect("/auth/sign-in");
+    }
     return (
         <div>
             <SidebarProvider>
@@ -24,9 +31,7 @@ export default function CandidateLayout({
                         </header>
 
                         <main className="min-h-0 overflow-y-auto p-2 md:p-4">
-                            <SessionProvider>
-                                {children}
-                            </SessionProvider>
+                            {children}
                         </main>
                     </div>
                 </div>
