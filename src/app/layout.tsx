@@ -26,7 +26,6 @@ export default function RootLayout({
       <body className={`${popins.variable} antialiased bg-background`}>
         <ThemeProvider
           attribute={'class'}
-          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

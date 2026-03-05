@@ -16,6 +16,7 @@ import { SidebarTrigger } from "./ui/sidebar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { ModeToggle } from "./ui/theme-toggle";
 import { Notification } from "./notification";
+import LogoutButton from "./logout-button";
 
 export const Navbar = () => {
 
@@ -165,7 +166,7 @@ export const Navbar = () => {
                       Support
                     </p>
                     <ul className="list-none flex flex-col space-y-1.5 justify-start">
-                      {["help", "status", "log out"].map((item) => (
+                      {["help", "status"].map((item) => (
                         <li
                           key={item}
                           className="font-normal hover:bg-gray-400 cursor-pointer transition duration-500 ease-in-out py-1 px-1 rounded-xs  leading-4 tracking-wide text-sm"
@@ -175,6 +176,7 @@ export const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <LogoutButton />
                     </ul>
                     <div className="p-1">
                       <Button
