@@ -16,11 +16,13 @@ interface BackendResponse {
 declare module "next-auth" {
   interface Session {
     accessToken: string;
+    error?: string;
     user: {
-      id: string;
-      name?: string | null;
+      _id: string;
+      user_name?: string | null;
       email?: string | null;
-      image?: string | null;
+      profile?: string | null;
+      role?: string
     };
   }
 
@@ -33,7 +35,10 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     accessToken: string;
-    id: string;
+    _id: string;
+    name: string;
+    email: string;
+    error?: string;         // ← add this
   }
 }
 
@@ -92,14 +97,48 @@ const authOptions: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.id = user.id;
       }
+
+      if (token.accessToken) {
+        try {
+          const res = await fetch(`${process.env.API_URL}/users/me`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token.accessToken}`, // ← validate token on backend
+            },
+          });
+
+          const text = await res.text();
+          const data = text ? JSON.parse(text) : {};
+
+          if (!res.ok) {
+            // Token invalid — force logout by returning empty token
+            return { ...token, error: "InvalidToken" };
+          }
+
+          // Map /me response into token
+          token.id = data.responses._id;
+          token.name = data.responses.user_name;
+          token.email = data.responses.email;
+        } catch (error: unknown) {
+          console.log(error);
+          return { ...token, error: "FetchFailed" };
+        }
+      }
+
       return token;
     },
 
-    // ✅ Typed Session callback
+
+    // Typed Session callback
     async session({ session, token }): Promise<Session> {
       session.accessToken = token.accessToken;
-      session.user.id = token.id;
+      session.user._id = token._id;
+      session.user.user_name = token.name;
+      session.user.email = token.email;
+      session.error = token.error; // ← expose error to client if needed
       return session;
+
     },
   },
 
