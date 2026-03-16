@@ -23,16 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <link rel="shortcut icon" href="/vercel.svg" type="image/x-icon" />
       <body className={`${popins.variable} antialiased bg-background`}>
         <ThemeProvider
-          attribute={'class'}
+          attribute={"class"}
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <Providers>
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </ThemeProvider>
       </body>
     </html>
