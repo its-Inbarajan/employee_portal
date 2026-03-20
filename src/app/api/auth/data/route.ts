@@ -1,20 +1,19 @@
 import { getServerSession } from "next-auth";
 
-
 export async function GET() {
-    const session = await getServerSession();
+  const session = await getServerSession();
 
-    if (!session) {
-        return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  if (!session) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-    const res = await fetch(`${process.env.API_URL}/me`, {
-        headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-        }
-    });
+  const res = await fetch(`${process.env.API_URL}/me`, {
+    headers: {
+      "x-client-type": "CANDIDATE_APP",
+    },
+  });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    return data
+  return data;
 }

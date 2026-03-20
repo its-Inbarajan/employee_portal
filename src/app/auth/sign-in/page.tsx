@@ -96,8 +96,9 @@ const SignIn = () => {
     router.push(`/auth/reset-password?${params.toString()}`);
   };
   return (
-    <section className="flex items-center justify-center h-screen overflow-hidden dark:bg-background bg-white">
-      <Card className="w-full max-w-sm mx-auto pb-0">
+    <section className="flex items-center justify-center h-screen relative overflow-hidden dark:bg-background bg-white">
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <Card className="w-full max-w-sm mx-auto pb-0 relative z-10">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>

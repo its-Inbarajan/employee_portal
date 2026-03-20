@@ -76,31 +76,41 @@ export default function ForgotPassword() {
   //   }
   // }, [searchParams]);
   return (
-    <section className="flex flex-col items-center gap-4 justify-center h-screen overflow-hidden relative">
-      {searchParams.get("form") === "verifyEmail" ? (
-        <FormProvider {...verifyEmailForm}>
-          <form noValidate className="w-full flex items-center justify-center">
-            <EmailVerificationForm />
-          </form>
-        </FormProvider>
-      ) : searchParams.get("form") === "verifyOtp" ? (
-        <FormProvider {...otpForm}>
-          <form noValidate className="w-full flex items-center justify-center">
-            <OtpForm />
-          </form>
-        </FormProvider>
-      ) : (
-        searchParams.get("form") === "updatePassword" && (
-          <FormProvider {...resetPasswordForm}>
+    <section className="flex flex-col dark:bg-background bg-white items-center gap-4 justify-center h-screen overflow-hidden relative">
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+
+      <div className="relative isolate w-full z-10">
+        {searchParams.get("form") === "verifyEmail" ? (
+          <FormProvider {...verifyEmailForm}>
             <form
               noValidate
               className="w-full flex items-center justify-center"
             >
-              <ResetPasswordForm />
+              <EmailVerificationForm />
             </form>
           </FormProvider>
-        )
-      )}
+        ) : searchParams.get("form") === "verifyOtp" ? (
+          <FormProvider {...otpForm}>
+            <form
+              noValidate
+              className="w-full flex items-center justify-center"
+            >
+              <OtpForm />
+            </form>
+          </FormProvider>
+        ) : (
+          searchParams.get("form") === "updatePassword" && (
+            <FormProvider {...resetPasswordForm}>
+              <form
+                noValidate
+                className="w-full flex items-center justify-center"
+              >
+                <ResetPasswordForm />
+              </form>
+            </FormProvider>
+          )
+        )}
+      </div>
     </section>
   );
 }
@@ -140,7 +150,12 @@ function EmailVerificationForm() {
         </FieldGroup>
       </CardContent>
       <CardFooter className="flex flex-col rounded-b-2xl gap-2 items-center border-t [.border-t]:pt-3 bg-muted/50 px-6 py-3">
-        <Button variant={"outline"} size={"sm"} className="w-full">
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          type="submit"
+          className="w-full"
+        >
           Send
           {/* <LoaderIcon className="animate-spin" /> */}
         </Button>
