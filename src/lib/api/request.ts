@@ -99,7 +99,7 @@ async function request<TResponse, TBody = unknown>(
   }
 
   return {
-    data: json?.data ?? json ?? null,
+    data: json?.data?.responses ?? json ?? null,
     message: json?.message ?? "Success",
     success: json?.success ?? true,
     statusCode: res.status,

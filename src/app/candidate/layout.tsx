@@ -17,6 +17,7 @@ export default async function CandidateLayout({
   if (!session) {
     redirect("/auth/sign-in");
   }
+
   return (
     <div>
       <SidebarProvider>
