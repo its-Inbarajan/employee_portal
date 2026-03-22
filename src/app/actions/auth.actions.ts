@@ -1,5 +1,7 @@
 "use server";
 
+import { toast } from "sonner";
+
 export interface LoginState {
   success: boolean;
   message: string;
@@ -39,6 +41,7 @@ export async function loginAction(
     const data = text ? await JSON.parse(text) : {};
 
     if (!response.ok) {
+      toast.error(data.message);
       return { success: false, message: data.message || "Invalid credentials" };
     }
 

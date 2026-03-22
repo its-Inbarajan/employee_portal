@@ -54,7 +54,7 @@ const SignUp = () => {
   // >(`http://localhost:4050/api/v1/users/signup`, "POST", {
   //   onSuccess: (res) => {
   //     console.log(res.data?.responses);
-  //     route.push("/candidate/onboarding");
+  //     route.push("/onboarding");
   //     toast.success(res.message);
   //   },
   //   onError: (err) => {
@@ -88,7 +88,7 @@ const SignUp = () => {
       }
 
       if (result?.ok) {
-        route.push("/candidate/onboarding");
+        route.push("/onboarding");
         route.refresh();
       }
     } catch (error: unknown) {
