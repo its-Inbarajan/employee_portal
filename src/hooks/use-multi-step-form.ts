@@ -2,22 +2,17 @@
 
 import React from "react";
 
-export type FormStep = {
-  id: string;
-  stepFields: string[];
-};
-
 type UseFormStepsProps = {
-  initialSteps: FormStep[];
-  onStepValidation?: (step: FormStep) => Promise<boolean> | boolean;
+  initialSteps: unknown[];
+  onStepValidation?: (step: unknown) => Promise<boolean> | boolean;
 };
 
 export type UseMultiFormStepsReturn = {
-  steps: FormStep[];
+  steps: unknown[];
 
   currentStep: number;
 
-  currentStepData: FormStep;
+  currentStepData: unknown;
 
   progress: number;
 

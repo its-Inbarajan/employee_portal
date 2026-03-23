@@ -14,5 +14,6 @@ export default async function CandidateOnboardingLayout({
   if (!session) {
     redirect("/auth/sign-in");
   }
+
   return <div>{children}</div>;
 }
