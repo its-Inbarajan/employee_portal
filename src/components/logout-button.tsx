@@ -15,7 +15,7 @@ export default function LogoutButton() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.accessToken}`,
+          Authorization: `Bearer ${session?.user.accessToken}`,
         },
         credentials: "include", // ✅ This forwards browser cookies to Next.js route
       });

@@ -92,7 +92,7 @@ async function request<TResponse, TBody = unknown>(
   const res = await fetch(url, init);
 
   const text = await res.text();
-  const json = text ? JSON.parse(text) : {};
+  const json = text ? JSON?.parse(text) : {};
 
   if (accessToken) {
     baseHeaders["Authorization"] = `Bearer ${accessToken}`;

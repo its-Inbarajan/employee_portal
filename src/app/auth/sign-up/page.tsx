@@ -183,7 +183,6 @@ const SignUp = () => {
                           autoComplete="new-password"
                           placeholder="******"
                           {...field}
-                          // disabled={isLoading}
                         />
                         <InputGroupButton
                           type="button"
@@ -214,15 +213,15 @@ const SignUp = () => {
                   />
                   <FieldContent>
                     <FieldLabel htmlFor="terms">
-                      Terms and Conditions.
+                      I agree to the Terms and Conditions.
                     </FieldLabel>
                     <FieldError errors={[fieldState.error]} />
-                    <FieldDescription className="line-clamp-3 hover:line-clamp-none active:line-clamp-none">
+                    {/* <FieldDescription>
                       This application is fully developers personal project to
                       showcase his skill in full stack development. so,
                       don&#39;t use any personal informations to access the
                       application.
-                    </FieldDescription>
+                    </FieldDescription> */}
                   </FieldContent>
                 </Field>
               )}
