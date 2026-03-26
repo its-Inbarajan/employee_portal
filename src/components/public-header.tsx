@@ -3,13 +3,6 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ExternalLinkIcon, Menu } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -30,9 +23,8 @@ const Navigations = [
   },
 ];
 export default function Header() {
-  // bg-linear-to-r from-[#B9FF66] to-gray-100 bg-size-[200%_200%]
   return (
-    <div className="fixed z-50 rounded-full top-0 sm:top-5 left-0 sm:left-1/2 md:-translate-x-1/2 bg-white/5 sm:p-0.5 w-full md:w-2xl lg:w-3xl flex items-center ">
+    <div className="fixed z-50 rounded-full top-0 sm:top-5 left-0 sm:left-1/2 md:-translate-x-1/2 bg-white/20 sm:p-0.5 w-full md:w-2xl lg:w-3xl flex items-center ">
       <div className="w-full text-black px-8 rounded-none sm:rounded-full backdrop-blur-md">
         <div className="flex w-full justify-between items-center gap-10">
           <figure>
@@ -67,37 +59,12 @@ export default function Header() {
             </ul>
           </nav>
           <div className="hidden sm:flex items-center justify-end gap-2">
-            <Link
-              href={"/auth/sign-in"}
-              className="bg-white ring text-black ring-black text-sm font-light inline-block md:px-4 md:py-1.5 py-1 px-2.5 rounded-md hover:bg-black hover:text-[#B9FF66] transition-all duration-300 ease-in-out"
-            >
-              Sign in
-            </Link>
-            <Link
-              href={"/auth/sign-up"}
-              className="bg-white ring text-black ring-black text-sm font-light inline-block md:px-4 md:py-1.5 py-1 px-2.5 rounded-md hover:bg-black hover:text-[#B9FF66] transition-all duration-300 ease-in-out"
-            >
-              Sign up
-            </Link>
-            {/* <DropdownMenu>
-                            <DropdownMenuTrigger asChild className="border-none">
-                                <Button className="bg-white ring text-black ring-black text-sm font-light h-8 text-center inline-flex items-center rounded-md hover:bg-black hover:text-[#B9FF66] transition-all duration-300 ease-in-out">Sign Up</Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <DropdownMenuGroup >
-                                    <Link href={'/auth/sign-up'}>
-                                        <DropdownMenuItem className="hover:cursor-pointer">
-                                            I&apos;m looking for a job
-                                        </DropdownMenuItem>
-                                    </Link>
-                                    <Link href={'/auth/recruit/sign-up'}>
-                                        <DropdownMenuItem className="hover:cursor-pointer">
-                                            I&apos;m looking for a candidates
-                                        </DropdownMenuItem>
-                                    </Link>
-                                </DropdownMenuGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu> */}
+            <Button asChild variant={"secondary"} size={"sm"}>
+              <Link href={"/auth/sign-in"}>Sign in</Link>
+            </Button>
+            <Button asChild variant={"default"} size={"sm"}>
+              <Link href={"/auth/sign-up"}>Sign up</Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -126,40 +93,33 @@ function MobileNav() {
                   href={`/${nav}`}
                   className="capitalize inline-flex w-full justify-between items-center"
                 >
-                  {nav} <ExternalLinkIcon className="size-4" />
+                  {nav}
+                  <ExternalLinkIcon size={10} />
                 </Link>
               ))}
             </div>
 
             <div className="flex flex-col items-center w-full  gap-2">
-              <Link
-                href={"/auth/sign-in"}
-                className="bg-white text-center w-full ring text-black ring-black text-sm font-light block md:px-4 md:py-1.5 py-1 px-2.5 rounded-md hover:bg-black hover:text-[#B9FF66] transition-all duration-300 ease-in-out h-8"
+              <Button
+                asChild
+                variant={"outline"}
+                size={"sm"}
+                className="w-full"
               >
-                Sign in
-              </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild className="border-none">
-                  <Button
-                    variant="outline"
-                    className="bg-white ring w-full text-black ring-black text-sm font-light h-8 text-center inline-flex items-center rounded-md hover:bg-black hover:text-[#B9FF66] transition-all duration-300 ease-in-out"
-                  >
-                    Sign Up
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuGroup>
-                    <Link href={"/auth/sign-in"}>
-                      <DropdownMenuItem className="hover:cursor-pointer">
-                        I&apos;m looking for a job
-                      </DropdownMenuItem>
-                    </Link>
-                    <DropdownMenuItem>
-                      I&apos;m looking for a candidates
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                <Link href={"/auth/sign-in"} prefetch="auto">
+                  Sign in
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant={"outline"}
+                size={"sm"}
+                className="w-full"
+              >
+                <Link href={"/auth/sign-up"} prefetch="auto">
+                  Sign Up
+                </Link>
+              </Button>
             </div>
           </nav>
         </SheetContent>
