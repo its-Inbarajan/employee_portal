@@ -8,7 +8,7 @@ export function useHelixCube(containerRef) {
     rotX: -0.4,
     rotY: 0.52,
     drag: { active: false, prevX: 0, prevY: 0, velX: 0, velY: 0 },
-    autoSpin: true,
+    // autoSpin: true,
   });
 
   React.useEffect(() => {
@@ -16,11 +16,11 @@ export function useHelixCube(containerRef) {
     if (!container) return;
 
     // ── Constants ──────────────────────────────────────────────────
-    const ARM_R = 0.7;
+    const ARM_R = 0.78;
     const ARM_HALF = 1.52;
     const SEGS = 48;
-    const SENS = 0.008;
-    const DAMPING = 0.88;
+    const SENS = 0.01;
+    // const DAMPING = 0.88;
 
     // ── Renderer ───────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -145,7 +145,7 @@ export function useHelixCube(containerRef) {
     const capGeo = new THREE.SphereGeometry(
       ARM_R,
       SEGS,
-      24,
+      4,
       0,
       Math.PI * 2,
       0,
@@ -219,7 +219,7 @@ export function useHelixCube(containerRef) {
       s.drag.prevX = e.clientX;
       s.drag.prevY = e.clientY;
       s.drag.velX = s.drag.velY = 0;
-      s.autoSpin = false;
+      // s.autoSpin = false;
       el.setPointerCapture(e.pointerId);
     };
     const onPointerMove = (e) => {
@@ -259,14 +259,21 @@ export function useHelixCube(containerRef) {
       frameRef.current = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      if (s.autoSpin) {
-        s.rotY += 0.005;
-        s.rotX += 0.001;
-      } else if (!s.drag.active) {
+      // if (s.autoSpin) {
+      //   s.rotY += 0.005;
+      //   s.rotX += 0.001;
+      // } else if (!s.drag.active) {
+      //   s.rotY += s.drag.velY;
+      //   s.rotX += s.drag.velX;
+      //   s.drag.velY *= DAMPING;
+      //   s.drag.velX *= DAMPING;
+      // }
+
+      s.rotY += 0.005;
+      s.rotX += 0.001;
+      if (s.drag.active) {
         s.rotY += s.drag.velY;
         s.rotX += s.drag.velX;
-        s.drag.velY *= DAMPING;
-        s.drag.velX *= DAMPING;
       }
 
       qX.setFromAxisAngle(axisX, s.rotX);

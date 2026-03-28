@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "badge": "Next-gen interface",
+    "headline": "Shape the future",
+    "highlight": "the future",
+    "subline": "A radically new kind of UI toolkit — drag, rotate, and explore 3D components that feel alive.",
+    "cta_primary": "Get started",
+    "cta_secondary": "View docs →"
+  },
+  "nav": {
+    "logo": "Helix UI",
+    "links": [
+      { "label": "Docs", "href": "/docs" },
+      { "label": "Pricing", "href": "/pricing" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "Sign in", "href": "/signin" }
+    ]
+  },
+  "features": [
+    {
+      "id": "f1",
+      "icon": "⬡",
+      "title": "3D Components",
+      "description": "Fully interactive Three.js primitives that respond to drag, scroll and touch."
+    },
+    {
+      "id": "f2",
+      "icon": "⚡",
+      "title": "Zero config",
+      "description": "Drop in a component, pass your data. No WebGL boilerplate required."
+    },
+    {
+      "id": "f3",
+      "icon": "🎨",
+      "title": "Themeable",
+      "description": "Every colour, size and material is a prop. Design system friendly."
+    }
+  ],
+  "stats": [
+    { "id": "s1", "value": "12k+", "label": "Developers" },
+    { "id": "s2", "value": "98%", "label": "Uptime" },
+    { "id": "s3", "value": "4.9★", "label": "Rating" },
+    { "id": "s4", "value": "< 2kb", "label": "Core bundle" }
+  ],
+  "footer": {
+    "tagline": "Built for the next generation of the web.",
+    "columns": [
+      {
+        "heading": "Product",
+        "links": [
+          { "label": "Features", "href": "/features" },
+          { "label": "Pricing", "href": "/pricing" },
+          { "label": "Changelog", "href": "/changelog" }
+        ]
+      },
+      {
+        "heading": "Developers",
+        "links": [
+          { "label": "Docs", "href": "/docs" },
+          { "label": "API ref", "href": "/api" },
+          { "label": "GitHub", "href": "https://github.com" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "label": "About", "href": "/about" },
+          { "label": "Blog", "href": "/blog" },
+          { "label": "Contact", "href": "/contact" }
+        ]
+      }
+    ]
+  }
+}

@@ -6,11 +6,17 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import React from "react";
 import dynamic from "next/dynamic";
 import AvatarGroupComponent from "@/components/avatar-group";
-
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const HelixCube = dynamic(() => import("@/components/HelixCube"), {
   ssr: false,
 });
@@ -70,6 +76,50 @@ export default function LandingPage() {
           <figure className="max-w-full w-full sm:block hidden h-full relative isolate">
             <HelixCube className="absolute inset-0 -z-10 md:z-10 right-0 w-md h-1/2" />
           </figure>
+        </div>
+      </section>
+
+      <section className="min-h-screen w-full relative overflow-hidden">
+        <div className="relative z-20 pt-4 select-none ms-auto flex h-full flex-col max-w-6xl mx-auto w-full px-4 gap-4">
+          <div className="flex flex-1 justify-between items-center gap-2">
+            <div className="flex flex-col gap-2 items-start text-start">
+              <span className="font-medium uppercase tracking-wide text-xs text-violet-500">
+                for job seekers
+              </span>
+              <p className="lg:text-4xl md:text-xl text-lg font-bold leading-tight max-w-xl capitalize w-xl tracking-wide text-white">
+                curated oppertunities for high-impack careers.
+              </p>
+            </div>
+            <div className="block">
+              <Button variant={"link"} size={"lg"}>
+                Browse All Roles
+                <ArrowRight />
+              </Button>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 items-center w-full gap-4">
+            <Card>
+              <CardHeader>
+                <Avatar className="ring ring-accent-foreground rounded">
+                  <AvatarImage
+                    src="/vercel.svg"
+                    alt="@shadcn"
+                    className="grayscale"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </CardHeader>
+              <CardContent>
+                <h1>Senior Product Architect</h1>
+                <span>Company Name</span>
+              </CardContent>
+              <CardFooter>
+                <div className="flex justify-between items-center">
+                  <p>$140k - $180k</p>
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
         </div>
       </section>
     </>
