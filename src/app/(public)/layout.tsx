@@ -1,3 +1,4 @@
+import PublicFooter from "@/components/public-footer";
 import Header from "@/components/public-header";
 
 export default function PublicLayout({
@@ -11,6 +12,9 @@ export default function PublicLayout({
         <Header />
       </header>
       <main>{children}</main>
+      <footer>
+        <PublicFooter />
+      </footer>
     </div>
   );
 }
