@@ -26,7 +26,10 @@ export default function AvatarGroupComponent() {
   return (
     <AvatarGroup className="select-none">
       {avatar.map((item) => (
-        <Avatar key={`avatar-${item.fallback}`}>
+        <Avatar
+          key={`avatar-${item.fallback}`}
+          className="hover:ring hover:ring-white transition-all duration-300 ease-linear cursor-pointer"
+        >
           <AvatarImage src={item.url} alt={`image-${item.fallback}`} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>

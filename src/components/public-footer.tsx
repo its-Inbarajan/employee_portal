@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function PublicFooter() {
   return (
-    <div className="relative overflow-hidden border-t border-t-muted-foreground">
+    <div className="relative overflow-hidden border-t">
       <div className="mx-auto md:max-w-7xl max-w-full px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
           <div className="col-span-4">

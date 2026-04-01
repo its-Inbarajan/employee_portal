@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { ExternalLinkIcon, Menu } from "lucide-react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -46,11 +47,11 @@ export default function Header() {
               {Navigations.map((nav) => (
                 <li
                   key={`public-nav-${nav.title}`}
-                  className="inline-block hover:bg-white rounded-full hover:ring hover:ring-black px-2 py-1 transition-all duration-300 ease-linear tracking-wide"
+                  className="inline-block hover:bg-white group rounded-full hover:ring hover:ring-black px-2 py-1 transition-all duration-300 ease-linear tracking-wide"
                 >
                   <Link
                     href={`${nav.route}`}
-                    className="text-black text-sm font-light font-Poppins leading-tight capitalize"
+                    className="text-sm font-light text-white group-hover:text-black transition-colors duration-300 ease-linear font-Poppins leading-tight capitalize"
                   >
                     {nav.title}
                   </Link>
@@ -87,15 +88,17 @@ function MobileNav() {
           </SheetHeader>
           <nav className="flex flex-col gap-4 justify-between h-full pb-4 px-4">
             <div className="flex flex-col gap-2">
-              {["For job seekers", "for companies"].map((nav) => (
-                <Link
-                  key={`mobile-public-nav-${nav}`}
-                  href={`/${nav}`}
-                  className="capitalize inline-flex w-full justify-between items-center"
-                >
-                  {nav}
-                  <ExternalLinkIcon size={10} />
-                </Link>
+              {Navigations.map((nav) => (
+                <SheetClose asChild key={`mobile-public-nav-${nav.id}`}>
+                  <Link
+                    href={`${nav.route}`}
+                    prefetch
+                    className="capitalize inline-flex w-ful justify-between items-center"
+                  >
+                    {nav.title}
+                    <ExternalLinkIcon size={10} />
+                  </Link>
+                </SheetClose>
               ))}
             </div>
 
