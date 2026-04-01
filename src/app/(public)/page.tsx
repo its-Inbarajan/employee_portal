@@ -59,8 +59,12 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="block">
-              <Button variant={"link"} size={"lg"}>
-                Browse All Roles
+              <Button
+                variant={"link"}
+                size={"lg"}
+                className="aspect-square md:aspect-auto ring md:ring-0 tracking-wide "
+              >
+                <span className="md:block hidden">Browse All Roles</span>
                 <ArrowRight />
               </Button>
             </div>

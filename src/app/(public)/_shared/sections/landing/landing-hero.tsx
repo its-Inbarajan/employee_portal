@@ -17,7 +17,7 @@ export default function LandingHero() {
     <section className="relative w-full h-screen overflow-hidden">
       <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_38%_38%,_#e8e4f8_0%,_#ddd8f0_45%,_#c8c0e4_100%)] dark:bg-[radial-gradient(ellipse_80%_90%_at_50%_-5%,#B48CDE,#000)]" />
       <div className="absolute bottom-0 z-20 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-      <div className="relative mb-52 z-20 pt-4 select-none flex ms-auto max-w-6xl w-full flex-row justify-between h-screen items-center px-4 gap-4">
+      <div className="relative mb-52 z-20 pt-4 select-none flex lg:px-16 w-full flex-row justify-between h-screen items-center px-4 gap-4">
         <div className="flex flex-col max-w-full items-center w-full lg:gap-y-2 gap-2 xl:gap-y-2 xl:items-start lg:items-start md:items-start">
           <Badge
             className="rounded-full sm:text-xs leading-6 bg-white/5 backdrop-blur-md tracking-normal text-[10px] font-normal uppercase"
