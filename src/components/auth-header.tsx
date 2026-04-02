@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function AuthHeader() {
   return (
     <nav className="md:px-6 px-4">
-      <figure>
+      <Link href={"/"} prefetch>
         <Image
           src={"/next.svg"}
           alt={"logo"}
@@ -13,7 +14,7 @@ export default function AuthHeader() {
           width={50}
           height={50}
         />
-      </figure>
+      </Link>
     </nav>
   );
 }

@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -10,6 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const Navigations = [
   {
@@ -23,7 +26,46 @@ const Navigations = [
     route: "/companies",
   },
 ];
+
+function NavLink({
+  nav,
+  isActive,
+}: {
+  nav: { route: string; title: string };
+  isActive: boolean;
+}) {
+  return (
+    <li
+      key={`public-nav-${nav.title}`}
+      className={cn(
+        // Base Styles & Hover Effects (Your existing code)
+        "inline-block group rounded-full px-2 py-1 transition-all  duration-300 ease-linear tracking-wide",
+        "hover:bg-white hover:ring hover:ring-purple-500",
+
+        // Active State: Forces the hover styles to stay on
+        isActive && "bg-white ring ring-offset-2 ring-purple-500",
+      )}
+    >
+      <Link
+        href={`${nav.route}`}
+        prefetch
+        className={cn(
+          // Base Link Styles
+          "text-sm font-light text-white transition-colors duration-300 ease-linear font-Poppins leading-tight capitalize",
+          "group-hover:text-black",
+
+          // Active Link State: Forces text to black
+          isActive && "text-black font-medium",
+        )}
+      >
+        {nav.title}
+      </Link>
+    </li>
+  );
+}
+
 export default function Header() {
+  const pathname = usePathname();
   return (
     <div className="fixed z-50 rounded-full top-0 sm:top-5 left-0 sm:left-1/2 md:-translate-x-1/2 bg-white/20 sm:p-0.5 w-full md:w-2xl lg:w-3xl flex items-center ">
       <div className="w-full text-black px-8 rounded-none sm:rounded-full backdrop-blur-md">
@@ -44,19 +86,16 @@ export default function Header() {
           <MobileNav />
           <nav className="relative md:block hidden">
             <ul className="list-none flex  items-center gap-2">
-              {Navigations.map((nav) => (
-                <li
-                  key={`public-nav-${nav.title}`}
-                  className="inline-block hover:bg-white group rounded-full hover:ring hover:ring-black px-2 py-1 transition-all duration-300 ease-linear tracking-wide"
-                >
-                  <Link
-                    href={`${nav.route}`}
-                    className="text-sm font-light text-white group-hover:text-black transition-colors duration-300 ease-linear font-Poppins leading-tight capitalize"
-                  >
-                    {nav.title}
-                  </Link>
-                </li>
-              ))}
+              {Navigations.map((nav) => {
+                const isActive = pathname === nav.route;
+                return (
+                  <NavLink
+                    key={`public-comp-${nav.title}-${isActive}`}
+                    isActive={isActive}
+                    nav={nav}
+                  />
+                );
+              })}
             </ul>
           </nav>
           <div className="hidden sm:flex items-center justify-end gap-2">

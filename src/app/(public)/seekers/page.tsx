@@ -62,11 +62,47 @@ export default function ForJobSeekers() {
             />
           </div>
         </div>
+        <div
+          className="absolute inset-0 -z-10 
+  /* Light Mode: Moved from 38% 38% (top-ish) to 50% 110% (bottom center) */
+  bg-[radial-gradient(ellipse_at_50%_110%,_#e8e4f8_0%,_#ddd8f0_45%,_#c8c0e4_100%)] 
+  
+  /* Dark Mode: Moved from 50% -5% (top) to 50% 105% (bottom) */
+  dark:bg-[radial-gradient(ellipse_80%_90%_at_50%_105%,_#B48CDE,_#000)]"
+        />
       </section>
 
       <MarketInsight />
       <Openings />
       <ProfilePresentation />
+
+      <section className="relative flex items-center overflow-hidden">
+        <div className="mx-auto max-w-6xl flex items-center justify-center h-full w-full md:px-24 md:py-24 px-6 py-6">
+          <div className="flex items-center gap-6 md:gap-8 flex-col h-full justify-center">
+            <div className="flex flex-col gap-y-2 md:gap-y-8 items-center shrink">
+              <h1 className="font-bold leading-6 text-accent-foreground tracking-wide md:text-5xl text-2xl">
+                Elevate Your Stroy.
+              </h1>
+              <h1 className="font-bold leading-6 tracking-wide md:text-5xl text-2xl text-purple-500">
+                Join the Editorial.
+              </h1>
+            </div>
+            <p className="text-muted-foreground text-xs leading-relaxed tracking-tight max-w-sm w-full text-center">
+              Applications are reviwed on a rolling basis. Our next cohort of
+              verified professional joins on the first of the month.
+            </p>
+            <div className="flex md:flex-row gap-4 flex-col flex-1 items-center">
+              <Button
+                variant={"secondary"}
+                size={"lg"}
+                className="bg-purple-500 hover:bg-purple-500/70"
+              >
+                Start Apply
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

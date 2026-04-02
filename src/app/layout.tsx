@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <link rel="shortcut icon" href="/vercel.svg" type="image/x-icon" />
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       <body className={`${poppins.variable} antialiased bg-background`}>
         <ThemeProvider
           attribute="class"
