@@ -13,7 +13,8 @@ interface Props {
 }
 
 export default function StepThreeForm({ defaultValues }: Readonly<Props>) {
-  const {} = useForm<SkillsAndResumeInfoFormValues>({
+  console.log(defaultValues);
+  const form = useForm<SkillsAndResumeInfoFormValues>({
     resolver: zodResolver(SkillsAndResumeInfoSchema),
     defaultValues: {
       project: [
@@ -30,9 +31,13 @@ export default function StepThreeForm({ defaultValues }: Readonly<Props>) {
       skills: [""],
     },
   });
+
+  const onsubmit = (data: SkillsAndResumeInfoFormValues) => {
+    console.log(data);
+  };
   return (
     <Card className="pb-0 relative">
-      <form noValidate>
+      <form onSubmit={form.handleSubmit(onsubmit)} noValidate>
         <CardContent></CardContent>
       </form>
     </Card>

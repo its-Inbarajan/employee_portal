@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-interface Props {
-  steps: string;
-}
+
 export default function Stepper() {
   return (
     <div className="">
