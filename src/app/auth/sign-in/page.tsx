@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { EyeIcon, EyeOffIcon, Loader } from "lucide-react";
 import {
   Card,
@@ -28,9 +28,35 @@ const initialState: LoginState = {
   message: "",
   errors: {},
 };
+
+function ForgotPasswordButton() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const handleForGotPasswordClick = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("form", "verifyEmail");
+
+    router.push(`/auth/reset-password?${params.toString()}`);
+  };
+  return (
+    <div className="flex items-center">
+      <FieldLabel htmlFor="password">Password</FieldLabel>
+      <Button
+        type="button"
+        onClick={handleForGotPasswordClick}
+        variant={"link"}
+        size={"sm"}
+        className="ml-auto inline-block text-xs active:text-blue-500 underline-offset-4 hover:underline"
+      >
+        Forgot your password?
+      </Button>
+    </div>
+  );
+}
+
 const SignIn = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const [show, setShow] = React.useState<boolean>(false);
   const [isSigningIn, setIsSigningIn] = React.useState<boolean>(false);
@@ -88,13 +114,6 @@ const SignIn = () => {
     setShow(!show);
   };
 
-  const handleForGotPasswordClick = () => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    params.set("form", "verifyEmail");
-
-    router.push(`/auth/reset-password?${params.toString()}`);
-  };
   return (
     <section className="flex items-center justify-center px-4 md:px-6 h-screen relative overflow-hidden dark:bg-background bg-white">
       <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
@@ -131,18 +150,9 @@ const SignIn = () => {
               </Field>
 
               <Field className="max-w-sm">
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Button
-                    type="button"
-                    onClick={handleForGotPasswordClick}
-                    variant={"link"}
-                    size={"sm"}
-                    className="ml-auto inline-block text-xs active:text-blue-500 underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </Button>
-                </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ForgotPasswordButton />
+                </Suspense>
                 <InputGroup>
                   <InputGroupInput
                     id="password"

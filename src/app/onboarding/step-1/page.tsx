@@ -1,10 +1,10 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { api } from "@/lib/api";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import StepOneForm from "../_components/step-one-form";
 import { BasicsInforFormValues } from "@/schema/candidate-onboarding-schema";
+import { authOptions } from "@/lib/authOptions";
 
 export default async function StepOnePage() {
   const session = await getServerSession(authOptions);

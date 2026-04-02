@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import OnboardingStepper from "./_components/onboarding-stepper";
+import { authOptions } from "@/lib/authOptions";
 
 interface Prop {
   children: React.ReactNode;

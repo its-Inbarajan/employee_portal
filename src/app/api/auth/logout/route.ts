@@ -1,7 +1,8 @@
 // app/api/auth/logout/route.ts
+import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../[...nextauth]/route";
+
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
