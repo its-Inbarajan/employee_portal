@@ -1,8 +1,6 @@
 import z from "zod";
 
-const phoneRegex = new RegExp(
-  /^([+]?1\s?)\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/,
-);
+const phoneRegex = new RegExp(/^(\+91[\-\s]?)?[0]?(91)?[6-9]\d{9}$/);
 
 // const ExperienceSchema = z.object({
 //   title: z.string().max(4, "title is required."),
@@ -92,7 +90,26 @@ export const professionalInfoSchema = z.object({
 });
 
 export const SkillsAndResumeInfoSchema = z.object({
-  skills: z.array(z.string()).min(1, "Minium one skill is required"),
+  skills: z
+    .object({
+      name: z.string(),
+      level: z
+        .enum(["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"])
+        .optional(),
+      yearsOfExp: z.number().optional(),
+    })
+    .array(),
+  language: z
+    .object({
+      language: z.string(),
+      proficiency: z.enum([
+        "BASIC",
+        "CONVERSATIONAL",
+        "PROFESSIONAL",
+        "NATIVE",
+      ]),
+    })
+    .array(),
   project: z.array(ProjectSchema),
   resumes: z
     .custom<File>()
