@@ -51,7 +51,7 @@ function NavLink({
         prefetch
         className={cn(
           // Base Link Styles
-          "text-sm font-light text-white transition-colors duration-300 ease-linear font-Poppins leading-tight capitalize",
+          "text-sm font-light text-accent-foreground transition-colors duration-300 ease-linear font-Poppins leading-tight capitalize",
           "group-hover:text-black",
 
           // Active Link State: Forces text to black

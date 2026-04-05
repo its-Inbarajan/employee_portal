@@ -93,7 +93,7 @@ export default function PublicFooter() {
         </div>
       </div>
       <div className="mt-10 flex flex-col md:flex-row  gap-4 border-t border-white/10 px-6 py-6 sm:flex-row sm:justify-between">
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-accent-foreground">
           © {new Date().getFullYear()} FindJob. All rights reserved.
         </p>
         <div className="flex flex-row items-center gap-6">

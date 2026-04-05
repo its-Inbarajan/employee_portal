@@ -6,10 +6,10 @@ import React from "react";
 
 export default function MarketInsight() {
   return (
-    <section className="mx-auto max-w-7xl md:px-12  py-12 md:py-24 bg-muted-foreground/5 w-full ">
+    <section className="mx-auto max-w-7xl md:px-12  py-6 px-6 md:py-24 bg-muted-foreground/5 w-full ">
       <div className="flex md:flex-row justify-start md:justify-between h-full items-center flex-col gap-5">
         <div className="flex flex-col items-center md:items-start gap-2">
-          <h1 className="font-bold leading-6 tracking-wide text-white md:text-2xl text-xl">
+          <h1 className="font-bold leading-6 tracking-wide text-accent-foreground md:text-2xl text-xl">
             Market Insight
           </h1>
           <p className="font-normal leading-6 tracking-wide text-muted-foreground text-xs">
@@ -28,7 +28,7 @@ export default function MarketInsight() {
                   <span className="text-xs md:text-sm text-muted-foreground tracking-wide">
                     AI DESIGN
                   </span>
-                  <span className="text-lg md:font-bold text-white font-medium">
+                  <span className="text-lg md:font-bold text-accent-foreground font-medium">
                     +142%
                   </span>
                 </div>
@@ -46,7 +46,7 @@ export default function MarketInsight() {
                   <span className="text-xs md:text-sm text-muted-foreground tracking-wide">
                     REMOTE INFRA
                   </span>
-                  <span className="text-lg md:font-bold text-white font-medium">
+                  <span className="text-lg md:font-bold text-accent-foreground font-medium">
                     +88%
                   </span>
                 </div>

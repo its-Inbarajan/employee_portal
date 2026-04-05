@@ -54,7 +54,6 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
     onSuccess: (res) => {
       if (res.success) {
         toast.success(res.message);
-        console.log(res.data);
         router.push("/onboarding/step-3");
       }
     },
@@ -77,6 +76,53 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                 This helps employers know who you are.
               </FieldDescription>
               <FieldGroup>
+                <Controller
+                  control={form.control}
+                  name="professionalCategory"
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <FieldLabel htmlFor="professionalCategory">
+                        Experience Level
+                      </FieldLabel>
+                      <Select
+                        value={field.value}
+                        defaultValue={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="professionalCategory">
+                          <SelectValue placeholder="Professional Category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {[
+                            "TECHNOLOGY",
+                            "DESIGN",
+                            "PRODUCT",
+                            "MARKETING",
+                            "SALES",
+                            "FINANCE",
+                            "OPERATIONS",
+                            "HUMAN_RESOURCES",
+                            "LEGAL",
+                            "HEALTHCARE",
+                            "EDUCATION",
+                            "CREATIVE",
+                            "CONSULTING",
+                            "OTHER",
+                          ].map((item) => (
+                            <SelectItem
+                              key={`professionalCategory-${item}`}
+                              value={item}
+                              className="capitalize"
+                            >
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FieldError errors={[fieldState.error]} />
+                    </Field>
+                  )}
+                />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <Controller
                     control={form.control}
@@ -152,7 +198,7 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger id="experienceLevel">
-                          <SelectValue placeholder="experienceLevel" />
+                          <SelectValue placeholder="Experience Level" />
                         </SelectTrigger>
                         <SelectContent>
                           {[

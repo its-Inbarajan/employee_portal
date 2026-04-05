@@ -11,10 +11,10 @@ export default function ProfilePresentation() {
       <div className="grid lg:grid-cols-12 md:grid-cols-6 grid-cols-1 md:gap-10 gap-5 items-start">
         <div className="lg:col-span-7 md:col-span-3 col-span-1 flex flex-col items-start gap-5">
           <div className="flex flex-col items-start md:gap-6 gap-4">
-            <h1 className="font-bold leading-6 tracking-wide md:text-3xl lg:text-5xl text-xl text-white">
+            <h1 className="font-bold leading-6 tracking-wide md:text-3xl lg:text-5xl text-xl text-accent-foreground">
               Your Profile.
             </h1>
-            <h1 className="font-bold leading-6 tracking-wide md:text-3xl lg:text-5xl text-xl text-white">
+            <h1 className="font-bold leading-6 tracking-wide md:text-3xl lg:text-5xl text-xl text-accent-foreground">
               Our Presentation.
             </h1>
           </div>
@@ -56,10 +56,10 @@ export default function ProfilePresentation() {
             <CardContent>
               <div className="flex flex-col gap-8 items-center">
                 <div className="flex flex-1 flex-row  items-start md:items-center gap-5 md:gap-10 justify-start">
-                  <Avatar className="rounded-lg ring-3 ring-white/50 w-16 h-full">
+                  <Avatar className="rounded-lg ring-3 ring-accent-foreground w-16 h-full">
                     <AvatarImage
                       className="rounded-md dark:brightness-75 dark:contrast-125 dark:invert border-black select-none"
-                      src={"/next.svg"}
+                      src={"/vercel.svg"}
                       alt={`profile`}
                     />
                     <AvatarFallback className="text-white">NJ</AvatarFallback>

@@ -127,8 +127,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    signIn: "/login",
-    error: "/login", // send errors to login not /api/auth/error
+    signIn: "/",
+    error: "/", // send errors to login not /api/auth/error
   },
 
   session: {

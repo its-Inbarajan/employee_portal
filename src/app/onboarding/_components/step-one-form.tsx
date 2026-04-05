@@ -45,6 +45,8 @@ export default function StepOneForm({ defaultValues }: Props) {
       firstName: defaultValues?.firstName ?? "",
       lastName: defaultValues?.lastName ?? "",
       phoneNumber: defaultValues?.phoneNumber ?? "",
+      dateOfBirth: defaultValues?.dateOfBirth ?? "",
+      gender: defaultValues?.gender ?? "",
       location: {
         city: defaultValues?.location?.city ?? "",
         state: defaultValues?.location?.state ?? "",
@@ -57,7 +59,7 @@ export default function StepOneForm({ defaultValues }: Props) {
   const { mutate, isPending } = useApiMutation<
     ICandidateProfile,
     BasicsInforFormValues
-  >("/candidate/onboarding/step-1", "PATCH", {
+  >(`/candidate/onboarding/step-1`, "PATCH", {
     onSuccess: (res) => {
       if (res.success) {
         toast.success(res.message);
@@ -140,7 +142,7 @@ export default function StepOneForm({ defaultValues }: Props) {
                   <Controller
                     control={form.control}
                     name="dateOfBirth"
-                    render={({ field, fieldState }) => (
+                    render={({ field: { onChange, value }, fieldState }) => (
                       <Field>
                         <FieldLabel htmlFor="dateOfBirth">
                           Date Of Birth
@@ -149,9 +151,9 @@ export default function StepOneForm({ defaultValues }: Props) {
                           type="date"
                           autoComplete="bday-day"
                           id="dateOfBirth"
-                          value={field.value}
-                          onChange={field.onChange}
-                          onBlur={field.onBlur}
+                          value={value}
+                          onChange={onChange}
+                          // onBlur={field.onBlur}
                         />
                         <FieldError errors={[fieldState.error]} />
                       </Field>

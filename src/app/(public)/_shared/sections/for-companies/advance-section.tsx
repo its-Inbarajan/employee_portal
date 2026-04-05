@@ -46,7 +46,7 @@ export default function AdvanceSection() {
     <section className="relative min-h-screen flex flex-col items-stretch space-y-6 overflow-hidden px-6 py-6">
       <div className="max-w-full mx-auto lg:max-w-5xl md:max-w-4xl w-full">
         <div className="flex flex-col items-center justify-center ">
-          <h1 className="font-bold leading-relaxed tracking-wide lg:text-5xl md:text-3xl text-xl">
+          <h1 className="font-bold leading-relaxed text-accent-foreground tracking-wide lg:text-5xl md:text-3xl text-xl">
             Advanced Capabilities for scale
           </h1>
           <p className="font-normal leading-relaxed tracking-wide text-xs text-muted-foreground">

@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,10 +37,21 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
+import { handleApiError } from "@/lib/api/use-api-error";
+import { api } from "@/lib/api";
+import { useResetPasswordStore } from "@/features/store";
+import { Loader2 } from "lucide-react";
 
 function ResetForms() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const setEmail = useResetPasswordStore((state) => state.setEmail);
+  const setResetToken = useResetPasswordStore((state) => state.setResetToken);
+  const email = useResetPasswordStore((state) => state.email);
+  const resetToken = useResetPasswordStore((state) => state.resetToken);
+  const resetStore = useResetPasswordStore((state) => state.resetStore);
 
   const verifyEmailForm = useForm<VerifyEmailType>({
     resolver: zodResolver(verifyEmailSchema),
@@ -52,32 +63,141 @@ function ResetForms() {
 
   const resetPasswordForm = useForm<ForgotPasswordType>({
     resolver: zodResolver(forgotPasswordSchema),
-    defaultValues: {
+    values: {
       confirm_password: "",
       new_password: "",
-      userId: "",
+      email: email,
+      resetToken: resetToken,
     },
     mode: "onChange",
   });
 
   const otpForm = useForm<VerifyOtpType>({
     resolver: zodResolver(verifyOtpSchema),
-    defaultValues: {
+    values: {
       otp: "",
+      email: email.toString(),
     },
     mode: "onChange",
   });
+
+  async function handleSubmitEmail(data: { email: string }) {
+    try {
+      const response = await api.post<
+        { responses: { email: string } },
+        { email: string }
+      >("/otps/sendOtp", {
+        ...data,
+      });
+
+      if (!response.success) {
+        toast.error(response.message);
+        return;
+      }
+
+      if (response?.success) {
+        setEmail(response.data?.responses?.email as string);
+        router.push("/auth/reset-password?form=verifyOtp");
+        router.refresh();
+        toast.success(response.message);
+      }
+    } catch (error: unknown) {
+      toast.error(handleApiError(error as Error));
+    }
+  }
+
+  async function verifyOtp(data: { otp: string }) {
+    const payload = {
+      otp: data.otp,
+      email: email,
+    };
+    try {
+      const res = await api.put<
+        {
+          message: string;
+          statusCode: number;
+          success: boolean;
+          responses: { resetToken: string };
+        },
+        { otp: string; email: string }
+      >("/otps/verifyOtp", {
+        ...payload,
+      });
+
+      if (!res.success) {
+        toast.error(res.message);
+        return;
+      }
+
+      if (res?.success) {
+        setResetToken(res.data?.responses.resetToken as string);
+        router.push("/auth/reset-password?form=updatePassword");
+        router.refresh();
+        toast.success(res.message);
+      }
+    } catch (error: unknown) {
+      toast.error(handleApiError(error));
+    }
+  }
+
+  async function updatePassword(data: {
+    new_password: string;
+    confirm_password: string;
+  }) {
+    const payload = {
+      new_password: data.new_password,
+      confirm_password: data.confirm_password,
+      resetToken: resetToken,
+      email: email,
+    };
+
+    try {
+      const res = await api.put<
+        { message: string },
+        {
+          new_password: string;
+          confirm_password: string;
+          resetToken: string;
+          email: string;
+        }
+      >("/users/forgot-password", {
+        ...payload,
+      });
+
+      if (!res.success) {
+        toast.error(res.message);
+        return;
+      }
+
+      if (res?.success) {
+        resetStore();
+        router.push("/auth/sign-in");
+        router.refresh();
+        toast.success(res.message);
+      }
+    } catch (error: unknown) {
+      toast.error(handleApiError(error));
+    }
+  }
   return (
     <div className="relative isolate w-full z-10">
       {searchParams.get("form") === "verifyEmail" ? (
         <FormProvider {...verifyEmailForm}>
-          <form noValidate className="w-full flex items-center justify-center">
+          <form
+            noValidate
+            onSubmit={verifyEmailForm.handleSubmit(handleSubmitEmail)}
+            className="w-full flex items-center justify-center"
+          >
             <EmailVerificationForm />
           </form>
         </FormProvider>
       ) : searchParams.get("form") === "verifyOtp" ? (
         <FormProvider {...otpForm}>
-          <form noValidate className="w-full flex items-center justify-center">
+          <form
+            noValidate
+            onSubmit={otpForm.handleSubmit(verifyOtp)}
+            className="w-full flex items-center justify-center"
+          >
             <OtpForm />
           </form>
         </FormProvider>
@@ -86,6 +206,7 @@ function ResetForms() {
           <FormProvider {...resetPasswordForm}>
             <form
               noValidate
+              onSubmit={resetPasswordForm.handleSubmit(updatePassword)}
               className="w-full flex items-center justify-center"
             >
               <ResetPasswordForm />
@@ -98,33 +219,28 @@ function ResetForms() {
 }
 
 export default function ForgotPassword() {
-  // React.useEffect(() => {
-  //   if (!searchParams.get("form")?.length) {
-  //     const params = new URLSearchParams(searchParams.toString());
-
-  //     params.set("form", " ");
-  //   }
-  // }, [searchParams]);
   return (
-    <section className="flex flex-col dark:bg-background bg-white items-center gap-4 justify-center h-screen overflow-hidden relative">
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]">
-        <Suspense fallback={<div>Loading...</div>}>
-          <ResetForms />
-        </Suspense>
-      </div>
+    <section className="flex flex-col dark:bg-background bg-white items-center gap-4 justify-center h-screen overflow-x-hidden relative">
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+      <React.Suspense
+        fallback={
+          <div className="flex flex-row items-center justify-center h-screen animate-spin">
+            <Loader2 className="size-5" />
+          </div>
+        }
+      >
+        <ResetForms />
+      </React.Suspense>
     </section>
   );
 }
-
 function EmailVerificationForm() {
   const { control } = useFormContext();
   return (
     <Card className="max-w-sm mx-auto w-full pb-0">
       <CardHeader>
         <CardTitle>Verify your email address.</CardTitle>
-        <CardDescription>
-          verify your email address with OTP in your inbox.
-        </CardDescription>
+        <CardDescription>verify your email address with OTP.</CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
@@ -142,6 +258,7 @@ function EmailVerificationForm() {
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                   value={field.value}
+                  placeholder="name@example.com"
                   aria-invalid={fieldState.invalid}
                 />
                 <FieldError errors={[fieldState.error]} />
@@ -167,11 +284,12 @@ function EmailVerificationForm() {
 
 function OtpForm() {
   const { control } = useFormContext();
+
   return (
     <Card className="max-w-sm mx-auto w-full pb-0">
       <CardHeader>
         <CardTitle>Verify otp</CardTitle>
-        <CardDescription>Find your OTP in given mail indox.</CardDescription>
+        <CardDescription>Find your OTP in given mail.</CardDescription>
       </CardHeader>
       <CardContent>
         <Controller
@@ -202,6 +320,8 @@ function OtpForm() {
 }
 
 function ResetPasswordForm() {
+  const { control } = useFormContext();
+
   return (
     <Card className="max-w-sm mx-auto w-full pb-0">
       <CardHeader>
@@ -213,25 +333,40 @@ function ResetPasswordForm() {
       <CardContent>
         <FieldSet>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="new_password">New Password</FieldLabel>
-              <Input
-                id="new_password"
-                autoComplete="new-password"
-                name="new_password"
-                placeholder="******"
-              />
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="confirm_password">
-                Confirm Password
-              </FieldLabel>
-              <Input
-                id="confirm_password"
-                name="confirm_password"
-                placeholder="******"
-              />
-            </Field>
+            <Controller
+              control={control}
+              name="new_password"
+              render={({ field, fieldState }) => (
+                <Field>
+                  <FieldLabel htmlFor="new_password">New Password</FieldLabel>
+                  <Input
+                    {...field}
+                    id="new_password"
+                    autoComplete="new-password"
+                    placeholder="******"
+                  />
+                  <FieldError errors={[fieldState.error]} />
+                </Field>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="confirm_password"
+              render={({ field, fieldState }) => (
+                <Field>
+                  <FieldLabel htmlFor="confirm_password">
+                    Confirm Password
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="confirm_password"
+                    placeholder="******"
+                  />
+                  <FieldError errors={[fieldState.error]} />
+                </Field>
+              )}
+            />
           </FieldGroup>
         </FieldSet>
       </CardContent>

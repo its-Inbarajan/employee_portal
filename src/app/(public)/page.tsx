@@ -20,7 +20,7 @@ const staticJobs: {
     id: 1,
     title: "senior software engg",
     companyName: "google",
-    image: "/vercel.svg",
+    image: "/next.svg",
     salary: "$150K - $180K",
     location: "landon/remote",
   },
@@ -28,7 +28,7 @@ const staticJobs: {
     id: 2,
     title: "marketing agents",
     companyName: "amazon",
-    image: "/vercel.svg",
+    image: "/next.svg",
     salary: "$150K - $180K",
     location: "england/remote",
   },
@@ -36,7 +36,7 @@ const staticJobs: {
     id: 3,
     title: "genAi developer",
     companyName: "meta",
-    image: "/vercel.svg",
+    image: "/next.svg",
     salary: "$150K - $180K",
     location: "bangalore/remote",
   },
@@ -54,7 +54,7 @@ export default function LandingPage() {
               <span className="font-medium uppercase tracking-wide text-xs text-violet-500">
                 for job seekers
               </span>
-              <p className="lg:text-4xl md:text-xl text-lg font-bold leading-tight text-balance max-w-sm md:max-w-xl capitalize w-xl tracking-wide text-white">
+              <p className="lg:text-4xl md:text-xl text-lg font-bold leading-tight text-balance max-w-sm md:max-w-xl capitalize w-xl tracking-wide text-accent-foreground">
                 curated oppertunities for high-impack careers.
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function LandingPage() {
                 <span className="font-medium uppercase tracking-wide text-xs text-violet-500">
                   for hiring team
                 </span>
-                <h1 className="text-balance font-bold tracking-wide text-white capitalize text-xl md:text-5xl w-xs md:w-2xl">
+                <h1 className="text-balance font-bold tracking-wide text-accent-foreground capitalize text-xl md:text-5xl w-xs md:w-2xl">
                   scale you organization with architechural precision.
                 </h1>
 

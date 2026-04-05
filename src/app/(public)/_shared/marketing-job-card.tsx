@@ -24,7 +24,7 @@ export default function MarketingJobCard({ item }: { item: Props }) {
     <Card className="flex pb-0 @container/card backdrop-blur-lg" key={item.id}>
       <CardHeader>
         <div className="flex justify-between w-full items-start shrink-0">
-          <Avatar className="ring ring-accent-foreground rounded">
+          <Avatar className="dark:brightness-75 dark:contrast-125 dark:invert border-black rounded">
             <AvatarImage
               src={item.image}
               alt="@shadcn"
@@ -33,7 +33,7 @@ export default function MarketingJobCard({ item }: { item: Props }) {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <Badge
-            className="rounded bg-background text-white uppercase tracking-wider font-normal"
+            className="rounded bg-background text-accent-foreground uppercase tracking-wider font-normal"
             variant={"secondary"}
           >
             {item.location}
@@ -42,7 +42,7 @@ export default function MarketingJobCard({ item }: { item: Props }) {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col items-start shrink-0">
-          <h1 className="font-semibold leading-tight tracking-wide capitalize text-xl">
+          <h1 className="font-semibold leading-tight text-accent-foreground tracking-wide capitalize text-xl">
             {item.title}
           </h1>
           <span className="text-xs text-muted-foreground capitalize font-medium tracking-wide">

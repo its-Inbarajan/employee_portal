@@ -67,6 +67,22 @@ export const professionalInfoSchema = z.object({
   currentTitle: z.string(),
   currentCompany: z.string(),
   totalExperienceYears: z.number(),
+  professionalCategory: z.enum([
+    "TECHNOLOGY",
+    "DESIGN",
+    "PRODUCT",
+    "MARKETING",
+    "SALES",
+    "FINANCE",
+    "OPERATIONS",
+    "HUMAN_RESOURCES",
+    "LEGAL",
+    "HEALTHCARE",
+    "EDUCATION",
+    "CREATIVE",
+    "CONSULTING",
+    "OTHER",
+  ]),
   experienceLevel: z
     .enum([
       "FRESHER",
@@ -99,7 +115,7 @@ export const SkillsAndResumeInfoSchema = z.object({
       yearsOfExp: z.number().optional(),
     })
     .array(),
-  language: z
+  languages: z
     .object({
       language: z.string(),
       proficiency: z.enum([

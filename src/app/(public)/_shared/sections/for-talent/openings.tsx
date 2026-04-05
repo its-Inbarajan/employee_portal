@@ -106,7 +106,7 @@ export default function Openings() {
                     )}
                   </div>
                   <div className="flex flex-col items-start">
-                    <p className="font-semibold md:text-md text-sm lg:text-xl leading-6 tracking-wide text-white">
+                    <p className="font-semibold md:text-md text-sm lg:text-xl leading-6 tracking-wide text-accent-foreground">
                       {item.title}
                     </p>
                     <span className="flex text-nowrap items-center text-xs lg:text-sm font-normal text-muted-foreground">
