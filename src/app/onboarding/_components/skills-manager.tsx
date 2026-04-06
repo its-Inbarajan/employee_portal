@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, UseFieldArrayReturn } from "react-hook-form";
 import { Plus, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Field } from "@/components/ui/field";
+import { SkillsAndResumeInfoFormValues } from "@/schema/candidate-onboarding-schema";
 
 // Types
 type Skill = {
@@ -26,10 +28,16 @@ type FormValues = {
   skills: Skill[];
 };
 
-export function SkillManager() {
+interface SkillManagerProps {
+  skillArrayField?: UseFieldArrayReturn<SkillsAndResumeInfoFormValues>;
+}
+
+export function SkillManager({ skillArrayField }: SkillManagerProps) {
   const { control } = useForm<FormValues>({
     defaultValues: { skills: [] },
   });
+
+  // const {append,  } = skillArrayField
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -89,66 +97,57 @@ export function SkillManager() {
         ))}
       </div>
 
-      {/* 2. THE STAGING AREA (The "Boring" Inputs replaced by a clean row) */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end border p-4 rounded-xl bg-card shadow-sm">
-        <div className="space-y-2 col-span-1 md:col-span-1">
-          <label className="text-xs font-bold uppercase text-muted-foreground">
-            Skill Name
-          </label>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 items-center border p-6 rounded-xl bg-card shadow-sm">
+        <Field>
           <Input
             value={tempSkill.skill_name}
             onChange={(e) =>
               setTempSkill({ ...tempSkill, skill_name: e.target.value })
             }
-            placeholder="e.g. React"
+            placeholder="e.g. React, Marketing"
           />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase text-muted-foreground">
-            Level
-          </label>
+        </Field>
+        <Field>
+          <Input
+            type="number"
+            placeholder="Years of Exprience"
+            value={tempSkill.yearsOfExp}
+            onChange={(e) =>
+              setTempSkill({
+                ...tempSkill,
+                yearsOfExp: parseInt(e.target.value) || Number(""),
+              })
+            }
+          />
+        </Field>
+        <Field>
           <Select
             value={tempSkill.level}
             onValueChange={(val: "BEGINNER" | "INTERMEDIATE" | "EXPERT") =>
               setTempSkill({ ...tempSkill, level: val })
             }
           >
-            <SelectTrigger>
+            <SelectTrigger id="level">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="w-full">
               <SelectItem value="BEGINNER">Beginner</SelectItem>
               <SelectItem value="INTERMEDIATE">Intermediate</SelectItem>
               <SelectItem value="EXPERT">Expert</SelectItem>
             </SelectContent>
           </Select>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-xs font-bold uppercase text-muted-foreground">
-            Exp (Yrs)
-          </label>
-          <Input
-            type="number"
-            value={tempSkill.yearsOfExp}
-            onChange={(e) =>
-              setTempSkill({
-                ...tempSkill,
-                yearsOfExp: parseInt(e.target.value) || 0,
-              })
-            }
-          />
-        </div>
-
-        <Button
-          type="button"
-          onClick={addSkill}
-          className="w-full gap-2"
-          variant="secondary"
-        >
-          <Plus className="w-4 h-4" /> Add
-        </Button>
+        </Field>
+        <Field>
+          <Button
+            type="button"
+            onClick={addSkill}
+            className="w-full gap-2 "
+            variant="secondary"
+            size={"sm"}
+          >
+            <Plus className="w-4 h-4" /> Add
+          </Button>
+        </Field>
       </div>
     </div>
   );

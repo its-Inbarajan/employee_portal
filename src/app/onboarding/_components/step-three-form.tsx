@@ -1,7 +1,7 @@
 "use client";
 
 import ResumeUpload from "@/components/resume-upload-input";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 
 import {
@@ -10,8 +10,11 @@ import {
 } from "@/schema/candidate-onboarding-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { SkillManager } from "./skills-manager";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 // interface OnboardingSkip {
 //   data: { message: string };
@@ -21,6 +24,9 @@ import { SkillManager } from "./skills-manager";
 // }
 
 export default function StepThreeForm() {
+  const [active, setActive] = React.useState<
+    string | "skills" | "languages" | "projects"
+  >("skills");
   const form = useForm<SkillsAndResumeInfoFormValues>({
     resolver: zodResolver(SkillsAndResumeInfoSchema),
     defaultValues: {
@@ -51,11 +57,11 @@ export default function StepThreeForm() {
     },
   });
 
-  // const skillFieldsArray = useFieldArray({
-  //   control: form.control,
-  //   name: "skills",
-  //   keyName: "id",
-  // });
+  const stepThreeArrayFields = useFieldArray<SkillsAndResumeInfoFormValues>({
+    control: form.control,
+    name: "skills",
+    keyName: "id",
+  });
 
   const onsubmit = (data: SkillsAndResumeInfoFormValues) => {
     console.log(data);
@@ -95,7 +101,7 @@ export default function StepThreeForm() {
   // }
 
   return (
-    <Card className="@container/card w-full relative">
+    <Card className="@container/card w-full pb-0 relative h-full">
       <form onSubmit={form.handleSubmit(onsubmit)} noValidate>
         <CardContent>
           <Field>
@@ -121,14 +127,53 @@ export default function StepThreeForm() {
                   }}
                 />
               </Field>
-
               <Field>
-                <FieldLabel>Add Skills</FieldLabel>
-                <SkillManager />
+                <RadioGroup
+                  defaultValue="skills"
+                  value={active}
+                  onValueChange={(val) => setActive(val)}
+                  className="w-full grid grid-cols-3 my-2 gap-4 items-center"
+                >
+                  <div className="flex items-center gap-3">
+                    <RadioGroupItem value="skills" id="skills" />
+                    <Label htmlFor="skills">Skills</Label>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <RadioGroupItem value="languages" id="language" />
+                    <Label htmlFor="language">Languages</Label>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <RadioGroupItem value="projects" id="projects" />
+                    <Label htmlFor="projects">Projects</Label>
+                  </div>
+                </RadioGroup>
               </Field>
+              {active === "skills" && (
+                <Field>
+                  <FieldLabel>Add Skills</FieldLabel>
+                  <SkillManager skillArrayField={stepThreeArrayFields} />
+                </Field>
+              )}
+
+              {active === "languages" && <div className="">Languages</div>}
+              {active === "projects" && <div className="">Projects</div>}
             </FieldGroup>
           </Field>
         </CardContent>
+        <CardFooter className="flex mt-4 flex-col rounded-b-2xl gap-2 items-center border-t bg-muted/50 px-6 py-3">
+          <Button
+            // disabled={isPending}
+            variant={"outline"}
+            size={"lg"}
+            className="w-full"
+          >
+            {/* {isPending ? (
+              <Loader className="inline-block size-5 animate-spin" />
+            ) : (
+            )} */}
+            Next
+          </Button>
+        </CardFooter>
       </form>
     </Card>
   );

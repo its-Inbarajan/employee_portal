@@ -114,7 +114,8 @@ export const SkillsAndResumeInfoSchema = z.object({
         .optional(),
       yearsOfExp: z.number().optional(),
     })
-    .array(),
+    .array()
+    .optional(),
   languages: z
     .object({
       language: z.string(),
@@ -125,8 +126,9 @@ export const SkillsAndResumeInfoSchema = z.object({
         "NATIVE",
       ]),
     })
-    .array(),
-  project: z.array(ProjectSchema),
+    .array()
+    .optional(),
+  project: z.array(ProjectSchema).optional(),
   resumes: z
     .custom<File>()
     .refine((file) => file instanceof File, "File is required") // Ensures the input is a File object
