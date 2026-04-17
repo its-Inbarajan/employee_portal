@@ -28,9 +28,9 @@ export default function OnboardingStepper({
           style={{ width: `${progressPct}%` }}
         />
       </div>
-      <div className="max-w-2xl mx-auto pt-4 px-4">
+      <div className="max-w-full mx-auto pt-4 px-4">
         {/* Step indicators */}
-        <div className="flex items-center justify-between mb-4 w-full">
+        <div className="flex items-center max-w-3xl mx-auto justify-between mb-4 w-full">
           {STEPS.map((s, idx) => {
             const isDone = s.step < currentStep;
             const isCurrent = s.step === currentStep;

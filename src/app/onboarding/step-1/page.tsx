@@ -24,7 +24,9 @@ export default async function StepOnePage() {
           This helps employers know who you are.
         </p>
       </div> */}
-      <StepOneForm defaultValues={profile?.responses} />
+      <div className="lg:max-w-3xl md:max-w-2xl mx-auto w-full max-w-full">
+        <StepOneForm defaultValues={profile?.responses} />
+      </div>
     </div>
   );
 }

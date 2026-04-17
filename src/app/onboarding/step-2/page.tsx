@@ -9,8 +9,10 @@ export default async function SteptwoPage() {
     { isServer: true },
   );
   return (
-    <StepTwoForm
-      defaultValues={data?.responses as ProfessionalInfoFormValues}
-    />
+    <div className="lg:max-w-3xl md:max-w-2xl max-w-full mx-auto w-full">
+      <StepTwoForm
+        defaultValues={data?.responses as ProfessionalInfoFormValues}
+      />
+    </div>
   );
 }

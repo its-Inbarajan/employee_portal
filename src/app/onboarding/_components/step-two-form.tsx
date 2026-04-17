@@ -66,7 +66,7 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
   });
 
   return (
-    <Card className="pb-0 relative">
+    <Card className="@container/card pb-0 relative">
       <form noValidate onSubmit={form.handleSubmit((values) => mutate(values))}>
         <CardContent>
           <FieldGroup>
@@ -177,7 +177,11 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                         type="number"
                         id="totalExperienceYears"
                         placeholder="total experience years"
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value === "" ? "" : Number(e.target.value),
+                          )
+                        }
                         onBlur={field.onBlur}
                         value={field.value}
                       />

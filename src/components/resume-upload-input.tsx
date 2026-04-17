@@ -4,6 +4,7 @@ import { FileTextIcon, UploadCloudIcon, X } from "lucide-react";
 import React from "react";
 import { Accept, useDropzone } from "react-dropzone";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
   maxSizeInMB?: number;
@@ -49,6 +50,7 @@ export default function ResumeUpload({
     setFile(null);
     // onFileSelect?.(null);
   };
+
   return (
     <div className="max-w-full w-full space-y-4">
       {!file ? (
@@ -61,7 +63,7 @@ export default function ResumeUpload({
               : "border-muted-foreground/25 hover:border-primary/50 hover:bg-accent",
           )}
         >
-          <input {...getInputProps()} />
+          <Input {...getInputProps()} />
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <div className="p-3 mb-3 rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
               <UploadCloudIcon className="w-6 h-6" />

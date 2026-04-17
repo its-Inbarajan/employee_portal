@@ -73,7 +73,7 @@ export default function StepOneForm({ defaultValues }: Props) {
   });
 
   return (
-    <Card className="pb-0 relative">
+    <Card className="pb-0 @container/card w-full relative">
       <form onSubmit={form.handleSubmit((values) => mutate(values))}>
         <CardContent>
           <FieldGroup>

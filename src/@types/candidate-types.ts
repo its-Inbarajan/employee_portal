@@ -113,7 +113,7 @@ export interface ICandidateProfile {
 
   currentTitle: string | null;
   currentCompany: string | null;
-  totalExperienceYears: number;
+  totalExperienceYears: number | null;
   professionalCategory: ProfessionalCategory;
   experienceLevel: string;
   currentCtc: number | null;
