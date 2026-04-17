@@ -73,6 +73,23 @@ interface ISocialLinks {
   twitter?: string;
 }
 
+export enum ProfessionalCategory {
+  TECHNOLOGY = "TECHNOLOGY",
+  DESIGN = "DESIGN",
+  PRODUCT = "PRODUCT",
+  MARKETING = "MARKETING",
+  SALES = "SALES",
+  FINANCE = "FINANCE",
+  OPERATIONS = "OPERATIONS",
+  HUMAN_RESOURCES = "HUMAN_RESOURCES",
+  LEGAL = "LEGAL",
+  HEALTHCARE = "HEALTHCARE",
+  EDUCATION = "EDUCATION",
+  CREATIVE = "CREATIVE",
+  CONSULTING = "CONSULTING",
+  OTHER = "OTHER",
+}
+
 export interface ICandidateProfile {
   userId: string;
   email: string;
@@ -97,6 +114,7 @@ export interface ICandidateProfile {
   currentTitle: string | null;
   currentCompany: string | null;
   totalExperienceYears: number;
+  professionalCategory: ProfessionalCategory;
   experienceLevel: string;
   currentCtc: number | null;
   skills: string[];

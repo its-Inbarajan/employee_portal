@@ -130,7 +130,7 @@ export default function StepOneForm({ defaultValues }: Props) {
                         </FieldLabel>
                         <Input
                           {...field}
-                          type="number"
+                          type="tel"
                           autoComplete="cc-number"
                           id="phoneNumber"
                           placeholder="12345678910"

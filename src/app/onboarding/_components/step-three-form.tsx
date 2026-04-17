@@ -123,7 +123,6 @@ export default function StepThreeForm() {
                     "application/msword": [".doc"],
                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
                       [".docx"],
-                    "image/png": [".png"],
                   }}
                 />
               </Field>

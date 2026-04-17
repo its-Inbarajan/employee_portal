@@ -1,3 +1,4 @@
+import { ProfessionalCategory } from "@/@types/candidate-types";
 import z from "zod";
 
 const phoneRegex = new RegExp(/^(\+91[\-\s]?)?[0]?(91)?[6-9]\d{9}$/);
@@ -63,26 +64,22 @@ export const basicsInfoSchema = z.object({
   gender: z.string().min(1, "Please select an option."),
 });
 
+export const ZodStringNumberOrNull = z
+  .string()
+  .transform((value) => (value === "" ? null : value))
+  .nullable()
+  .refine((value) => value === null || !isNaN(Number(value)), {
+    message: "Invalid number",
+  })
+  .transform((value) => (value === null ? null : Number(value)));
+
 export const professionalInfoSchema = z.object({
   currentTitle: z.string(),
   currentCompany: z.string(),
-  totalExperienceYears: z.number(),
-  professionalCategory: z.enum([
-    "TECHNOLOGY",
-    "DESIGN",
-    "PRODUCT",
-    "MARKETING",
-    "SALES",
-    "FINANCE",
-    "OPERATIONS",
-    "HUMAN_RESOURCES",
-    "LEGAL",
-    "HEALTHCARE",
-    "EDUCATION",
-    "CREATIVE",
-    "CONSULTING",
-    "OTHER",
-  ]),
+  totalExperienceYears: z.number().min(0),
+  professionalCategory: z.nativeEnum(ProfessionalCategory, {
+    message: "Select atleast one value.",
+  }),
   experienceLevel: z
     .enum([
       "FRESHER",
@@ -94,7 +91,10 @@ export const professionalInfoSchema = z.object({
       "EXECUTIVE",
     ])
     .refine((val) => !!val, { message: "Unknow experience level." }),
-  currentCtc: z.number().min(1, "Minium value 1"),
+  currentCtc: z
+    .number()
+    .min(1, "Current CTC must be atleast one.")
+    .refine((val) => !!val, { message: "Choose atleast single digit." }),
   // languages: z.object({
   //   language: z.string().array(),
   //   proficiency: z.enum(["BASIC", "CONVERSATIONAL", "PROFESSIONAL", "NATIVE"]),

@@ -34,6 +34,7 @@ import { Loader } from "lucide-react";
 interface Props {
   defaultValues: ProfessionalInfoFormValues;
 }
+
 export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
   const router = useRouter();
   const form = useForm<ProfessionalInfoFormValues>({
@@ -43,6 +44,7 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
       currentCtc: defaultValues.currentCtc ?? "",
       currentTitle: defaultValues?.currentTitle ?? "",
       experienceLevel: defaultValues.experienceLevel ?? "FRESHER",
+      professionalCategory: defaultValues.professionalCategory ?? "TECHNOLOGY",
       totalExperienceYears: defaultValues.totalExperienceYears ?? "",
     },
   });
@@ -82,7 +84,7 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                   render={({ field, fieldState }) => (
                     <Field>
                       <FieldLabel htmlFor="professionalCategory">
-                        Experience Level
+                        Professional Category
                       </FieldLabel>
                       <Select
                         value={field.value}
@@ -235,7 +237,8 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                         id="currentCtc"
                         placeholder="current ctc"
                         type="number"
-                        {...field}
+                        onBlur={field.onBlur}
+                        value={field.value}
                         onChange={(e) => field.onChange(Number(e.target.value))}
                       />
                       <FieldError errors={[fieldState.error]} />
