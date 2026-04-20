@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import OnboardingStepper from "./_components/onboarding-stepper";
 import { authOptions } from "@/lib/authOptions";
+import SessionGuard from "@/providers/session-guard";
 
 interface Prop {
   children: React.ReactNode;
@@ -30,7 +31,9 @@ export default async function CandidateOnboardingLayout({
       </div>
 
       {/* ✅ Stepper is client component — owns usePathname */}
-      <OnboardingStepper>{children}</OnboardingStepper>
+      <SessionGuard>
+        <OnboardingStepper>{children}</OnboardingStepper>
+      </SessionGuard>
     </div>
   );
 }

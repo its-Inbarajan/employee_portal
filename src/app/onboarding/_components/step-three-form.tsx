@@ -26,8 +26,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useApiMutation } from "@/lib/api/use-query";
-import { ICandidateProfile } from "@/@types/candidate-types";
+import { useApiUpload } from "@/lib/api/use-query";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { handleApiError } from "@/lib/api/use-api-error";
@@ -73,25 +72,37 @@ export default function StepThreeForm() {
       keyName: "id",
     });
 
-  const { mutate, isPending } = useApiMutation<
-    ICandidateProfile,
-    SkillsAndResumeInfoFormValues
-  >("/candidate/onboarding/step-3", "PATCH", {
+  const { mutate, isPending } = useApiUpload<{
+    message: string;
+  }>("/candidate/onboarding/step-3", {
     onSuccess: (res) => {
       if (res.success) {
-        toast.success(res.message);
-        router.push("/onboarding/step-3");
+        toast.success("Skills and resume saved!");
+        router.push("/onboarding/step-4");
       }
     },
     onError: (err) => {
-      toast.error(handleApiError(err));
       console.log(handleApiError(err));
+      toast.error(handleApiError(err));
     },
   });
 
   const onsubmit = (data: SkillsAndResumeInfoFormValues) => {
     // const formData = new FormData();
-    mutate(data);
+
+    const formData = new FormData();
+
+    // File — must be appended with the key your multer expects
+    if (data.resumes) {
+      formData.append("resume", data.resumes);
+    }
+
+    // Arrays must be JSON stringified — multipart only carries strings + files
+    formData.append("skills", JSON.stringify(data.skills));
+    formData.append("languages", JSON.stringify(data.languages ?? []));
+    formData.append("projects", JSON.stringify(data.project ?? []));
+    console.log(formData);
+    mutate(formData);
   };
 
   return (

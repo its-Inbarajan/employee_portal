@@ -67,7 +67,7 @@ export default function StepOneForm({ defaultValues }: Props) {
       }
     },
     onError: (err) => {
-      toast.error(err.message);
+      toast.error(handleApiError(err));
       console.log(handleApiError(err));
     },
   });

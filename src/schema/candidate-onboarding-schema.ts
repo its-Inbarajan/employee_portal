@@ -3,34 +3,37 @@ import z from "zod";
 
 const phoneRegex = new RegExp(/^(\+91[\-\s]?)?[0]?(91)?[6-9]\d{9}$/);
 
-// const ExperienceSchema = z.object({
-//   title: z.string().max(4, "title is required."),
-//   company: z.string().max(4, "company is required."),
-//   location: z.string(),
-//   locationType: z.enum(["REMOTE", "HYBRID", "ONSITE"]),
-//   employmentType: z.enum([
-//     "FULL_TIME",
-//     "PART_TIME",
-//     "CONTRACT",
-//     "FREELANCE",
-//     "INTERNSHIP",
-//   ]),
-//   startDate: z.string(),
-//   endDate: z.string(), // null = currently working
-//   isCurrent: z.boolean(),
-//   description: z.string(),
-//   skills: z.array(z.string()), // skills used in this role
-// });
+const socialMediaSchema = z.object({
+  // URL validation + Specific domain check
+  github: z
+    .url({ message: "Invalid GitHub URL" })
+    .regex(/github\.com/, "Must be a valid GitHub link")
+    .optional()
+    .or(z.literal("")),
 
-// const EducationSchema = z.object({
-//   institution: z.string(),
-//   degree: z.string(), // "B.Tech", "MBA"
-//   fieldOfStudy: z.string(), // "Computer Science"
-//   startYear: z.number(),
-//   endYear: z.number(),
-//   grade: z.string(), // "8.7 CGPA" or "First Class"
-//   activities: z.string(),
-// });
+  linkedin: z
+    .url({ message: "Invalid LinkedIn URL" })
+    .regex(/linkedin\.com/, "Must be a valid LinkedIn link")
+    .optional()
+    .or(z.literal("")),
+
+  twitter: z
+    .url({ message: "Invalid Twitter URL" })
+    .regex(/(twitter\.com|x\.com)/, "Must be a valid Twitter/X link")
+    .optional()
+    .or(z.literal("")),
+
+  portfolio: z
+    .url({ message: "Invalid portfolio URL" })
+    .optional()
+    .or(z.literal("")),
+
+  facebook: z
+    .url({ message: "Invalid Facebook URL" })
+    .regex(/facebook\.com/, "Must be a valid Facebook link")
+    .optional()
+    .or(z.literal("")),
+});
 
 const ProjectSchema = z.object({
   title: z.string(),
@@ -51,6 +54,15 @@ type AllowedMimeTypes =
   | "application/pdf"
   | "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
+export const ZodStringNumberOrNull = z
+  .string()
+  .transform((value) => (value === "" ? null : value))
+  .nullable()
+  .refine((value) => value === null || !isNaN(Number(value)), {
+    message: "Invalid number",
+  })
+  .transform((value) => (value === null ? null : Number(value)));
+
 export const basicsInfoSchema = z.object({
   firstName: z.string().min(1, "Required"),
   lastName: z.string().min(1, "Required"),
@@ -63,15 +75,6 @@ export const basicsInfoSchema = z.object({
   }),
   gender: z.string().min(1, "Please select an option."),
 });
-
-export const ZodStringNumberOrNull = z
-  .string()
-  .transform((value) => (value === "" ? null : value))
-  .nullable()
-  .refine((value) => value === null || !isNaN(Number(value)), {
-    message: "Invalid number",
-  })
-  .transform((value) => (value === null ? null : Number(value)));
 
 export const professionalInfoSchema = z.object({
   currentTitle: z.string(),
@@ -95,14 +98,6 @@ export const professionalInfoSchema = z.object({
     .number()
     .min(1, "Current CTC must be atleast one.")
     .refine((val) => !!val, { message: "Choose atleast single digit." }),
-  // languages: z.object({
-  //   language: z.string().array(),
-  //   proficiency: z.enum(["BASIC", "CONVERSATIONAL", "PROFESSIONAL", "NATIVE"]),
-  // }),
-  // headline: z.string().max(120),
-  // experience: z.array(ExperienceSchema),
-  // skills: z.string().array().min(1, "Atleast enter one skill."),
-  // education: z.array(EducationSchema),
 });
 
 export const SkillsAndResumeInfoSchema = z.object({
@@ -139,8 +134,32 @@ export const SkillsAndResumeInfoSchema = z.object({
     ),
 });
 
+export const JobPreferencesSchema = z.object({
+  desiredRoles: z.string().array().min(1, "At least enter one value"),
+  desiredSalaryMin: z.number().min(0),
+  desiredSalaryMax: z.number().min(0),
+
+  currency: z.string(),
+  noticePeriodDays: z.number().min(0).max(365),
+
+  isImmediateJoiner: z.boolean(),
+  preferredLocations: z.string().array().min(1, "At least enter one value"),
+  workModePreference: z.enum(["REMOTE", "HYBRID", "ONSITE", "ANY"]),
+  preferredCompanySize: z.enum(["STARTUP", "SME", "MID_SIZE", "LARGE", "ANY"]),
+  preferredJobTypes: z
+    .enum(["FULL_TIME", "PART_TIME", "CONTRACT", "INTERNSHIP"])
+    .array()
+    .min(1, "Select at least one"),
+  preferredIndustries: z.string().array(),
+  openToRelocate: z.boolean(),
+  isOpenToWork: z.boolean(),
+  isProfilePublic: z.boolean(),
+  socialLinks: socialMediaSchema,
+});
+
 export type BasicsInforFormValues = z.infer<typeof basicsInfoSchema>;
 export type ProfessionalInfoFormValues = z.infer<typeof professionalInfoSchema>;
 export type SkillsAndResumeInfoFormValues = z.infer<
   typeof SkillsAndResumeInfoSchema
 >;
+export type JobPreferencesFormValues = z.infer<typeof JobPreferencesSchema>;

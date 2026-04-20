@@ -13,6 +13,7 @@ declare module "next-auth" {
   }
 
   interface Session {
+    error?: string;
     user: {
       _id: string;
       email: string;
@@ -21,6 +22,7 @@ declare module "next-auth" {
       profileId: string | null;
       onboardingCompleted: boolean;
       accessToken: string;
+      accessTokenExpiry?: Date;
     };
   }
 }
@@ -33,8 +35,13 @@ declare module "next-auth/jwt" {
     onboardingCompleted: boolean;
     accessToken: string;
     refreshToken: string;
+    accessTokenExpiry?: number;
+    error?: string;
   }
 }
+
+const ACCESS_TOKEN_EXPIRY = 15 * 60; // 15 min in seconds — match your backend
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -105,15 +112,23 @@ export const authOptions: NextAuthOptions = {
         token.onboardingCompleted = user.onboardingCompleted;
         token.accessToken = user.accessToken; // ✅ set from cookie extract
         token.refreshToken = user.refreshToken;
+        token.accessTokenExpiry = Date.now() + ACCESS_TOKEN_EXPIRY * 1000;
       }
-
-      return token;
+      // ── Token still valid — return as-is ──
+      if (Date.now() < (token.accessTokenExpiry as number)) {
+        return token;
+      }
+      return await refreshAccessToken(token);
     },
 
     // SESSION — populate session FROM token
     // Never read FROM session here
     // Always write TO session from token
     async session({ session, token }): Promise<typeof session> {
+      if (token.error) {
+        session.error = token.error as string;
+      }
+
       session.user._id = token.userId as string;
       session.user.email = token.email as string;
       session.user.name = token.name as string;
@@ -155,4 +170,56 @@ function extractCookieValue(rawCookies: string, name: string): string {
     .split(";")[0] // take only name=value part
     .replace(`${name}=`, "") // strip the name=
     .trim();
+}
+
+// ─────────────────────────────────────────
+// REFRESH ACCESS TOKEN
+// Calls your backend /refresh endpoint
+// ─────────────────────────────────────────
+async function refreshAccessToken(token: JWT): Promise<JWT> {
+  try {
+    console.log("[NextAuth] Refreshing access token...");
+
+    const res = await fetch(`${process.env.API_URL}/users/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-client-type": "CANDIDATE_APP",
+        // Send refresh token in cookie format
+        Cookie: `refreshToken=${token.refreshToken}`,
+      },
+    });
+    console.log(res);
+    if (!res.ok) {
+      throw new Error(`Refresh failed: ${res.status}`);
+    }
+
+    // ── Extract new accessToken from Set-Cookie ──
+    const rawCookies = res.headers.get("set-cookie") ?? "";
+    const newAccessToken = extractCookieValue(rawCookies, "accessToken");
+    const newRefreshToken = extractCookieValue(rawCookies, "refreshToken");
+
+    if (!newAccessToken) {
+      throw new Error("No access token in refresh response");
+    }
+
+    console.log("[NextAuth] Token refreshed successfully");
+
+    return {
+      ...token,
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken || (token.refreshToken as string),
+      accessTokenExpiry: Date.now() + ACCESS_TOKEN_EXPIRY * 1000,
+      error: undefined, // clear any previous error
+    };
+  } catch (err) {
+    console.error("[NextAuth] Token refresh failed:", err);
+
+    // ✅ Return token with error — session callback exposes this
+    // Client can detect error and force logout
+    return {
+      ...token,
+      error: "RefreshTokenError",
+    };
+  }
 }
