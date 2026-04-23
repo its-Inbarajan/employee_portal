@@ -40,7 +40,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-const ACCESS_TOKEN_EXPIRY = 15 * 60; // 15 min in seconds — match your backend
+const ACCESS_TOKEN_EXPIRY = 60 * 60 * 24; // 1 day in seconds — match your backend
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -189,7 +189,6 @@ async function refreshAccessToken(token: JWT): Promise<JWT> {
         Cookie: `refreshToken=${token.refreshToken}`,
       },
     });
-    console.log(res);
     if (!res.ok) {
       throw new Error(`Refresh failed: ${res.status}`);
     }

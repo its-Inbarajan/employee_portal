@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useOnboardingStore } from "@/features/candidate-onboarding-store";
 import { cn } from "@/lib/utils";
 import { SkillsAndResumeInfoFormValues } from "@/schema/candidate-onboarding-schema";
 import { Plus, X } from "lucide-react";
@@ -27,30 +28,22 @@ interface SkillManagerProps {
 export default function LanguageManager({
   langugageArrayField,
 }: SkillManagerProps) {
+  const { languages, addLanguages, removeLanguages } = useOnboardingStore(
+    (state) => state,
+  );
   const [tempLangugae, setTempLanguage] = React.useState<ILanguages>({
     language: "",
     proficiency: "BASIC",
   });
-  const [fields, setFields] = React.useState<ILanguages[]>([
-    {
-      language: "",
-      proficiency: "BASIC",
-    },
-  ]);
 
-  // const { append, fields, remove } = useFieldArray({
-  //   control,
-  //   name: "languages",
-  // });
-
-  const addLanguages = () => {
+  const addLanguage = () => {
     if (!tempLangugae.language) return; // Add Zod validation here if needed
 
     langugageArrayField?.append({
       language: tempLangugae.language,
       proficiency: tempLangugae.proficiency,
-    }); // Push to RHF state
-    setFields((pre) => [...pre, tempLangugae]);
+    });
+    addLanguages(tempLangugae);
     // Reset staging area
     setTempLanguage({ language: "", proficiency: "BASIC" });
   };
@@ -62,26 +55,26 @@ export default function LanguageManager({
     return "bg-slate-500 hover:bg-slate-600";
   };
 
-  const handleRemoveSkills = (indexToRemove: number) => {
-    if (indexToRemove < 0) return;
-
-    setFields((prev) => {
-      // 2. Rename the parameter in filter to 'i' or 'idx'
-      const filtered = prev.filter((_, idx) => idx !== indexToRemove);
-      return filtered;
-    });
-    langugageArrayField?.remove(indexToRemove);
+  const handleRemoveSkills = (languageToRemove: string, index: number) => {
+    if (!languageToRemove.trim()) return;
+    removeLanguages(languageToRemove);
+    // setFields((prev) => {
+    //   // 2. Rename the parameter in filter to 'i' or 'idx'
+    //   const filtered = prev.filter((_, idx) => idx !== languageToRemove);
+    //   return filtered;
+    // });
+    langugageArrayField?.remove(index);
   };
 
   return (
     <div className="space-y-6 w-full">
       <div className="flex flex-wrap flex-col gap-2  p-2 border rounded-lg bg-muted/30">
-        {fields.length === 0 && (
+        {languages.length === 0 && (
           <p className="text-sm text-muted-foreground italic">
             No skills added yet...
           </p>
         )}
-        {fields.map(
+        {languages.map(
           (field, index) =>
             field.language && (
               <Badge
@@ -93,7 +86,7 @@ export default function LanguageManager({
               >
                 <span className="font-semibold text-xs">{field.language}</span>
                 <button
-                  onClick={() => handleRemoveSkills(index)}
+                  onClick={() => handleRemoveSkills(field.language, index)}
                   className="hover:bg-black/20 rounded-full p-0.5 transition-colors"
                 >
                   <X className="w-3 h-3" />
@@ -140,7 +133,7 @@ export default function LanguageManager({
           <Field>
             <Button
               type="button"
-              onClick={addLanguages}
+              onClick={addLanguage}
               className="w-full gap-2 "
               variant="secondary"
               size={"sm"}

@@ -3,7 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import Chip from "@/components/ui/chip";
-import { CompoBox } from "@/components/ui/combobox";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -242,12 +249,19 @@ export default function ProfilePage() {
                   >
                     Select your primary role
                   </label>
-                  <CompoBox
-                    PopoverClassName="w-full rounded-md border-px border-gray-500"
-                    options={roles}
-                    placeholder="Choose Role"
-                    CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-                  />
+                  <Combobox items={roles}>
+                    <ComboboxInput placeholder="Select a framework" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
                 <div className="col-span-12 lg:col-span-4">
                   <label
@@ -256,12 +270,20 @@ export default function ProfilePage() {
                   >
                     Years of experience
                   </label>
-                  <CompoBox
-                    PopoverClassName="w-full  rounded-md border-px border-gray-500"
-                    options={years}
-                    placeholder="Choose experience"
-                    CommandClassName="max-w-full w-[18rem] lg:w-[12rem]"
-                  />
+
+                  <Combobox items={years}>
+                    <ComboboxInput placeholder="Select a framework" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
               </div>
             </div>
@@ -275,12 +297,19 @@ export default function ProfilePage() {
               <div className="flex flex-row col-span-12 flex-wrap gap-2 items-center">
                 <Chip value="Frontend Developer" />
               </div>
-              <CompoBox
-                PopoverClassName="w-full col-span-12 lg:col-span-12 rounded-md border-px border-gray-500"
-                options={roles}
-                placeholder="Choose a role"
-                CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-              />
+              <Combobox items={roles}>
+                <ComboboxInput placeholder="Select a framework" />
+                <ComboboxContent>
+                  <ComboboxEmpty>No items found.</ComboboxEmpty>
+                  <ComboboxList>
+                    {(item) => (
+                      <ComboboxItem key={item} value={item}>
+                        {item}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
             </div>
 
             <div className="grid w-full items-center">
@@ -486,12 +515,26 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="grid w-full items-center">
-                      <CompoBox
+                      {/* <CompoBox
                         options={positions}
                         CommandClassName="w-full"
                         PopoverClassName="rounded-md border-px border-gray-500 w-full"
                         placeholder={positions[0].data[0] ?? "Choose position"}
-                      />
+                      /> */}
+
+                      <Combobox items={positions}>
+                        <ComboboxInput placeholder="Select a framework" />
+                        <ComboboxContent>
+                          <ComboboxEmpty>No items found.</ComboboxEmpty>
+                          <ComboboxList>
+                            {(item) => (
+                              <ComboboxItem key={item} value={item}>
+                                {item}
+                              </ComboboxItem>
+                            )}
+                          </ComboboxList>
+                        </ComboboxContent>
+                      </Combobox>
                     </div>
                   </div>
                 </CardContent>

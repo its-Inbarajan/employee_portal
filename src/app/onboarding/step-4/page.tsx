@@ -23,10 +23,10 @@ export default function StepFourPage() {
     resolver: zodResolver(JobPreferencesSchema),
     defaultValues: {
       desiredRoles: [],
-      desiredSalaryMin: 0,
-      desiredSalaryMax: 0,
+      desiredSalaryMin: undefined,
+      desiredSalaryMax: undefined,
       currency: "INR",
-      noticePeriodDays: 0,
+      noticePeriodDays: undefined,
       isImmediateJoiner: false,
       preferredLocations: [],
       workModePreference: "ANY",
@@ -45,6 +45,7 @@ export default function StepFourPage() {
       },
     },
     mode: "onChange",
+    reValidateMode: "onChange",
   });
   const router = useRouter();
   const [loading, setLoading] = React.useState<boolean>(false);

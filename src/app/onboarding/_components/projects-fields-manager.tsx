@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useOnboardingStore } from "@/features/candidate-onboarding-store";
 import { SkillsAndResumeInfoFormValues } from "@/schema/candidate-onboarding-schema";
 import { Plus, X } from "lucide-react";
 import React from "react";
@@ -23,16 +24,10 @@ interface Projects {
 export default function ProjectsManager({
   projectsArrayField,
 }: SkillManagerProps) {
-  const [fields, setFields] = React.useState<Projects[]>([
-    {
-      description: "",
-      endDate: "",
-      repoUrl: "",
-      startDate: "",
-      title: "",
-      url: "",
-    },
-  ]);
+  const { projects, addProjects, removeProjects } = useOnboardingStore(
+    (state) => state,
+  );
+
   const [tempProjects, setProjects] = React.useState<Projects>({
     description: "",
     endDate: "",
@@ -42,11 +37,11 @@ export default function ProjectsManager({
     url: "",
   });
 
-  const addProjects = () => {
+  const addProject = () => {
     if (!tempProjects.title) return; // Add Zod validation here if needed
 
     projectsArrayField?.append(tempProjects); // Push to RHF state
-    setFields((pre) => [...pre, tempProjects]);
+    addProjects(tempProjects);
     // Reset staging area
     setProjects({
       description: "",
@@ -58,14 +53,14 @@ export default function ProjectsManager({
     });
   };
 
-  const handleRemoveSkills = (indexToRemove: number) => {
+  const handleRemoveSkills = (title: string, indexToRemove: number) => {
     if (indexToRemove < 0) return;
-
-    setFields((prev) => {
-      // 2. Rename the parameter in filter to 'i' or 'idx'
-      const filtered = prev.filter((_, idx) => idx !== indexToRemove);
-      return filtered;
-    });
+    removeProjects(title);
+    // setFields((prev) => {
+    //   // 2. Rename the parameter in filter to 'i' or 'idx'
+    //   const filtered = prev.filter((_, idx) => idx !== indexToRemove);
+    //   return filtered;
+    // });
     projectsArrayField?.remove(indexToRemove);
   };
   const handleInputChange = (
@@ -81,11 +76,11 @@ export default function ProjectsManager({
   return (
     <div className="space-y-6 w-full">
       <div className="flex flex-wrap gap-2 p-2 border rounded-lg bg-muted/30">
-        {fields.map(
+        {projects.map(
           (field, index) =>
             field.title && (
               <Badge
-                key={`${index}-skill-${field.title}`}
+                key={`${index}-projects-${field.title}`}
                 className={
                   "pl-3 pr-1 py-1 gap-2 flex items-center animate-in zoom-in-95"
                 }
@@ -93,7 +88,7 @@ export default function ProjectsManager({
                 <span className="font-semibold text-xs">{field.title}</span>
                 <button
                   type="button"
-                  onClick={() => handleRemoveSkills(index)}
+                  onClick={() => handleRemoveSkills(field.title, index)}
                   className="hover:bg-black/20 rounded-full p-0.5 transition-colors"
                 >
                   <X className="w-3 h-3" />
@@ -158,7 +153,7 @@ export default function ProjectsManager({
           <Field className="col-span-4">
             <Button
               type="button"
-              onClick={addProjects}
+              onClick={addProject}
               variant={"outline"}
               size={"lg"}
             >

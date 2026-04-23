@@ -1,7 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CompoBox } from "@/components/ui/combobox";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -137,7 +145,7 @@ export default function JobFilter() {
           <div className="overflow-auto flex-1">
             <div className="h-fit flex flex-col shadow px-3 py-3 rounded ">
               <div className="grid relative w-full grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
-                <CompoBox
+                {/* <CompoBox
                   PopoverClassName="w-full rounded h-12 bg-gray-200 px-1 border-px border-gray-500"
                   options={roles}
                   placeholder="Choose Role"
@@ -148,7 +156,21 @@ export default function JobFilter() {
                   options={[]}
                   placeholder="Choose location"
                   CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-                />
+                /> */}
+
+                <Combobox items={roles}>
+                  <ComboboxInput placeholder="Select a framework" />
+                  <ComboboxContent>
+                    <ComboboxEmpty>No items found.</ComboboxEmpty>
+                    <ComboboxList>
+                      {(item) => (
+                        <ComboboxItem key={item} value={item}>
+                          {item}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
               </div>
               <div className="sticky top-0 z-20">
                 <div className="col-span-full  w-full py-2">
@@ -243,25 +265,29 @@ export default function JobFilter() {
                         <div className="uppercase font-normal text-gray-400 text-xs">
                           Popular
                         </div>
-                        {["react", "python", "nextjs", "java", "ruby on rails"].map(
-                          (item) => (
-                            <div
-                              className="flex justify-between items-center gap-2 w-full"
-                              key={`popular-lan-${item}`}
-                            >
-                              <div className="font-medium leading-relaxed text-sm capitalize tracking-wide">
-                                {item}
-                              </div>
-                              <Button
-                                size={"icon-sm"}
-                                variant={"secondary"}
-                                className="hover:bg-transparent bg-transparent"
-                              >
-                                <PlusIcon className="size-5 text-blue-500" />
-                              </Button>
+                        {[
+                          "react",
+                          "python",
+                          "nextjs",
+                          "java",
+                          "ruby on rails",
+                        ].map((item) => (
+                          <div
+                            className="flex justify-between items-center gap-2 w-full"
+                            key={`popular-lan-${item}`}
+                          >
+                            <div className="font-medium leading-relaxed text-sm capitalize tracking-wide">
+                              {item}
                             </div>
-                          )
-                        )}
+                            <Button
+                              size={"icon-sm"}
+                              variant={"secondary"}
+                              className="hover:bg-transparent bg-transparent"
+                            >
+                              <PlusIcon className="size-5 text-blue-500" />
+                            </Button>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -335,9 +361,11 @@ export default function JobFilter() {
                               id={item.toLocaleLowerCase()}
                               name={item.toLocaleLowerCase()}
                             />
-                            <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                            <Label htmlFor={item.toLocaleLowerCase()}>
+                              {item}
+                            </Label>
                           </div>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
@@ -360,7 +388,7 @@ export default function JobFilter() {
                         defaultValue={[0, 10]} // Or use `value` prop for controlled component
                         max={10}
                         step={1}
-                      // value={range}
+                        // value={range}
                       />
                     </div>
                   </div>
@@ -441,7 +469,9 @@ export default function JobFilter() {
                             id={item.toLocaleLowerCase()}
                             name={item.toLocaleLowerCase()}
                           />
-                          <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                          <Label htmlFor={item.toLocaleLowerCase()}>
+                            {item}
+                          </Label>
                         </div>
                       ))}
                     </div>
@@ -470,7 +500,9 @@ export default function JobFilter() {
                             id={item.toLocaleLowerCase()}
                             name={item.toLocaleLowerCase()}
                           />
-                          <Label htmlFor={item.toLocaleLowerCase()}>{item}</Label>
+                          <Label htmlFor={item.toLocaleLowerCase()}>
+                            {item}
+                          </Label>
                         </div>
                       ))}
                     </div>

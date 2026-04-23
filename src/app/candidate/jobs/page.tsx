@@ -2,7 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CompoBox } from "@/components/ui/combobox";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useDialog from "@/hocs/useDialog";
 import {
@@ -46,11 +53,7 @@ const OpenPrefernceEdit: React.FC<{ openDrawer: () => void }> = ({
   openDrawer,
 }) => {
   return (
-    <Button
-      size={"sm"}
-      variant={'ghost'}
-      onClick={openDrawer}
-    >
+    <Button size={"sm"} variant={"ghost"} onClick={openDrawer}>
       <PenIcon className="" />
     </Button>
   );
@@ -64,11 +67,11 @@ export default function Jobs() {
       id: String(i + 1),
       name: `Search Tab ${i + 1}`,
       value: `default`,
-    }))
+    })),
   );
 
   const [activeTab, setActiveTab] = React.useState<string>(
-    tabs[0]?.value ?? "default"
+    tabs[0]?.value ?? "default",
   );
 
   React.useEffect(() => {
@@ -149,7 +152,10 @@ export default function Jobs() {
       >
         <div className="flex flex-row ">
           {tabs.map((item, index) => (
-            <TabsList key={`key-${item.name}-${index}`} className="font-normal p-0 relative text-sm text-black flex w-fit items-center mb-0 rounded-none">
+            <TabsList
+              key={`key-${item.name}-${index}`}
+              className="font-normal p-0 relative text-sm text-black flex w-fit items-center mb-0 rounded-none"
+            >
               <TabsTrigger
                 className="border w-fit relative rounded-none rounded-t-sm"
                 value={`${item.value}`}
@@ -190,7 +196,7 @@ export default function Jobs() {
             <Card className="rounded-none w-full shadow-2xs  mt-0">
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 items-center">
-                  <CompoBox
+                  {/* <CompoBox
                     PopoverClassName="w-full 4 dark:ring dark:ring-black place-holder:text-black h-12 bg-gray-200 px-1 border-px border-gray-500"
                     options={roles}
                     placeholder="Choose Role"
@@ -201,7 +207,21 @@ export default function Jobs() {
                     options={[]}
                     placeholder="Choose location"
                     CommandClassName="max-w-full w-[18rem] lg:w-[24rem]"
-                  />
+                  /> */}
+
+                  <Combobox items={roles}>
+                    <ComboboxInput placeholder="Select a framework" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
               </CardContent>
             </Card>

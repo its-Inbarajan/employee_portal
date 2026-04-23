@@ -16,6 +16,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Field } from "@/components/ui/field";
 import { SkillsAndResumeInfoFormValues } from "@/schema/candidate-onboarding-schema";
+import { useOnboardingStore } from "@/features/candidate-onboarding-store";
 
 // Types
 type Skill = {
@@ -35,13 +36,10 @@ export function SkillManager({ skillArrayField }: SkillManagerProps) {
     level: "BEGINNER",
     yearsOfExp: "",
   });
-  const [fields, setFields] = React.useState<Skill[]>([
-    {
-      skill_name: "",
-      level: "BEGINNER",
-      yearsOfExp: "",
-    },
-  ]);
+
+  const addSkills = useOnboardingStore((state) => state.addSkills);
+  const removeSkills = useOnboardingStore((state) => state.removeSkills);
+  const addedSkills = useOnboardingStore((state) => state.skills);
 
   const addSkill = () => {
     if (!tempSkill.skill_name) return; // Add Zod validation here if needed
@@ -51,9 +49,13 @@ export function SkillManager({ skillArrayField }: SkillManagerProps) {
       level: tempSkill.level,
       yearsOfExp: Number(tempSkill.yearsOfExp),
     }); // Push to RHF state
-    setFields((pre) => [...pre, tempSkill]);
+    addSkills(tempSkill);
     // Reset staging area
-    setTempSkill({ skill_name: "", level: "BEGINNER", yearsOfExp: Number("") });
+    setTempSkill({
+      skill_name: "",
+      level: "BEGINNER",
+      yearsOfExp: Number(""),
+    });
   };
 
   // Helper for Badge Colors
@@ -74,26 +76,26 @@ export function SkillManager({ skillArrayField }: SkillManagerProps) {
     }));
   };
 
-  const handleRemoveSkills = (indexToRemove: number) => {
+  const handleRemoveSkills = (skillName: string, indexToRemove: number) => {
     if (indexToRemove < 0) return;
-
-    setFields((prev) => {
-      // 2. Rename the parameter in filter to 'i' or 'idx'
-      const filtered = prev.filter((_, idx) => idx !== indexToRemove);
-      return filtered;
-    });
+    removeSkills(skillName);
+    // setFields((prev) => {
+    //   // 2. Rename the parameter in filter to 'i' or 'idx'
+    //   const filtered = prev.filter((_, idx) => idx !== indexToRemove);
+    //   return filtered;
+    // });
     skillArrayField?.remove(indexToRemove);
   };
   return (
     <div className="space-y-6 w-full ">
       {/* 1. THE BADGE LIST (The "Upside" Map) */}
       <div className="flex flex-wrap gap-2 p-2 border rounded-lg bg-muted/30">
-        {fields.length === 0 && (
+        {addedSkills.length === 0 && (
           <p className="text-sm text-muted-foreground italic">
             No skills added yet...
           </p>
         )}
-        {fields.map(
+        {addedSkills.map(
           (field, index) =>
             field.skill_name && (
               <Badge
@@ -108,7 +110,7 @@ export function SkillManager({ skillArrayField }: SkillManagerProps) {
                 </span>
                 <button
                   type="button"
-                  onClick={() => handleRemoveSkills(index)}
+                  onClick={() => handleRemoveSkills(field.skill_name, index)}
                   className="hover:bg-black/20 rounded-full p-0.5 transition-colors"
                 >
                   <X className="w-3 h-3" />
