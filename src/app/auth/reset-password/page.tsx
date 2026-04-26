@@ -76,7 +76,7 @@ function ResetForms() {
     resolver: zodResolver(verifyOtpSchema),
     values: {
       otp: "",
-      email: email.toString(),
+      email: email,
     },
     mode: "onChange",
   });

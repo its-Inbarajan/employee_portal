@@ -39,15 +39,16 @@ type OnboardingStore = {
   removeLanguages: (language: string) => void;
   removeIndustrie: (industrieIdx: number) => void;
   removeLocation: (languageIdx: number) => void;
+  emptyAllState: () => void;
 };
 
 export const useOnboardingStore = create<OnboardingStore>((set) => ({
   desiredRoles: [],
+  locations: [],
+  industries: [],
   skills: [],
   languages: [],
   projects: [],
-  locations: [],
-  industries: [],
   addProjects: (project) =>
     set((state) => ({
       projects: state.projects.includes(project)
@@ -113,5 +114,15 @@ export const useOnboardingStore = create<OnboardingStore>((set) => ({
   removeLocation: (index) =>
     set((state) => ({
       locations: state.locations.filter((_, idx) => idx !== index),
+    })),
+
+  emptyAllState: () =>
+    set(() => ({
+      desiredRoles: [],
+      locations: [],
+      industries: [],
+      skills: [],
+      languages: [],
+      projects: [],
     })),
 }));

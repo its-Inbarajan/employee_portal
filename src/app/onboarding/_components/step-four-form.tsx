@@ -34,10 +34,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useOnboardingStore } from "@/features/candidate-onboarding-store";
+import { useCandidateStore } from "@/features/candidate-store";
 import { handleApiError } from "@/lib/api/use-api-error";
 import { useApiMutation } from "@/lib/api/use-query";
 import { JobPreferencesFormValues } from "@/schema/candidate-onboarding-schema";
-import { Loader, X } from "lucide-react";
+import { Loader, Plus, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, FieldErrors, UseFormReturn } from "react-hook-form";
@@ -135,6 +136,7 @@ export default function StepFourForm({
     addDesiredRole,
     removeIndustrie,
     removeDesiredRole,
+    emptyAllState,
   } = useOnboardingStore((state) => state);
 
   const { watch, setValue } = form;
@@ -144,56 +146,66 @@ export default function StepFourForm({
   const roles = watch("desiredRoles") ?? [];
   const industrieWatch = watch("preferredIndustries") ?? [];
   const locationWatch = watch("preferredLocations") ?? [];
+  // Create a reusable "Add" function
+  const handleAddRole = () => {
+    const trimmedValue = role?.trim();
 
+    if (trimmedValue) {
+      // 1. Update the list by appending the new role
+      setValue("desiredRoles", [...roles, trimmedValue], {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+      addDesiredRole(trimmedValue);
+      setRole("");
+    }
+  };
+  // Handle the Enter key for desktop/mobile "Go"
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      const trimmedValue = role?.trim();
-
-      if (trimmedValue) {
-        // 1. Update the list by appending the new role
-        setValue("desiredRoles", [...roles, trimmedValue], {
-          shouldDirty: true,
-          shouldTouch: true,
-        });
-        addDesiredRole(trimmedValue);
-        setRole("");
-      }
+      handleAddRole();
     }
   };
+
+  const handleAddLocation = () => {
+    const trimmedValue = location?.trim();
+
+    if (trimmedValue) {
+      // 1. Update the list by appending the new role
+      setValue("preferredLocations", [...locationWatch, trimmedValue], {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+      addLocations(trimmedValue);
+      setLocation("");
+    }
+  };
+
+  const handleAddIndustries = () => {
+    const trimmedValue = industrie?.trim();
+
+    if (trimmedValue) {
+      // 1. Update the list by appending the new role
+      setValue("preferredLocations", [...industrieWatch, trimmedValue], {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+      addIndustries(trimmedValue);
+      setIndustries("");
+    }
+  };
+
   const handleLocationInputKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      const trimmedValue = location?.trim();
-
-      if (trimmedValue) {
-        // 1. Update the list by appending the new role
-        setValue("preferredLocations", [...locationWatch, trimmedValue], {
-          shouldDirty: true,
-          shouldTouch: true,
-        });
-        addLocations(trimmedValue);
-        setLocation("");
-      }
+      handleAddLocation();
     }
   };
   const handleIndustriesInputKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      const trimmedValue = industrie?.trim();
-
-      if (trimmedValue) {
-        // 1. Update the list by appending the new role
-        setValue("preferredLocations", [...industrieWatch, trimmedValue], {
-          shouldDirty: true,
-          shouldTouch: true,
-        });
-        addIndustries(trimmedValue);
-        setIndustries("");
-      }
+      handleAddIndustries();
     }
   };
 
@@ -221,15 +233,20 @@ export default function StepFourForm({
       removeIndustrie(index);
     }
   };
+  const addCandidateDetails = useCandidateStore(
+    (state) => state.addCandidateDetails,
+  );
 
   const { mutate, isPending } = useApiMutation<
-    ICandidateProfile,
+    { responses: ICandidateProfile },
     JobPreferencesFormValues
   >(`/candidate/onboarding/step-4`, "PATCH", {
     onSuccess: (res) => {
       if (res.success) {
+        addCandidateDetails(res.data?.responses as ICandidateProfile);
         toast.success(res.message);
         router.push("/candidate");
+        emptyAllState();
       }
     },
     onError: (err) => {
@@ -372,18 +389,30 @@ export default function StepFourForm({
                         </Badge>
                       ))}
                     </div>
-                    <Input
-                      type="text"
-                      onChange={(e) => setLocation(e.target.value)}
-                      onKeyDown={handleLocationInputKeyDown}
-                      value={location}
-                      id="preferredLocations"
-                      name="preferredLocations"
-                      placeholder="e.g : India, Germany, Russia"
-                    />
-                    <FieldDescription className="text-xs">
-                      Type location and press Enter...
-                    </FieldDescription>
+                    <div className="flex flex-col gap-2">
+                      <Input
+                        type="text"
+                        onChange={(e) => setLocation(e.target.value)}
+                        onKeyDown={handleLocationInputKeyDown}
+                        value={location}
+                        id="preferredLocations"
+                        name="preferredLocations"
+                        placeholder="e.g : India, Germany, Russia"
+                      />
+                      <FieldDescription className="text-xs">
+                        Type location and press Enter...
+                      </FieldDescription>
+                      <Button
+                        variant={"outline"}
+                        className="md:hidden flex"
+                        size={"sm"}
+                        onClick={handleAddLocation}
+                        disabled={!location.toString()}
+                        type="button"
+                      >
+                        <Plus /> Add Locations
+                      </Button>
+                    </div>
                   </Field>
                 </div>
                 <div className="block">
@@ -414,17 +443,29 @@ export default function StepFourForm({
                         </Badge>
                       ))}
                     </div>
-                    <Input
-                      type="text"
-                      id="preferredIndustries"
-                      placeholder="e.g. Fintech, SaaS, E-commerce..."
-                      onChange={(e) => setIndustries(e.target.value)}
-                      onKeyDown={handleIndustriesInputKeyDown}
-                      value={industrie}
-                    />
-                    <FieldDescription className="text-xs">
-                      Type Industries and press Enter...
-                    </FieldDescription>
+                    <div className="flex flex-col gap-2">
+                      <Input
+                        type="text"
+                        id="preferredIndustries"
+                        placeholder="e.g. Fintech, SaaS, E-commerce..."
+                        onChange={(e) => setIndustries(e.target.value)}
+                        onKeyDown={handleIndustriesInputKeyDown}
+                        value={industrie}
+                      />
+                      <FieldDescription className="text-xs">
+                        Type Industries and press Enter...
+                      </FieldDescription>
+                      <Button
+                        variant={"outline"}
+                        className="md:hidden flex"
+                        size={"sm"}
+                        onClick={handleAddIndustries}
+                        disabled={!industrie.trim()}
+                        type="button"
+                      >
+                        <Plus /> Add Industries
+                      </Button>
+                    </div>
                   </Field>
                 </div>
                 <div className="block ">
@@ -453,18 +494,29 @@ export default function StepFourForm({
                         </Badge>
                       ))}
                     </div>
-                    <Input
-                      id="role"
-                      type="text"
-                      placeholder="e.g Full stack, Sales"
-                      value={role}
-                      onChange={(e) => setRole(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <FieldDescription className="text-xs">
-                      Type role and press Enter...
-                    </FieldDescription>
-                    {/* <FieldError errors={[fieldState.error]} /> */}
+                    <div className="flex flex-col gap-2">
+                      <Input
+                        id="role"
+                        type="text"
+                        placeholder="e.g Full stack, Sales"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                      />
+                      <FieldDescription className="text-xs">
+                        Type role and press Enter...
+                      </FieldDescription>
+                      <Button
+                        variant={"outline"}
+                        className="md:hidden flex"
+                        size={"sm"}
+                        type="button"
+                        disabled={!role.trim()}
+                        onClick={handleAddRole}
+                      >
+                        <Plus /> Add Role
+                      </Button>
+                    </div>
                   </Field>
                 </div>
               </div>

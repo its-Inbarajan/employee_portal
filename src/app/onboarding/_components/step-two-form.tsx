@@ -45,7 +45,7 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
       currentTitle: defaultValues?.currentTitle ?? "",
       experienceLevel: defaultValues.experienceLevel ?? "FRESHER",
       professionalCategory: defaultValues.professionalCategory ?? "TECHNOLOGY",
-      totalExperienceYears: defaultValues.totalExperienceYears ?? "",
+      totalExperienceYears: defaultValues.totalExperienceYears ?? undefined,
     },
   });
 
@@ -179,11 +179,14 @@ export default function StepTwoForm({ defaultValues }: Readonly<Props>) {
                         placeholder="total experience years"
                         onChange={(e) =>
                           field.onChange(
-                            e.target.value === "" ? "" : Number(e.target.value),
+                            e.target.value === ""
+                              ? undefined
+                              : Number(e.target.value),
                           )
                         }
+                        ref={field.ref}
                         onBlur={field.onBlur}
-                        value={field.value}
+                        value={field.value ?? ""}
                       />
                       <FieldError errors={[fieldState.error]} />
                     </Field>

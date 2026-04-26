@@ -79,7 +79,7 @@ export const basicsInfoSchema = z.object({
 export const professionalInfoSchema = z.object({
   currentTitle: z.string(),
   currentCompany: z.string(),
-  totalExperienceYears: z.number().min(0),
+  totalExperienceYears: z.number().min(0).max(365),
   professionalCategory: z.nativeEnum(ProfessionalCategory, {
     message: "Select atleast one value.",
   }),

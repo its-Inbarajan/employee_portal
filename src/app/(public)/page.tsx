@@ -47,8 +47,8 @@ export default function LandingPage() {
     <>
       <LandingHero />
 
-      <section className="min-h-full md:pb-12 w-full relative overflow-hidden">
-        <div className="relative z-20 pt-4 select-none ms-auto flex h-full flex-col max-w-6xl mx-auto w-full px-4 gap-8">
+      <section className="md:pb-12 w-full relative overflow-hidden">
+        <div className="relative z-20 pt-4 select-none h-dvh ms-auto flex flex-col max-w-6xl mx-auto w-full px-4 gap-8">
           <div className="flex flex-1 justify-between items-center gap-2">
             <div className="flex flex-col gap-2 items-start text-start">
               <span className="font-medium uppercase tracking-wide text-xs text-violet-500">
@@ -81,8 +81,8 @@ export default function LandingPage() {
       </section>
 
       <section className="min-h-screen relative pt-6 overflow-hidden">
-        <div className="relative z-20 pt-4 h-full select-none max-w-6xl mx-auto w-full px-4 gap-8">
-          <div className="flex md:flex-row flex-col h-full gap-6 md:gap-16 items-stretch">
+        <div className="relative z-20 pt-4 select-none max-w-6xl mx-auto w-full px-4 gap-8">
+          <div className="flex md:flex-row flex-col gap-6 md:gap-16 items-stretch">
             <figure className="relative w-full aspect-video md:aspect-auto md:flex-1 md:self-stretch max-w-xl overflow-hidden rounded-xl">
               <Image
                 src={startup}
@@ -151,9 +151,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="min-h-screen relative flex items-center overflow-hidden">
-        <div className="mx-auto max-w-6xl flex items-center justify-center h-full w-full md:px-24 md:py-24 px-6 py-6">
-          <div className="flex items-center gap-5 flex-col h-full justify-center">
+      <section className="relative flex items-center overflow-hidden">
+        <div className="mx-auto max-w-6xl flex items-center justify-center w-full md:px-20 md:py-20 px-6 py-6">
+          <div className="flex items-center gap-5 flex-col justify-center">
             <div className="flex flex-col gap-y-6 items-center shrink">
               <h1 className="font-bold leading-6 tracking-wide md:text-5xl text-2xl">
                 Read to edit your

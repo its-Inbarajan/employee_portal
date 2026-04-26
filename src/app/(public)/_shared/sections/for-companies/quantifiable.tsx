@@ -7,11 +7,11 @@ import React from "react";
 export default function QuantifiableSection() {
   return (
     <section className="relative overflow-hidden py-10 lg:py-16 md:py-8 md:px-2 lg:px-5 px-4 bg-muted-foreground/5">
-      <div className="@container/main max-w-full w-full flex items-center justify-center ">
-        <Card className="@container/card rounded-2xl shadow backdrop-blur-md">
+      <div className=" max-w-full w-full flex items-center justify-center ">
+        <Card className="rounded-2xl shadow backdrop-blur-md">
           <CardContent>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 w-full">
-              <div className="flex flex-col items-start gap-4">
+              <div className="flex flex-col w-full items-start gap-4">
                 <h1 className="font-semibold leading-5 md:leading-10 capitalize tracking-wide text-wrap lg:text-[2rem] md:text-xl text-accent-foreground">
                   Quantifiable value for your bottom line
                 </h1>
