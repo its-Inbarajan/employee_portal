@@ -2,7 +2,6 @@ import { Navbar } from "@/components/navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Asidebar } from "@/components/asidebar";
 import { Toaster } from "@/components/ui/sonner";
-import Advertice from "@/components/advertice";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -27,7 +26,6 @@ export default async function CandidateLayout({
           </aside>
           <div className="grid grid-rows-[auto_1fr] min-h-screen">
             <header>
-              <Advertice />
               <Navbar />
             </header>
 

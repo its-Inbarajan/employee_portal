@@ -117,7 +117,11 @@ export interface ICandidateProfile {
   professionalCategory: ProfessionalCategory;
   experienceLevel: string;
   currentCtc: number | null;
-  skills: string[];
+  skills: {
+    level: string;
+    name: string;
+    yearsOfExp: number;
+  }[];
   languages: string[];
 
   experience: IExperience[];

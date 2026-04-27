@@ -57,12 +57,12 @@ export const JobList: React.FC<{ item: JobListProps; isApplied: boolean }> = ({
             </span>
           </div>
           <div className="inline-block float-start">
-            <span className="font-medium text-accent dark:text-accent-foreground/50 tracking-wide leading-5 text-sm">
+            <span className="font-medium text-muted-foreground tracking-wide leading-5 text-sm">
               ₹16L – ₹18L • 0.0% – 1.0%
             </span>
           </div>
           <div className="inline-block float-start">
-            <span className="font-medium text-accent dark:text-accent-foreground/50 tracking-wide leading-5 text-xs">
+            <span className="font-medium text-muted-foreground tracking-wide leading-5 text-xs">
               Posted: 3 days ago
             </span>
           </div>
