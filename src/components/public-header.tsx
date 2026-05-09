@@ -13,6 +13,12 @@ import {
 } from "./ui/sheet";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Navigations = [
   {
@@ -102,9 +108,26 @@ export default function Header() {
             <Button asChild variant={"secondary"} size={"sm"}>
               <Link href={"/auth/sign-in"}>Sign in</Link>
             </Button>
-            <Button asChild variant={"default"} size={"sm"}>
-              <Link href={"/auth/sign-up"}>Sign up</Link>
-            </Button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="default" size={"sm"}>
+                  Sign up
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link prefetch href={"/auth/sign-up"}>
+                    I&apos;m looking for job
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link prefetch href={"/auth/sign-up/recruiter"}>
+                    I&apos;m looking for candidates
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
@@ -152,16 +175,34 @@ function MobileNav() {
                   Sign in
                 </Link>
               </Button>
-              <Button
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="default" className="w-full" size={"sm"}>
+                    Sign up
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center">
+                  <DropdownMenuItem asChild>
+                    <Link prefetch href={"/auth/sign-up"}>
+                      I&apos;m looking for job
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link prefetch href={"/auth/sign-up/recruiter"}>
+                      I&apos;m looking for candidates
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* <Button
                 asChild
-                variant={"outline"}
-                size={"sm"}
+               
                 className="w-full"
               >
                 <Link href={"/auth/sign-up"} prefetch="auto">
                   Sign Up
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </nav>
         </SheetContent>
