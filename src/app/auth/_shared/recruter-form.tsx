@@ -91,7 +91,7 @@ export default function RecruterForm({ control }: RecruterFormProps) {
                     type={show ? "text" : "password"}
                     {...field}
                     name="password"
-                    autoComplete="current-password"
+                    autoComplete="new-password"
                     placeholder="******"
                   />
                   <InputGroupButton type="button" onClick={handleShowPassword}>

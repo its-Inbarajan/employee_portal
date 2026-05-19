@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -40,10 +38,6 @@ export default function CompanySocialDetailsForm({
     <Field>
       <FieldGroup>
         <FieldSet>
-          <FieldLegend>Social Profiles</FieldLegend>
-          <FieldDescription>
-            Please make sure all the urls start with https
-          </FieldDescription>
           <Controller
             name="linkedin"
             control={control}
@@ -68,7 +62,10 @@ export default function CompanySocialDetailsForm({
                   ref={ref}
                   onChange={onChange}
                 />
-                <FieldError errors={[fieldState.error]} />
+                <FieldError
+                  className="text-red-500 text-xs mb-0"
+                  errors={[fieldState.error]}
+                />
               </Field>
             )}
           />
@@ -81,8 +78,8 @@ export default function CompanySocialDetailsForm({
               Social Medias
             </FieldLabel>
             {fields.map((item, indx) => (
-              <Field key={item.id} orientation={"horizontal"}>
-                <Field orientation={"responsive"}>
+              <Field key={item.id}>
+                <Field orientation={"horizontal"}>
                   <Input
                     type="url"
                     id="social_medias"
@@ -90,31 +87,31 @@ export default function CompanySocialDetailsForm({
                     defaultValue={item.url}
                     placeholder="e.g facebook, reddit, instagram etc"
                   />
-                  {errors.social_medias?.[indx]?.url && (
-                    <FieldError className="text-red-500 text-xs mb-0">
-                      {errors.social_medias[indx]?.url?.message}
-                    </FieldError>
-                  )}
-                </Field>
-                <Button
-                  onClick={() => append({ url: "" })}
-                  type="button"
-                  variant={"outline"}
-                  size={"icon-sm"}
-                >
-                  <Plus />
-                </Button>
+                  <Button
+                    onClick={() => append({ url: "" })}
+                    type="button"
+                    variant={"outline"}
+                    size={"icon-sm"}
+                  >
+                    <Plus />
+                  </Button>
 
-                <Button
-                  disabled={fields.length === 1}
-                  onClick={() => remove(indx)}
-                  type="button"
-                  className="disabled:cursor-not-allowed"
-                  variant={"destructive"}
-                  size={"icon-sm"}
-                >
-                  <Minus />
-                </Button>
+                  <Button
+                    disabled={fields.length === 1}
+                    onClick={() => remove(indx)}
+                    type="button"
+                    className="disabled:cursor-not-allowed"
+                    variant={"destructive"}
+                    size={"icon-sm"}
+                  >
+                    <Minus />
+                  </Button>
+                </Field>
+                {errors.social_medias?.[indx]?.url && (
+                  <FieldError className="text-red-500 text-xs mb-0">
+                    {errors.social_medias[indx]?.url?.message}
+                  </FieldError>
+                )}
               </Field>
             ))}
           </Field>
