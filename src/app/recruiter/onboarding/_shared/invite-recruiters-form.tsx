@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -44,13 +42,6 @@ export default function InviteRecruitersForm({
   return (
     <FieldGroup>
       <FieldSet>
-        <FieldLegend className="font-bold text-2xl leading-6">
-          Invite you team
-        </FieldLegend>
-        <FieldDescription>
-          Build your dream team faster. Invite your colleagues to collaborate on
-          hiring, review resumes, and leave feedback together in one place.
-        </FieldDescription>
         <FieldGroup>
           {fields.map((item, index) => (
             <div
@@ -74,7 +65,10 @@ export default function InviteRecruitersForm({
                       id={`invitation.${index}.email`}
                       placeholder="recruiter@example.com"
                     />
-                    <FieldError errors={[error]} />
+                    <FieldError
+                      className="text-red-500 text-xs mb-0"
+                      errors={[error]}
+                    />
                   </Field>
                 )}
               />
@@ -111,7 +105,10 @@ export default function InviteRecruitersForm({
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <FieldError errors={[error]} />
+                    <FieldError
+                      className="text-red-500 text-xs mb-0"
+                      errors={[error]}
+                    />
                   </Field>
                 )}
               />

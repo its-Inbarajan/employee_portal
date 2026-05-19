@@ -3,52 +3,72 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import MarketingJobCard from "./_shared/marketing-job-card";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, FolderEdit, Loader } from "lucide-react";
 import Image from "next/image";
 import startup from "@/assets/pngs/startup.jpg";
 import LandingHero from "./_shared/sections/landing/landing-hero";
+import { useApiQuery } from "@/lib/api/use-query";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import Link from "next/link";
 
-const staticJobs: {
-  title: string;
-  image: string;
-  location: string;
-  companyName: string;
-  id: number;
-  salary: string;
-}[] = [
-  {
-    id: 1,
-    title: "senior software engg",
-    companyName: "google",
-    image: "/next.svg",
-    salary: "$150K - $180K",
-    location: "landon/remote",
-  },
-  {
-    id: 2,
-    title: "marketing agents",
-    companyName: "amazon",
-    image: "/next.svg",
-    salary: "$150K - $180K",
-    location: "england/remote",
-  },
-  {
-    id: 3,
-    title: "genAi developer",
-    companyName: "meta",
-    image: "/next.svg",
-    salary: "$150K - $180K",
-    location: "bangalore/remote",
-  },
-];
+// const staticJobs: {
+//   title: string;
+//   image: string;
+//   location: string;
+//   companyName: string;
+//   id: number;
+//   salary: string;
+// }[] = [
+//   {
+//     id: 1,
+//     title: "senior software engg",
+//     companyName: "google",
+//     image: "/next.svg",
+//     salary: "$150K - $180K",
+//     location: "landon/remote",
+//   },
+//   {
+//     id: 2,
+//     title: "marketing agents",
+//     companyName: "amazon",
+//     image: "/next.svg",
+//     salary: "$150K - $180K",
+//     location: "england/remote",
+//   },
+//   {
+//     id: 3,
+//     title: "genAi developer",
+//     companyName: "meta",
+//     image: "/next.svg",
+//     salary: "$150K - $180K",
+//     location: "bangalore/remote",
+//   },
+// ];
 
 export default function LandingPage() {
+  const { data, isPending } = useApiQuery<{
+    responses: {
+      title: string;
+      id: number;
+      image: string;
+      companyName: string;
+      location: string;
+      salary: string;
+    }[];
+  }>(["public-job-listing"], "/jobs/getAllJobs");
   return (
     <>
       <LandingHero />
 
       <section className="md:pb-12 w-full relative overflow-hidden">
-        <div className="relative z-20 pt-4 select-none h-dvh ms-auto flex flex-col max-w-6xl mx-auto w-full px-4 gap-8">
+        <div className="relative z-20 pt-4 select-none h-full ms-auto flex flex-col max-w-6xl mx-auto w-full px-4 gap-8">
           <div className="flex flex-1 justify-between items-center gap-2">
             <div className="flex flex-col gap-2 items-start text-start">
               <span className="font-medium uppercase tracking-wide text-xs text-violet-500">
@@ -69,13 +89,44 @@ export default function LandingPage() {
               </Button>
             </div>
           </div>
+          {isPending && (
+            <div className="flex flex-col py-10 items-center justify-center h-1/2 text-center">
+              <span>
+                <Loader className="size-5 animate-spin" />
+              </span>
+              <p>Loading Jobs...</p>
+            </div>
+          )}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 items-center w-full gap-4">
-            {staticJobs.map((item) => (
-              <MarketingJobCard
-                key={`marketing-job-${item.title}`}
-                item={item}
-              />
-            ))}
+            {!isPending &&
+              data?.data?.responses?.map((item) => (
+                <MarketingJobCard
+                  key={`marketing-job-${item.title}`}
+                  item={item}
+                />
+              ))}
+          </div>
+          <div className="flex items-center justify-center">
+            <Empty>
+              <EmptyHeader>
+                <EmptyMedia
+                  variant="icon"
+                  className="bg-purple-500/25 text-purple-500"
+                >
+                  <FolderEdit />
+                </EmptyMedia>
+                <EmptyTitle>No Jobs Yet</EmptyTitle>
+                <EmptyDescription>
+                  Jobs haven&apos;t created yet. Get started by creating your
+                  first job.
+                </EmptyDescription>
+              </EmptyHeader>
+              <EmptyContent className="flex-row justify-center gap-2">
+                <Button asChild variant={"default"} size={"lg"}>
+                  <Link href={"/auth/sign-up/recruiter"}>Create Jobs</Link>
+                </Button>
+              </EmptyContent>
+            </Empty>
           </div>
         </div>
       </section>

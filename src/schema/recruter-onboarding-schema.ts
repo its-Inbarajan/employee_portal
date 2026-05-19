@@ -18,7 +18,7 @@ export const basicSigupSchema = z.object({
 });
 
 export const companyOnboardingDetails = z.object({
-  company_logo: z.string(),
+  company_logo: z.string().optional(),
   company_name: z.string().min(4, { error: "At least enter 4 charaters" }),
   company_email: z.email(),
   company_industry: z.string().min(4, { error: "At least enter 4 charaters" }),

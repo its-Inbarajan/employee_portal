@@ -54,7 +54,10 @@ export default function CompanyDetailsForm({
                     placeholder="abc pvt"
                     {...field}
                   />
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -76,7 +79,10 @@ export default function CompanyDetailsForm({
                     placeholder="info@company.com"
                     {...field}
                   />
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -98,7 +104,10 @@ export default function CompanyDetailsForm({
                     placeholder="https://www.companyname.com"
                     {...field}
                   />
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -120,7 +129,10 @@ export default function CompanyDetailsForm({
                   id="company_about"
                   {...field}
                 />
-                <FieldError errors={[fieldState.error]} />
+                <FieldError
+                  className="text-red-500 text-xs mb-0"
+                  errors={[fieldState.error]}
+                />
               </Field>
             )}
           />
@@ -142,7 +154,10 @@ export default function CompanyDetailsForm({
                     id="company_industry"
                     placeholder="industry"
                   />
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -164,7 +179,10 @@ export default function CompanyDetailsForm({
                     id="company_location"
                     placeholder="location"
                   />
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -202,7 +220,10 @@ export default function CompanyDetailsForm({
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  <FieldError errors={[fieldState.error]} />
+                  <FieldError
+                    className="text-red-500 text-xs mb-0"
+                    errors={[fieldState.error]}
+                  />
                 </Field>
               )}
             />
@@ -215,7 +236,10 @@ export default function CompanyDetailsForm({
               <Field>
                 <FieldLabel htmlFor="company_logo">Company Logo</FieldLabel>
                 <Input type="file" id="company_logo" {...field} />
-                <FieldError errors={[fieldState.error]} />
+                <FieldError
+                  className="text-red-500 text-xs mb-0"
+                  errors={[fieldState.error]}
+                />
               </Field>
             )}
           />
