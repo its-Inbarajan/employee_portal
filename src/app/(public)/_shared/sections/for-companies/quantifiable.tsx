@@ -10,7 +10,7 @@ export default function QuantifiableSection() {
       <div className=" max-w-full w-full flex items-center justify-center ">
         <Card className="rounded-2xl shadow backdrop-blur-md">
           <CardContent>
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 w-full">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 w-full items-center">
               <div className="flex flex-col w-full items-start gap-4">
                 <h1 className="font-semibold leading-5 md:leading-10 capitalize tracking-wide text-wrap lg:text-[2rem] md:text-xl text-accent-foreground">
                   Quantifiable value for your bottom line
@@ -21,13 +21,13 @@ export default function QuantifiableSection() {
                   based on your team size and infrastructure complexity.
                 </p>
                 <div className="flex flex-col items-start gap-4 ">
-                  <div className="w-2xs md:w-xs flex flex-col py-2.5 items-start px-4 border-l-4 rounded-lb-2xl border-l-blue-500">
+                  <div className="w-2xs md:w-xs flex flex-col py-2.5 items-start px-4 border-l-4 rounded-lb-2xl border-l-purple-500">
                     <span>400+ hours</span>
                     <span className="text-xs font-normal tracking-wide text-muted-foreground">
                       saving per month through automation
                     </span>
                   </div>
-                  <div className="w-2xs md:w-xs flex flex-col py-2.5 items-start px-4 border-l-4 rounded-lb-2xl border-l-blue-500">
+                  <div className="w-2xs md:w-xs flex flex-col py-2.5 items-start px-4 border-l-4 rounded-lb-2xl border-l-purple-500">
                     <span>32% Lowers</span>
                     <span className="text-xs font-normal tracking-wide text-muted-foreground">
                       infrastructure maintance cost
@@ -35,7 +35,7 @@ export default function QuantifiableSection() {
                   </div>
                 </div>
               </div>
-              <Card className="relative aspect-square bg-white/5 border saturate-50 border-white/5 shadow rounded-md backdrop-blur-md h-[350px] md:h-[400px] overflow-hidden pointer-events-none">
+              <Card className="relative aspect-auto bg-white/5 border saturate-50 border-white/5 shadow rounded-md backdrop-blur-md h-full overflow-hidden pointer-events-none">
                 <CardContent>
                   <div className="flex flex-col space-y-6 items-start">
                     <div className="flex justify-between items-center gap-2 w-full flex-1">
@@ -62,7 +62,7 @@ export default function QuantifiableSection() {
                       </div>
                       <div className="w-full bg-stone-700 rounded-full h-2">
                         <div
-                          className="bg-blue-600 h-2 rounded-full"
+                          className="bg-purple-600 h-2 rounded-full"
                           style={{ width: "88%" }}
                         />
                       </div>
@@ -76,7 +76,7 @@ export default function QuantifiableSection() {
                       </div>
                       <div className="w-full bg-stone-700 rounded-full h-2">
                         <div
-                          className="bg-linear-to-r from-blue-500 bg-transparent bg-clip to-sky-500 h-2 rounded-full"
+                          className="bg-linear-to-r from-purple-500 bg-transparent bg-clip to-purple-500 h-2 rounded-full"
                           style={{ width: "72%" }}
                         />
                       </div>
@@ -90,7 +90,7 @@ export default function QuantifiableSection() {
                       </div>
                       <div className="w-full bg-stone-700 rounded-full h-2">
                         <div
-                          className="bg-blue-600 h-2 rounded-full"
+                          className="bg-purple-600 h-2 rounded-full"
                           style={{ width: "94%" }}
                         />
                       </div>
