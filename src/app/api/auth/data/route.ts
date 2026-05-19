@@ -6,7 +6,7 @@ export async function GET() {
   if (!session) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
-
+  console.log(session);
   const res = await fetch(`${process.env.API_URL}/me`, {
     headers: {
       "x-client-type": "CANDIDATE_APP",

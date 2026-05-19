@@ -25,7 +25,7 @@ export default function RecruiterSignup() {
       fullName: "",
       password: "",
       phoneNumber: "",
-      recruiterType: "AGENCY",
+      recruiterType: "INHOUSE",
       work_email: "",
     },
     mode: "onChange",
@@ -52,7 +52,7 @@ export default function RecruiterSignup() {
       });
 
       if (result?.ok) {
-        router.push("/recruiter");
+        router.push("/recruiter/onboarding");
         router.refresh();
       }
       toast.success(res.message);
