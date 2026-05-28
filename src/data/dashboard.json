@@ -1,0 +1,190 @@
+{
+  "stats": {
+    "statsData": [
+      {
+        "desc": "Active Jobs",
+        "count": "4",
+        "content": "This week",
+        "icon": "trending-up"
+      },
+      {
+        "desc": "Total Applicants",
+        "count": "74",
+        "content": "Today",
+        "icon": "trending-down"
+      },
+      {
+        "desc": "In Pipeline",
+        "count": "24",
+        "content": "3 Need Action",
+        "icon": null
+      },
+      {
+        "desc": "Interviews This Week",
+        "count": "8",
+        "content": "Upcoming today",
+        "icon": "trending-up"
+      }
+    ]
+  },
+  "applications": [
+    {
+      "candidate": {
+        "fallback": "IN",
+        "name": "Inba Rajan"
+      },
+      "role": "Full Stack Developer",
+      "score": 98
+    },
+    {
+      "candidate": {
+        "fallback": "B",
+        "name": "Bharath"
+      },
+      "role": "Backend Developer",
+      "score": 88
+    },
+    {
+      "candidate": {
+        "fallback": "BM",
+        "name": "Bala manikandan"
+      },
+      "role": "Marketing Lead",
+      "score": 78
+    },
+    {
+      "candidate": {
+        "fallback": "V",
+        "name": "Venkatesh"
+      },
+      "role": "BBO Call supervisor",
+      "score": 88
+    },
+    {
+      "candidate": {
+        "fallback": "GN",
+        "name": "Gobi Nath"
+      },
+      "role": "Full Time Optional Trader",
+      "score": 98
+    },
+    {
+      "candidate": {
+        "fallback": "KV",
+        "name": "Kalaivanar"
+      },
+      "role": "Full Stack Developer",
+      "score": 98
+    }
+  ],
+  "interviews": [
+    {
+      "min": "45",
+      "candidateName": "Anika Kapoor",
+      "plotform": "Zoom",
+      "timing": {
+        "movement": "AM",
+        "time": "10"
+      },
+      "type": "Technical"
+    },
+    {
+      "min": "30",
+      "candidateName": "David Okafor",
+      "plotform": "Zoom",
+      "timing": {
+        "movement": "PM",
+        "time": "3"
+      },
+      "type": "Culture Fit"
+    }
+  ],
+  "navigation": {
+    "user": {
+      "name": "shadcn",
+      "email": "m@example.com",
+      "avatar": "/next.svg"
+    },
+    "navMain": [
+      {
+        "title": "Overview",
+        "url": "#",
+        "items": [
+          {
+            "icon": "layout-dashboard",
+            "title": "Dashboard",
+            "url": "/recruiter/dashboard"
+          }
+        ]
+      },
+      {
+        "title": "Recruiting",
+        "url": "#",
+        "items": [
+          {
+            "title": "Job Postings",
+            "icon": "briefcase",
+            "url": "/recruiter/job-postings"
+          },
+          {
+            "title": "Post a job",
+            "url": "/recruiter/create-job",
+            "icon": "pencil"
+          },
+          {
+            "title": "Applications",
+            "url": "/recruiter/applications",
+            "icon": "users-round"
+          },
+          {
+            "title": "Pipeline",
+            "url": "/recruiter/pipeline",
+            "icon": "clipboard-pen"
+          },
+          {
+            "title": "Interviews",
+            "url": "/recruiter/interviews",
+            "icon": "calendar"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "url": "#",
+        "items": [
+          {
+            "title": "Company Profile",
+            "url": "/recruiter/company-profile",
+            "icon": "building-2"
+          },
+          {
+            "title": "Analytics",
+            "url": "/recruiter/analytics",
+            "icon": "chart-no-axes-combined"
+          },
+          {
+            "title": "Notification",
+            "url": "/recruiter/notification",
+            "icon": "bell"
+          }
+        ]
+      },
+      {
+        "title": "Account",
+        "url": "",
+        "items": [
+          {
+            "title": "Settings",
+            "url": "/recruiter/settings",
+            "icon": "cog"
+          },
+          {
+            "title": "Team members",
+            "url": "/recruiter/team-members",
+            "icon": "circle-user"
+          }
+        ]
+      }
+    ]
+  }
+}

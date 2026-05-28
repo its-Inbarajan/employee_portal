@@ -300,7 +300,7 @@ export default function OnboardingRecruiter() {
                     Back
                   </Button>
                   <Button
-                    onClick={() => router.push("/recruiter")}
+                    onClick={() => router.push("/recruiter/dashboard")}
                     variant={"outline"}
                     size={"sm"}
                     type="button"
