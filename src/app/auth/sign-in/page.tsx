@@ -23,6 +23,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { toast } from "sonner";
 const initialState: LoginState = {
   success: false,
   message: "",
@@ -90,16 +91,19 @@ const SignIn = () => {
         password: credentialsRef.current?.password,
         redirect: false,
       });
-
-      if (result?.ok) {
+      if (result?.ok && state.data?.userRole === "CANDIDATE") {
         router.push("/candidate");
+        toast.success(state.message);
+      } else if (result?.ok && state.data?.userRole === "RECRUITER") {
+        router.push("/recruiter/dashboard");
+        toast.success(state.message);
       } else {
         setIsSigningIn(false);
       }
     }
 
     callBackSignIn();
-  }, [state.success, router]);
+  }, [state, router]);
 
   const handleFormAction = (formData: FormData) => {
     credentialsRef.current = {

@@ -2,10 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { JobList } from "./components/job-list";
-import { useSession } from "next-auth/react";
 import ProfileCard from "./_shared/profile-card";
 import { useCandidateStore } from "@/features/candidate-store";
 
@@ -166,18 +164,18 @@ export default function CandidatePage() {
     },
   ];
   const candidateDetails = useCandidateStore((state) => state.candiate);
-  const { status } = useSession();
-
-  if (status === "loading")
-    return (
-      <p className="flex flex-row items-center h-full justify-center">
-        <span className="animate-spin">
-          <Loader2 />
-        </span>{" "}
-        Loading...
-      </p>
-    );
-  if (status === "unauthenticated") return <p>Access Denied</p>;
+  // const { status } = useSession();
+  // const router = useRouter();
+  // if (status === "loading")
+  //   return (
+  //     <p className="flex flex-row items-center h-full justify-center">
+  //       <span className="animate-spin">
+  //         <Loader2 />
+  //       </span>{" "}
+  //       Loading...
+  //     </p>
+  //   );
+  // if (status === "unauthenticated") return router.push("/unauthorized");
 
   return (
     <div className="md:max-w-full md:w-full sm:w-sm max-w-sm mx-auto gap-5 flex flex-col justify-self-start">

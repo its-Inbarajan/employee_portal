@@ -4,13 +4,15 @@ import { Asidebar } from "@/components/asidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import CandidateSessionProvider from "@/providers/candidate-session-provider";
+import { candidateAuthOptions } from "@/lib/auth/candidate.auth";
 
 export default async function CandidateLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  const session = await getServerSession(candidateAuthOptions);
 
   // Protect — redirect if not logged in
   if (!session) {
@@ -19,23 +21,25 @@ export default async function CandidateLayout({
 
   return (
     <div>
-      <SidebarProvider>
-        <div className="min-h-screen md:h-screen w-full grid grid-cols-[auto_1fr]">
-          <aside className="sticky top-0 h-screen overflow-y-auto">
-            <Asidebar />
-          </aside>
-          <div className="grid grid-rows-[auto_1fr] min-h-screen">
-            <header>
-              <Navbar />
-            </header>
+      <CandidateSessionProvider>
+        <SidebarProvider>
+          <div className="min-h-screen md:h-screen w-full grid grid-cols-[auto_1fr]">
+            <aside className="sticky top-0 h-screen overflow-y-auto">
+              <Asidebar />
+            </aside>
+            <div className="grid grid-rows-[auto_1fr] min-h-screen">
+              <header>
+                <Navbar />
+              </header>
 
-            <main className="min-h-0 overflow-y-auto p-2 md:p-4">
-              {children}
-            </main>
+              <main className="min-h-0 overflow-y-auto p-2 md:p-4">
+                {children}
+              </main>
+            </div>
           </div>
-        </div>
-      </SidebarProvider>
-      <Toaster position="bottom-right" theme="system" />
+        </SidebarProvider>
+        <Toaster position="bottom-right" theme="system" />
+      </CandidateSessionProvider>
     </div>
   );
 }

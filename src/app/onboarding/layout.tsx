@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import OnboardingStepper from "./_components/onboarding-stepper";
-import { authOptions } from "@/lib/authOptions";
-import SessionGuard from "@/providers/session-guard";
+import { candidateAuthOptions } from "@/lib/auth/candidate.auth";
+import CandidateSessionProvider from "@/providers/candidate-session-provider";
 
 interface Prop {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ interface Prop {
 export default async function CandidateOnboardingLayout({
   children,
 }: Readonly<Prop>) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(candidateAuthOptions);
   // Protect — redirect if not logged in
   if (!session) {
     redirect("/auth/sign-in");
@@ -31,9 +31,9 @@ export default async function CandidateOnboardingLayout({
       </div>
 
       {/* ✅ Stepper is client component — owns usePathname */}
-      <SessionGuard>
+      <CandidateSessionProvider>
         <OnboardingStepper>{children}</OnboardingStepper>
-      </SessionGuard>
+      </CandidateSessionProvider>
     </div>
   );
 }

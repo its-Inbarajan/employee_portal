@@ -1,224 +1,186 @@
-import { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { JWT } from "next-auth/jwt";
+// import { NextAuthOptions } from "next-auth";
+// import CredentialsProvider from "next-auth/providers/credentials";
+// import { JWT } from "next-auth/jwt";
 
-declare module "next-auth" {
-  interface User {
-    _id: string;
-    userRole: string;
-    profileId: string | null;
-    onboardingCompleted: boolean;
-    accessToken: string;
-    refreshToken: string;
-  }
+// const ACCESS_TOKEN_EXPIRY = 60 * 60 * 24; // 1 day in seconds — match your backend
 
-  interface Session {
-    error?: string;
-    user: {
-      _id: string;
-      email: string;
-      name: string;
-      userRole: string;
-      profileId: string | null;
-      onboardingCompleted: boolean;
-      accessToken: string;
-      accessTokenExpiry?: Date;
-    };
-  }
-}
+// export const authOptions: NextAuthOptions = {
+//   providers: [
+//     CredentialsProvider({
+//       name: "credentials",
+//       credentials: {
+//         email: { label: "Email", type: "email" },
+//         password: { label: "Password", type: "password" },
+//       },
 
-declare module "next-auth/jwt" {
-  interface JWT {
-    userId: string;
-    userRole: string;
-    profileId: string | null;
-    onboardingCompleted: boolean;
-    accessToken: string;
-    refreshToken: string;
-    accessTokenExpiry?: number;
-    error?: string;
-  }
-}
+//       async authorize(credentials) {
+//         if (!credentials?.email || !credentials?.password) return null;
 
-const ACCESS_TOKEN_EXPIRY = 60 * 60 * 24; // 1 day in seconds — match your backend
+//         try {
+//           const res = await fetch(`${process.env.API_URL}/users/login`, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//               "x-client-type": "CANDIDATE_APP",
+//             },
+//             body: JSON.stringify({
+//               email: credentials.email,
+//               password: credentials.password,
+//             }),
+//           });
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    CredentialsProvider({
-      name: "credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
+//           const data = await res.json();
 
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+//           if (!res.ok) return null;
 
-        try {
-          const res = await fetch(`${process.env.API_URL}/users/login`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-client-type": "CANDIDATE_APP",
-            },
-            body: JSON.stringify({
-              email: credentials.email,
-              password: credentials.password,
-            }),
-          });
+//           // ── Extract accessToken from Set-Cookie header ──
+//           // Your backend sets it as a cookie — grab it here in Node
+//           const rawCookies = res.headers.get("set-cookie") ?? "";
 
-          const data = await res.json();
+//           const accessToken = extractCookieValue(rawCookies, "accessToken");
+//           const refreshToken = extractCookieValue(rawCookies, "refreshToken");
 
-          if (!res.ok) return null;
+//           if (!data.user) return null;
 
-          // ── Extract accessToken from Set-Cookie header ──
-          // Your backend sets it as a cookie — grab it here in Node
-          const rawCookies = res.headers.get("set-cookie") ?? "";
+//           return {
+//             id: data.user._id,
+//             _id: data.user._id,
+//             email: data.user.email,
+//             name: data.user.user_name,
+//             image: data.user.profile ?? null,
+//             userRole: data.userRole,
+//             profileId: data.user.profileId ?? null,
+//             onboardingCompleted: data.onboardingCompleted ?? false,
+//             accessToken, // now carried into jwt callback
+//             refreshToken, // store so we can rotate later
+//           };
+//         } catch (err) {
+//           console.error("[authorize] error:", err);
+//           return null;
+//         }
+//       },
+//     }),
+//   ],
 
-          const accessToken = extractCookieValue(rawCookies, "accessToken");
-          const refreshToken = extractCookieValue(rawCookies, "refreshToken");
+//   callbacks: {
+//     // JWT — runs on every request
+//     // 'user' is only present on first sign in
+//     async jwt({ token, user }): Promise<JWT> {
+//       // First sign in — populate token from authorize() return
+//       if (user) {
+//         token.userId = user._id;
+//         token.userRole = user.userRole;
+//         token.profileId = user.profileId;
+//         token.onboardingCompleted = user.onboardingCompleted;
+//         token.accessToken = user.accessToken; // ✅ set from cookie extract
+//         token.refreshToken = user.refreshToken;
+//         token.accessTokenExpiry = Date.now() + ACCESS_TOKEN_EXPIRY * 1000;
+//       }
+//       // ── Token still valid — return as-is ──
+//       if (Date.now() < (token.accessTokenExpiry as number)) {
+//         return token;
+//       }
+//       return await refreshAccessToken(token);
+//     },
 
-          if (!data.user) return null;
+//     // SESSION — populate session FROM token
+//     // Never read FROM session here
+//     // Always write TO session from token
+//     async session({ session, token }): Promise<typeof session> {
+//       if (token.error) {
+//         session.error = token.error as string;
+//       }
 
-          return {
-            id: data.user._id,
-            _id: data.user._id,
-            email: data.user.email,
-            name: data.user.user_name,
-            image: data.user.profile ?? null,
-            userRole: data.userRole,
-            profileId: data.user.profileId ?? null,
-            onboardingCompleted: data.onboardingCompleted ?? false,
-            accessToken, // now carried into jwt callback
-            refreshToken, // store so we can rotate later
-          };
-        } catch (err) {
-          console.error("[authorize] error:", err);
-          return null;
-        }
-      },
-    }),
-  ],
+//       session.user._id = token.userId as string;
+//       session.user.email = token.email as string;
+//       session.user.name = token.name as string;
+//       session.user.userRole = token.userRole as string;
+//       session.user.profileId = token.profileId as string | null;
+//       session.user.onboardingCompleted = token.onboardingCompleted as boolean;
+//       session.user.accessToken = token.accessToken as string;
 
-  callbacks: {
-    // JWT — runs on every request
-    // 'user' is only present on first sign in
-    async jwt({ token, user }): Promise<JWT> {
-      // First sign in — populate token from authorize() return
-      if (user) {
-        token.userId = user._id;
-        token.userRole = user.userRole;
-        token.profileId = user.profileId;
-        token.onboardingCompleted = user.onboardingCompleted;
-        token.accessToken = user.accessToken; // ✅ set from cookie extract
-        token.refreshToken = user.refreshToken;
-        token.accessTokenExpiry = Date.now() + ACCESS_TOKEN_EXPIRY * 1000;
-      }
-      // ── Token still valid — return as-is ──
-      if (Date.now() < (token.accessTokenExpiry as number)) {
-        return token;
-      }
-      return await refreshAccessToken(token);
-    },
+//       return session;
+//     },
+//   },
 
-    // SESSION — populate session FROM token
-    // Never read FROM session here
-    // Always write TO session from token
-    async session({ session, token }): Promise<typeof session> {
-      if (token.error) {
-        session.error = token.error as string;
-      }
+//   pages: {
+//     signIn: "/",
+//     error: "/", // send errors to login not /api/auth/error
+//   },
 
-      session.user._id = token.userId as string;
-      session.user.email = token.email as string;
-      session.user.name = token.name as string;
-      session.user.userRole = token.userRole as string;
-      session.user.profileId = token.profileId as string | null;
-      session.user.onboardingCompleted = token.onboardingCompleted as boolean;
-      session.user.accessToken = token.accessToken as string;
+//   session: {
+//     strategy: "jwt",
+//     maxAge: 60 * 60 * 24, // 1 day
+//   },
 
-      return session;
-    },
-  },
+//   secret: process.env.NEXTAUTH_SECRET,
+// };
 
-  pages: {
-    signIn: "/",
-    error: "/", // send errors to login not /api/auth/error
-  },
+// // HELPER — parse a single cookie value from
+// // the raw Set-Cookie header string
 
-  session: {
-    strategy: "jwt",
-    maxAge: 60 * 60 * 24, // 1 day
-  },
+// function extractCookieValue(rawCookies: string, name: string): string {
+//   // Set-Cookie can contain multiple cookies separated by comma
+//   // but commas also appear in expires= values — split on name= patterns
+//   const match = rawCookies
+//     .split(/,(?=[^;]+=[^;]+)/) // split multiple Set-Cookie entries
+//     .find((c) => c.trim().startsWith(`${name}=`));
 
-  secret: process.env.NEXTAUTH_SECRET,
-};
+//   if (!match) return "";
 
-// HELPER — parse a single cookie value from
-// the raw Set-Cookie header string
+//   return match
+//     .split(";")[0] // take only name=value part
+//     .replace(`${name}=`, "") // strip the name=
+//     .trim();
+// }
 
-function extractCookieValue(rawCookies: string, name: string): string {
-  // Set-Cookie can contain multiple cookies separated by comma
-  // but commas also appear in expires= values — split on name= patterns
-  const match = rawCookies
-    .split(/,(?=[^;]+=[^;]+)/) // split multiple Set-Cookie entries
-    .find((c) => c.trim().startsWith(`${name}=`));
+// // ─────────────────────────────────────────
+// // REFRESH ACCESS TOKEN
+// // Calls your backend /refresh endpoint
+// // ─────────────────────────────────────────
+// async function refreshAccessToken(token: JWT): Promise<JWT> {
+//   try {
+//     console.log("[NextAuth] Refreshing access token...");
 
-  if (!match) return "";
+//     const res = await fetch(`${process.env.API_URL}/users/refresh`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "x-client-type": "CANDIDATE_APP",
+//         // Send refresh token in cookie format
+//         Cookie: `refreshToken=${token.refreshToken}`,
+//       },
+//     });
+//     if (!res.ok) {
+//       throw new Error(`Refresh failed: ${res.status}`);
+//     }
 
-  return match
-    .split(";")[0] // take only name=value part
-    .replace(`${name}=`, "") // strip the name=
-    .trim();
-}
+//     // ── Extract new accessToken from Set-Cookie ──
+//     const rawCookies = res.headers.get("set-cookie") ?? "";
+//     const newAccessToken = extractCookieValue(rawCookies, "accessToken");
+//     const newRefreshToken = extractCookieValue(rawCookies, "refreshToken");
 
-// ─────────────────────────────────────────
-// REFRESH ACCESS TOKEN
-// Calls your backend /refresh endpoint
-// ─────────────────────────────────────────
-async function refreshAccessToken(token: JWT): Promise<JWT> {
-  try {
-    console.log("[NextAuth] Refreshing access token...");
+//     if (!newAccessToken) {
+//       throw new Error("No access token in refresh response");
+//     }
 
-    const res = await fetch(`${process.env.API_URL}/users/refresh`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-client-type": "CANDIDATE_APP",
-        // Send refresh token in cookie format
-        Cookie: `refreshToken=${token.refreshToken}`,
-      },
-    });
-    if (!res.ok) {
-      throw new Error(`Refresh failed: ${res.status}`);
-    }
+//     console.log("[NextAuth] Token refreshed successfully");
 
-    // ── Extract new accessToken from Set-Cookie ──
-    const rawCookies = res.headers.get("set-cookie") ?? "";
-    const newAccessToken = extractCookieValue(rawCookies, "accessToken");
-    const newRefreshToken = extractCookieValue(rawCookies, "refreshToken");
+//     return {
+//       ...token,
+//       accessToken: newAccessToken,
+//       refreshToken: newRefreshToken || (token.refreshToken as string),
+//       accessTokenExpiry: Date.now() + ACCESS_TOKEN_EXPIRY * 1000,
+//       error: undefined, // clear any previous error
+//     };
+//   } catch (err) {
+//     console.error("[NextAuth] Token refresh failed:", err);
 
-    if (!newAccessToken) {
-      throw new Error("No access token in refresh response");
-    }
-
-    console.log("[NextAuth] Token refreshed successfully");
-
-    return {
-      ...token,
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken || (token.refreshToken as string),
-      accessTokenExpiry: Date.now() + ACCESS_TOKEN_EXPIRY * 1000,
-      error: undefined, // clear any previous error
-    };
-  } catch (err) {
-    console.error("[NextAuth] Token refresh failed:", err);
-
-    // ✅ Return token with error — session callback exposes this
-    // Client can detect error and force logout
-    return {
-      ...token,
-      error: "RefreshTokenError",
-    };
-  }
-}
+//     // ✅ Return token with error — session callback exposes this
+//     // Client can detect error and force logout
+//     return {
+//       ...token,
+//       error: "RefreshTokenError",
+//     };
+//   }
+// }

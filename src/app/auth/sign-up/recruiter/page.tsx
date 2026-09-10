@@ -45,7 +45,7 @@ export default function RecruiterSignup() {
         return;
       }
 
-      const result = await signIn("credentials", {
+      const result = await signIn("recruiter-credentials", {
         email: data.work_email,
         password: data.password,
         redirect: false,

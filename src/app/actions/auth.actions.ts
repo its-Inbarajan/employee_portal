@@ -9,6 +9,10 @@ export interface LoginState {
     email?: string;
     password?: string;
   };
+  data?: {
+    userRole: "CANDIDATE" | "RECRUITER";
+    user: unknown;
+  };
 }
 export async function loginAction(
   _prevState: LoginState,
@@ -45,7 +49,7 @@ export async function loginAction(
       return { success: false, message: data.message || "Invalid credentials" };
     }
 
-    return { success: true, message: "Login successfull" };
+    return { success: true, message: "Login successfull", data };
   } catch {
     return {
       success: false,

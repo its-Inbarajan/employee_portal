@@ -1,15 +1,22 @@
 "use client";
 import { type UserSignupResponse } from "@/@types/user";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Field,
   FieldContent,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -23,6 +30,7 @@ import { SignupSchemaValue, sigupSchema } from "@/schema/signup-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -100,16 +108,25 @@ const SignUp = () => {
 
   return (
     <section className="flex items-center justify-center h-screen relative  overflow-hidden dark:bg-background bg-accent">
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-      <div className="max-w-sm w-full relative z-20 px-4 md:px-6 bg-accent py-6 rounded-2xl dark:bg-background">
+      <div className="absolute bottom-0 left-0 right-0 top-0  bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+      {/* <div className="max-w-sm w-full relative z-20 px-4 md:px-6 bg-accent py-6 rounded-2xl dark:bg-background"> */}
+
+      <Card className="w-full max-w-lg relative z-20 pb-0">
+        <CardHeader>
+          <CardTitle>Sign up</CardTitle>
+          <CardDescription>
+            Create and Setup your account to browse jobs
+          </CardDescription>
+          <CardAction>
+            <Button asChild variant={"outline"} size={"sm"}>
+              <Link href={"/auth/sign-up/recruiter"}>Recruiter Sign up</Link>
+            </Button>
+          </CardAction>
+        </CardHeader>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <FieldGroup>
-            <FieldSet>
-              <FieldLegend>Sign up</FieldLegend>
-              <FieldDescription>
-                Create and Setup your account to browse jobs
-              </FieldDescription>
-              <FieldGroup>
+          <CardContent>
+            <FieldGroup className="gap-3">
+              <FieldSet>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Controller
                     name="user_name"
@@ -195,37 +212,39 @@ const SignUp = () => {
                     </Field>
                   )}
                 />
-              </FieldGroup>
-            </FieldSet>
-            <Controller
-              control={control}
-              name="terms"
-              render={({ field, fieldState }) => (
-                <Field orientation="horizontal">
-                  <Checkbox
-                    id="terms"
-                    onCheckedChange={field.onChange}
-                    onBlur={field.onBlur}
-                    value={String(field.value)}
-                    checked={field.value}
-                    disabled={isPending}
-                    name="terms"
-                  />
-                  <FieldContent>
-                    <FieldLabel htmlFor="terms">
-                      I agree to the Terms and Conditions.
-                    </FieldLabel>
-                    <FieldError errors={[fieldState.error]} />
-                    {/* <FieldDescription>
+                <Controller
+                  control={control}
+                  name="terms"
+                  render={({ field, fieldState }) => (
+                    <Field orientation="horizontal" className="mb-4">
+                      <Checkbox
+                        id="terms"
+                        onCheckedChange={field.onChange}
+                        onBlur={field.onBlur}
+                        value={String(field.value)}
+                        checked={field.value}
+                        disabled={isPending}
+                        name="terms"
+                      />
+                      <FieldContent>
+                        <FieldLabel htmlFor="terms">
+                          I agree to the Terms and Conditions.
+                        </FieldLabel>
+                        <FieldError errors={[fieldState.error]} />
+                        {/* <FieldDescription>
                       This application is fully developers personal project to
                       showcase his skill in full stack development. so,
                       don&#39;t use any personal informations to access the
                       application.
                     </FieldDescription> */}
-                  </FieldContent>
-                </Field>
-              )}
-            />
+                      </FieldContent>
+                    </Field>
+                  )}
+                />
+              </FieldSet>
+            </FieldGroup>
+          </CardContent>
+          <CardFooter className="flex flex-col rounded-b-2xl gap-2 items-center border-t bg-muted/50 px-6 py-3">
             <Field orientation="horizontal">
               <Button
                 type="submit"
@@ -238,9 +257,10 @@ const SignUp = () => {
                 {isPending && <Loader2 className="animate-spin inline-block" />}
               </Button>
             </Field>
-          </FieldGroup>
+          </CardFooter>
         </form>
-      </div>
+      </Card>
+      {/* </div> */}
     </section>
   );
 };

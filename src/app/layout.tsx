@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Providers from "./providers";
 import QueryProvider from "@/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 // import { Manrope } from "next/font/google";
@@ -41,11 +40,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Providers>
-            <QueryProvider>{children}</QueryProvider>
-            <Toaster position="bottom-right" expand={false} richColors />
-            <Analytics />
-          </Providers>
+          <QueryProvider>{children}</QueryProvider>
+          <Toaster position="bottom-right" expand={false} richColors />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

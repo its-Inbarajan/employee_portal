@@ -1,13 +1,42 @@
 "use client";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { toast } from "sonner";
-import { Loader } from "lucide-react";
+import { Loader, LogOut } from "lucide-react";
 import { api } from "@/lib/api";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-export default function LogoutButton() {
+interface LogoutProps {
+  className?: string;
+  variant?:
+    | "default"
+    | "link"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | null
+    | undefined;
+  size?:
+    | "default"
+    | "xs"
+    | "sm"
+    | "lg"
+    | "icon"
+    | "icon-xs"
+    | "icon-sm"
+    | "icon-lg"
+    | null
+    | undefined;
+}
+
+export default function LogoutButton({
+  className,
+  variant = "default",
+  size = "default",
+}: LogoutProps) {
   const [isPending, setIsPending] = React.useState<boolean>(false);
   const router = useRouter();
   async function handleLogout() {
@@ -49,8 +78,10 @@ export default function LogoutButton() {
       size={"sm"}
       disabled={isPending}
       onClick={handleLogout}
+      className={cn(buttonVariants({ className, variant, size }))}
     >
-      {isPending ? <Loader className="animate-spin" /> : "Logout"}
+      {isPending && <Loader className="animate-spin" />}
+      <LogOut /> Log out
     </Button>
   );
 }

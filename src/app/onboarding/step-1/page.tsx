@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 import StepOneForm from "../_components/step-one-form";
 import { BasicsInforFormValues } from "@/schema/candidate-onboarding-schema";
-import { authOptions } from "@/lib/authOptions";
+import { candidateAuthOptions } from "@/lib/auth/candidate.auth";
 
 export default async function StepOnePage() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(candidateAuthOptions);
   if (!session) redirect("/auth/signin");
 
   // Pre-fill form with existing data if they're coming back

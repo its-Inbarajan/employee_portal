@@ -1,19 +1,21 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
 import RecruiterAppSidebar from "./_components/recruiter-app-sidebar";
+import RecruiterSessionProvider from "@/providers/recruiter-session-provider";
+import { recruiterAuthOptions } from "@/lib/auth/recruiter.auth";
 
 export default async function RecruiterLayout({
   children,
 }: {
   children: Readonly<React.ReactNode>;
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/sign-in/recruiter");
+  const session = await getServerSession(recruiterAuthOptions);
+  console.log(session);
+  if (!session) redirect("/auth/sign-up/recruiter");
   return (
-    <div>
+    <RecruiterSessionProvider>
       <SidebarProvider
         style={
           {
@@ -25,6 +27,6 @@ export default async function RecruiterLayout({
         <RecruiterAppSidebar />
         <SidebarInset>{children}</SidebarInset>
       </SidebarProvider>
-    </div>
+    </RecruiterSessionProvider>
   );
 }
