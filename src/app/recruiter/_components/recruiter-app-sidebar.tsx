@@ -16,7 +16,7 @@ import React from "react";
 import { NavUser } from "./nav-user";
 import { usePathname, useRouter } from "next/navigation";
 import { DynamicIcon, IconName } from "@/components/dynamic-icon";
-import { navigation } from "@/data/dashboard.json";
+import navigations from "@/data/dashboard.json";
 
 export default function RecruiterAppSidebar({
   ...props
@@ -35,7 +35,7 @@ export default function RecruiterAppSidebar({
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {navigation.navMain.map((item) => (
+            {navigations.navigation.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarGroupLabel className="text-[10px] font-semibold uppercase tracking-widest text-white/40 px-3">
                   {item.title}
@@ -73,7 +73,7 @@ export default function RecruiterAppSidebar({
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={navigation.user} />
+        <NavUser user={navigations.navigation.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

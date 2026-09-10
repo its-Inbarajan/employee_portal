@@ -5,7 +5,7 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import RecentApplicationsTable from "../_components/dashboard/recent-applications-table";
 import TodaysInterviewListing from "../_components/dashboard/todays-interview-listing";
-import { stats, applications, interviews } from "@/data/dashboard.json";
+import dashboardData from "@/data/dashboard.json";
 import dynamicIconImports from "lucide-react/dynamicIconImports";
 interface StatsData {
   desc: string;
@@ -39,14 +39,18 @@ export default function DashboardPage() {
         </Button>
       </div>
       <div className="@container/main flex flex-1 flex-col gap-12">
-        <SectionCards statsData={stats.statsData as StatsData[]} />
+        <SectionCards
+          statsData={dashboardData?.stats.statsData as StatsData[]}
+        />
         <div className="flex flex-1 flex-col px-4 lg:px-6 ">
           <div className="grid grid-cols-12 w-full items-start gap-5">
             <div className="col-span-7">
-              <RecentApplicationsTable applications={applications} />
+              <RecentApplicationsTable
+                applications={dashboardData.applications}
+              />
             </div>
             <div className="col-span-5">
-              <TodaysInterviewListing interviews={interviews} />
+              <TodaysInterviewListing interviews={dashboardData.interviews} />
             </div>
           </div>
         </div>
